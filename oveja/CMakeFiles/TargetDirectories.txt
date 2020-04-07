@@ -1,0 +1,8 @@
+/home/carlos/robocomp/components/robotsOvejas/oveja/CMakeFiles/install/strip.dir
+/home/carlos/robocomp/components/robotsOvejas/oveja/CMakeFiles/edit_cache.dir
+/home/carlos/robocomp/components/robotsOvejas/oveja/CMakeFiles/MyFirstComp.dir
+/home/carlos/robocomp/components/robotsOvejas/oveja/CMakeFiles/rebuild_cache.dir
+/home/carlos/robocomp/components/robotsOvejas/oveja/CMakeFiles/list_install_components.dir
+/home/carlos/robocomp/components/robotsOvejas/oveja/CMakeFiles/install/local.dir
+/home/carlos/robocomp/components/robotsOvejas/oveja/CMakeFiles/install.dir
+/home/carlos/robocomp/components/robotsOvejas/oveja/CMakeFiles/MyFirstComp_autogen.dir
