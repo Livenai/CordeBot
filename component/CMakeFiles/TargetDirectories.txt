@@ -1,0 +1,8 @@
+/home/carlos/robocomp/components/CordeBot/component/CMakeFiles/install/strip.dir
+/home/carlos/robocomp/components/CordeBot/component/CMakeFiles/edit_cache.dir
+/home/carlos/robocomp/components/CordeBot/component/CMakeFiles/MyFirstComp.dir
+/home/carlos/robocomp/components/CordeBot/component/CMakeFiles/rebuild_cache.dir
+/home/carlos/robocomp/components/CordeBot/component/CMakeFiles/list_install_components.dir
+/home/carlos/robocomp/components/CordeBot/component/CMakeFiles/install/local.dir
+/home/carlos/robocomp/components/CordeBot/component/CMakeFiles/install.dir
+/home/carlos/robocomp/components/CordeBot/component/CMakeFiles/MyFirstComp_autogen.dir
