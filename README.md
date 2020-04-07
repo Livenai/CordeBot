@@ -1,5 +1,7 @@
 =======   CordeBot   =======
 
+Componente de Robocomp destinado a la simulacion de corderos/ovejas en un corral virtual, asi como a la simulacion de los sensores de posicion MDEK1001.
+
 Pasos para ejecutar el componente:
 
   1) Compilar el componente:
