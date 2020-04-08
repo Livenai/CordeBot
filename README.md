@@ -17,6 +17,7 @@ Pasos para ejecutar el componente:
     make {es posible que senecesite sudo}
     
   2) Ejecutar el mapa:
+    
     (en CordeBot/)
     rcis mapa.xml
 
