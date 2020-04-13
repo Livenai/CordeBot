@@ -44,13 +44,13 @@
 			
 		<!-- <axes id="axis" length="1000"/>
 		 -->
-			<!--
+			<!---->
 		
 			<differentialrobot id="base" port="10004">
-			<mesh id="base_robex" file="/home/robocomp/robocomp/components/CordeBot/models/Sheep/sheep_textured.osg"  tx="0" ty="0" tz="0" scale="800" rx="1.57" rz="3.14" collide="1"/>
+			<mesh id="base_robex" file="/home/robocomp/robocomp/components/CordeBot/models/sheep/sheep_textured.ive"  tx="0" ty="0" tz="0" scale="6" rx="3.14"  ry="3.14" collide="1"/>
 				<translation id="laserPose" tx="0" ty="140" tz="200">
 					<laser id="laser" port="10003" measures="100" min="100" max="30000" angle="3" ifconfig="10000" />
-						<plane id="sensorL" nz="1" pz="-200" size="100" repeat="1" texture="#ff0000" /> 
+						<plane id="sensorL" nz="1" pz="-200" size="1" repeat="1" texture="#ff0000" /> 
 				</translation>	
 				<translation id="robotGeometricCenter" tx="0" ty="0" tz="50">
 				</translation>
@@ -59,30 +59,30 @@
 				
 			
 			<differentialrobot id="base1" port="11004">
-			<mesh id="base_robex1" file="/home/robocomp/robocomp/components/CordeBot/models/Sheep/sheep_textured.osg"  tx="0" ty="0" tz="0" scale="700" rx="1.57"  rz="3.14" collide="1"/>
+			<mesh id="base_robex1" file="/home/robocomp/robocomp/components/CordeBot/models/sheep/sheep_textured.ive"  tx="0" ty="0" tz="0" scale="7" rx="3.14"  ry="3.14" collide="1"/>
 				<translation id="laserPose1" tx="0" ty="140" tz="200">
 					<laser id="laser1" port="11003" measures="100" min="100" max="30000" angle="3" ifconfig="10000" />
-						<plane id="sensorL1" nz="1" pz="-200" size="100" repeat="1" texture="#ff0000" /> 
+						<plane id="sensorL1" nz="1" pz="-200" size="1" repeat="1" texture="#ff0000" /> 
 				</translation>	
 				<translation id="robotGeometricCenter1" tx="0" ty="0" tz="50">
 				</translation>
 			</differentialrobot>
 		
 			<differentialrobot id="base2" port="12004">
-			<mesh id="base_robex2" file="/home/robocomp/robocomp/components/CordeBot/models/Sheep/sheep_textured.osg"  tx="0" ty="0" tz="0" scale="600" rx="1.57"  rz="3.14" collide="1"/>
+			<mesh id="base_robex2" file="/home/robocomp/robocomp/components/CordeBot/models/sheep/sheep_textured.ive"  tx="0" ty="0" tz="0" scale="8" rx="3.14"  ry="3.14" collide="1"/>
 				<translation id="laserPose2" tx="0" ty="140" tz="200">
 					<laser id="laser2" port="12003" measures="100" min="100" max="30000" angle="3" ifconfig="10000" />
-						<plane id="sensorL2" nz="1" pz="-200" size="100" repeat="1" texture="#ff0000" /> 
+						<plane id="sensorL2" nz="1" pz="-200" size="1" repeat="1" texture="#ff0000" /> 
 				</translation>	
 				<translation id="robotGeometricCenter2" tx="0" ty="0" tz="50">
 				</translation>
 			</differentialrobot>
 		
 			<differentialrobot id="base3" port="13004">
-			<mesh id="base_robex3" file="/home/robocomp/robocomp/components/CordeBot/models/Sheep/sheep_textured.osg"  tx="0" ty="0" tz="0" scale="500" rx="1.57"  rz="3.14" collide="1"/>
+			<mesh id="base_robex3" file="/home/robocomp/robocomp/components/CordeBot/models/sheep/sheep_textured.ive"  tx="0" ty="0" tz="0" scale="9" rx="3.14"  ry="3.14" collide="1"/>
 				<translation id="laserPose3" tx="0" ty="140" tz="200">
 					<laser id="laser3" port="13003" measures="100" min="100" max="30000" angle="3" ifconfig="10000" />
-						<plane id="sensorL3" nz="1" pz="-200" size="100" repeat="1" texture="#ff0000" /> 
+						<plane id="sensorL3" nz="1" pz="-200" size="1" repeat="1" texture="#ff0000" /> 
 				</translation>	
 				<translation id="robotGeometricCenter3" tx="0" ty="0" tz="50">
 				</translation>
@@ -91,7 +91,7 @@
 
 
 			<differentialrobot id="base4" port="14004">
-			<mesh id="base_robex4" file="/home/robocomp/robocomp/components/CordeBot/models/sheep/sheep_textured.ive"  tx="0" ty="0" tz="0" scale="10" rx="3.14"  rz="0" collide="1"/>
+			<mesh id="base_robex4" file="/home/robocomp/robocomp/components/CordeBot/models/sheep/sheep_textured.ive"  tx="0" ty="0" tz="0" scale="10" rx="3.14"  ry="3.14" collide="1"/>
 				<translation id="laserPose4" tx="0" ty="140" tz="200">
 					<laser id="laser4" port="14003" measures="100" min="100" max="30000" angle="3" ifconfig="10000" />
 						<plane id="sensorl4" nz="1" pz="-200" size="1" repeat="1" texture="#ff0000" /> 
@@ -109,12 +109,12 @@
 
 
 			<!-- COMEDERO   -->
-			<mesh id="comedero" file="/home/robocomp/robocomp/components/CordeBot/models/comedero/comedero_textured.osg"  tx="0" ty="50" tz="1000" scale="20" rx="3.14"  rz="0" collide="0"/>
+			<mesh id="comedero" file="/home/robocomp/robocomp/components/CordeBot/models/comedero/comedero_textured.osg"  tx="1868.15" ty="50" tz="2073.39" scale="20" rx="3.14"  rz="0" collide="0"/>
 			-->
 
 
 			<!-- BEBEDERO   -->
-			<mesh id="bebedero" file="/home/robocomp/robocomp/components/CordeBot/models/bebedero/bebedero_textured.osg"  tx="1300" ty="50" tz="1000" scale="20" rx="3.14"  rz="0" collide="0"/>
+			<mesh id="bebedero" file="/home/robocomp/robocomp/components/CordeBot/models/bebedero/bebedero_textured.osg"  tx="-1868.15" ty="50" tz="-2073.39" scale="20" rx="3.14"  rz="0" collide="0"/>
 			-->
 
 
