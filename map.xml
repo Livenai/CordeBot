@@ -44,7 +44,7 @@
 			
 		<!-- <axes id="axis" length="1000"/>
 		 -->
-			<!---->
+			<!--
 		
 			<differentialrobot id="base" port="10004">
 			<mesh id="base_robex" file="/home/robocomp/robocomp/components/CordeBot/models/sheep/sheep_textured.ive"  tx="0" ty="0" tz="0" scale="6" rx="3.14"  ry="3.14" collide="1"/>

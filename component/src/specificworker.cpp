@@ -422,19 +422,19 @@ void SpecificWorker::escribirCoords(std::string nRobot, float x, float y)
     qDebug() << "El numero es : " << h;
     switch(h){
         case 0:
-            file.open("/home/robocomp/robocomp/components/CordeBot/component/ficherosCoords/archivoRobot1.txt", ios::app);
+            file.open("/home/robocomp/robocomp/components/CordeBot/component/ficherosCoords/coord_lamb.txt", ios::app);
             break;
         case 1:
-            file.open("/home/robocomp/robocomp/components/CordeBot/component/ficherosCoords/archivoRobot2.txt", ios::app);
+            file.open("/home/robocomp/robocomp/components/CordeBot/component/ficherosCoords/coord_lamb1.txt", ios::app);
             break;
         case 2:
-            file.open("/home/robocomp/robocomp/components/CordeBot/component/ficherosCoords/archivoRobot3.txt", ios::app);
+            file.open("/home/robocomp/robocomp/components/CordeBot/component/ficherosCoords/coord_lamb2.txt", ios::app);
             break;
         case 3:
-            file.open("/home/robocomp/robocomp/components/CordeBot/component/ficherosCoords/archivoRobot4.txt", ios::app);
+            file.open("/home/robocomp/robocomp/components/CordeBot/component/ficherosCoords/coord_lamb3.txt", ios::app);
             break;
         case 4:
-            file.open("/home/robocomp/robocomp/components/CordeBot/component/ficherosCoords/archivoRobot5.txt", ios::app);
+            file.open("/home/robocomp/robocomp/components/CordeBot/component/ficherosCoords/coord_lamb4.txt", ios::app);
             break;
     };
     //file.open("/home/robocomp/robocomp/components/CordeBot/component/ficherosCoords/archivoRobot1", ios::app);
