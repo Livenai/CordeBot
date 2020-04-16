@@ -443,8 +443,20 @@ void SpecificWorker::escribirCoords(std::string nRobot, float x, float y)
     {
         qDebug() << "Error al abrir el archivo";
     }
+    // FALTA POR INTRODUCIRLE RUIDO A LAS COORDENDAS uwu
+    float noisyX, noisyY;
+    
+    // LA OPERACION rand() DE std GENERA TIENE UNA LIGERA PREDISPOSICION POR LOS NUMEROS MAS PEQUEÑOS.
+    // ESTO PUEDE SERVIR PARA QUE EL ERROR SE RELATIVAMENTE BAJO EXCEPTO EN OCASIONES EN LAS QUE SE GENERARAN PICOS
+    // DESENBOCANDO EN UN COMPORTAMIENTO MAS REALISTA
+    int noise = 100;
 
-    file <<  x << "#" << y << endl;
+    noisyX = x + ((rand() % (noise*2)) - noise);
+    noisyY = y + ((rand() % (noise*2)) - noise);
+
+    qDebug() << "-------------------------------" << endl << "x: " << x << endl << "y: " << y << endl << "nX: " << noisyX << endl << "nY: " << noisyY << endl << "-------------------------------" << endl;    
+    
+    file <<  noisyX << "#" << noisyY << endl;
 
     file.close();
 }
