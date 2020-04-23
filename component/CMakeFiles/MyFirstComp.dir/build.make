@@ -78,8 +78,15 @@ DifferentialRobot.cpp: /home/carlos/robocomp/interfaces/DifferentialRobot.ice
 DifferentialRobot.h: DifferentialRobot.cpp
 	@$(CMAKE_COMMAND) -E touch_nocreate DifferentialRobot.h
 
+InnerModelManager.cpp: /home/carlos/robocomp/interfaces/InnerModelManager.ice
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/carlos/robocomp/components/CordeBot/component/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Generating InnerModelManager.cpp and InnerModelManager.h from InnerModelManager.ice"
+	slice2cpp --underscore -I/home/carlos/robocomp//interfaces/ -I/home/carlos/robocomp/interfaces -I/opt/robocomp/interfaces -I. /home/carlos/robocomp/interfaces/InnerModelManager.ice --output-dir .
+
+InnerModelManager.h: InnerModelManager.cpp
+	@$(CMAKE_COMMAND) -E touch_nocreate InnerModelManager.h
+
 Laser.cpp: /home/carlos/robocomp/interfaces/Laser.ice
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/carlos/robocomp/components/CordeBot/component/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Generating Laser.cpp and Laser.h from Laser.ice"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/carlos/robocomp/components/CordeBot/component/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Generating Laser.cpp and Laser.h from Laser.ice"
 	slice2cpp --underscore -I/home/carlos/robocomp//interfaces/ -I/home/carlos/robocomp/interfaces -I/opt/robocomp/interfaces -I. /home/carlos/robocomp/interfaces/Laser.ice --output-dir .
 
 Laser.h: Laser.cpp
@@ -87,7 +94,7 @@ Laser.h: Laser.cpp
 
 CMakeFiles/MyFirstComp.dir/specificworker.cpp.o: CMakeFiles/MyFirstComp.dir/flags.make
 CMakeFiles/MyFirstComp.dir/specificworker.cpp.o: /home/robocomp/robocomp/components/CordeBot/component/src/specificworker.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/carlos/robocomp/components/CordeBot/component/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/MyFirstComp.dir/specificworker.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/carlos/robocomp/components/CordeBot/component/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/MyFirstComp.dir/specificworker.cpp.o"
 	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/MyFirstComp.dir/specificworker.cpp.o -c /home/robocomp/robocomp/components/CordeBot/component/src/specificworker.cpp
 
 CMakeFiles/MyFirstComp.dir/specificworker.cpp.i: cmake_force
@@ -111,7 +118,7 @@ CMakeFiles/MyFirstComp.dir/specificworker.cpp.o.provides.build: CMakeFiles/MyFir
 
 CMakeFiles/MyFirstComp.dir/specificmonitor.cpp.o: CMakeFiles/MyFirstComp.dir/flags.make
 CMakeFiles/MyFirstComp.dir/specificmonitor.cpp.o: /home/robocomp/robocomp/components/CordeBot/component/src/specificmonitor.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/carlos/robocomp/components/CordeBot/component/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/MyFirstComp.dir/specificmonitor.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/carlos/robocomp/components/CordeBot/component/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/MyFirstComp.dir/specificmonitor.cpp.o"
 	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/MyFirstComp.dir/specificmonitor.cpp.o -c /home/robocomp/robocomp/components/CordeBot/component/src/specificmonitor.cpp
 
 CMakeFiles/MyFirstComp.dir/specificmonitor.cpp.i: cmake_force
@@ -135,7 +142,7 @@ CMakeFiles/MyFirstComp.dir/specificmonitor.cpp.o.provides.build: CMakeFiles/MyFi
 
 CMakeFiles/MyFirstComp.dir/home/carlos/robocomp/classes/rapplication/rapplication.cpp.o: CMakeFiles/MyFirstComp.dir/flags.make
 CMakeFiles/MyFirstComp.dir/home/carlos/robocomp/classes/rapplication/rapplication.cpp.o: /home/carlos/robocomp/classes/rapplication/rapplication.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/carlos/robocomp/components/CordeBot/component/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/MyFirstComp.dir/home/carlos/robocomp/classes/rapplication/rapplication.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/carlos/robocomp/components/CordeBot/component/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/MyFirstComp.dir/home/carlos/robocomp/classes/rapplication/rapplication.cpp.o"
 	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/MyFirstComp.dir/home/carlos/robocomp/classes/rapplication/rapplication.cpp.o -c /home/carlos/robocomp/classes/rapplication/rapplication.cpp
 
 CMakeFiles/MyFirstComp.dir/home/carlos/robocomp/classes/rapplication/rapplication.cpp.i: cmake_force
@@ -159,7 +166,7 @@ CMakeFiles/MyFirstComp.dir/home/carlos/robocomp/classes/rapplication/rapplicatio
 
 CMakeFiles/MyFirstComp.dir/home/carlos/robocomp/classes/sigwatch/sigwatch.cpp.o: CMakeFiles/MyFirstComp.dir/flags.make
 CMakeFiles/MyFirstComp.dir/home/carlos/robocomp/classes/sigwatch/sigwatch.cpp.o: /home/carlos/robocomp/classes/sigwatch/sigwatch.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/carlos/robocomp/components/CordeBot/component/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/MyFirstComp.dir/home/carlos/robocomp/classes/sigwatch/sigwatch.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/carlos/robocomp/components/CordeBot/component/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/MyFirstComp.dir/home/carlos/robocomp/classes/sigwatch/sigwatch.cpp.o"
 	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/MyFirstComp.dir/home/carlos/robocomp/classes/sigwatch/sigwatch.cpp.o -c /home/carlos/robocomp/classes/sigwatch/sigwatch.cpp
 
 CMakeFiles/MyFirstComp.dir/home/carlos/robocomp/classes/sigwatch/sigwatch.cpp.i: cmake_force
@@ -183,7 +190,7 @@ CMakeFiles/MyFirstComp.dir/home/carlos/robocomp/classes/sigwatch/sigwatch.cpp.o.
 
 CMakeFiles/MyFirstComp.dir/home/carlos/robocomp/classes/qlog/qlog.cpp.o: CMakeFiles/MyFirstComp.dir/flags.make
 CMakeFiles/MyFirstComp.dir/home/carlos/robocomp/classes/qlog/qlog.cpp.o: /home/carlos/robocomp/classes/qlog/qlog.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/carlos/robocomp/components/CordeBot/component/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/MyFirstComp.dir/home/carlos/robocomp/classes/qlog/qlog.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/carlos/robocomp/components/CordeBot/component/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/MyFirstComp.dir/home/carlos/robocomp/classes/qlog/qlog.cpp.o"
 	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/MyFirstComp.dir/home/carlos/robocomp/classes/qlog/qlog.cpp.o -c /home/carlos/robocomp/classes/qlog/qlog.cpp
 
 CMakeFiles/MyFirstComp.dir/home/carlos/robocomp/classes/qlog/qlog.cpp.i: cmake_force
@@ -207,7 +214,7 @@ CMakeFiles/MyFirstComp.dir/home/carlos/robocomp/classes/qlog/qlog.cpp.o.provides
 
 CMakeFiles/MyFirstComp.dir/main.cpp.o: CMakeFiles/MyFirstComp.dir/flags.make
 CMakeFiles/MyFirstComp.dir/main.cpp.o: /home/robocomp/robocomp/components/CordeBot/component/src/main.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/carlos/robocomp/components/CordeBot/component/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/MyFirstComp.dir/main.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/carlos/robocomp/components/CordeBot/component/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/MyFirstComp.dir/main.cpp.o"
 	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/MyFirstComp.dir/main.cpp.o -c /home/robocomp/robocomp/components/CordeBot/component/src/main.cpp
 
 CMakeFiles/MyFirstComp.dir/main.cpp.i: cmake_force
@@ -231,7 +238,7 @@ CMakeFiles/MyFirstComp.dir/main.cpp.o.provides.build: CMakeFiles/MyFirstComp.dir
 
 CMakeFiles/MyFirstComp.dir/genericmonitor.cpp.o: CMakeFiles/MyFirstComp.dir/flags.make
 CMakeFiles/MyFirstComp.dir/genericmonitor.cpp.o: /home/robocomp/robocomp/components/CordeBot/component/src/genericmonitor.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/carlos/robocomp/components/CordeBot/component/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/MyFirstComp.dir/genericmonitor.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/carlos/robocomp/components/CordeBot/component/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/MyFirstComp.dir/genericmonitor.cpp.o"
 	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/MyFirstComp.dir/genericmonitor.cpp.o -c /home/robocomp/robocomp/components/CordeBot/component/src/genericmonitor.cpp
 
 CMakeFiles/MyFirstComp.dir/genericmonitor.cpp.i: cmake_force
@@ -255,7 +262,7 @@ CMakeFiles/MyFirstComp.dir/genericmonitor.cpp.o.provides.build: CMakeFiles/MyFir
 
 CMakeFiles/MyFirstComp.dir/commonbehaviorI.cpp.o: CMakeFiles/MyFirstComp.dir/flags.make
 CMakeFiles/MyFirstComp.dir/commonbehaviorI.cpp.o: /home/robocomp/robocomp/components/CordeBot/component/src/commonbehaviorI.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/carlos/robocomp/components/CordeBot/component/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/MyFirstComp.dir/commonbehaviorI.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/carlos/robocomp/components/CordeBot/component/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/MyFirstComp.dir/commonbehaviorI.cpp.o"
 	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/MyFirstComp.dir/commonbehaviorI.cpp.o -c /home/robocomp/robocomp/components/CordeBot/component/src/commonbehaviorI.cpp
 
 CMakeFiles/MyFirstComp.dir/commonbehaviorI.cpp.i: cmake_force
@@ -279,7 +286,7 @@ CMakeFiles/MyFirstComp.dir/commonbehaviorI.cpp.o.provides.build: CMakeFiles/MyFi
 
 CMakeFiles/MyFirstComp.dir/genericworker.cpp.o: CMakeFiles/MyFirstComp.dir/flags.make
 CMakeFiles/MyFirstComp.dir/genericworker.cpp.o: /home/robocomp/robocomp/components/CordeBot/component/src/genericworker.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/carlos/robocomp/components/CordeBot/component/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/MyFirstComp.dir/genericworker.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/carlos/robocomp/components/CordeBot/component/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object CMakeFiles/MyFirstComp.dir/genericworker.cpp.o"
 	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/MyFirstComp.dir/genericworker.cpp.o -c /home/robocomp/robocomp/components/CordeBot/component/src/genericworker.cpp
 
 CMakeFiles/MyFirstComp.dir/genericworker.cpp.i: cmake_force
@@ -303,7 +310,7 @@ CMakeFiles/MyFirstComp.dir/genericworker.cpp.o.provides.build: CMakeFiles/MyFirs
 
 CMakeFiles/MyFirstComp.dir/CommonBehavior.cpp.o: CMakeFiles/MyFirstComp.dir/flags.make
 CMakeFiles/MyFirstComp.dir/CommonBehavior.cpp.o: CommonBehavior.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/carlos/robocomp/components/CordeBot/component/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object CMakeFiles/MyFirstComp.dir/CommonBehavior.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/carlos/robocomp/components/CordeBot/component/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building CXX object CMakeFiles/MyFirstComp.dir/CommonBehavior.cpp.o"
 	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/MyFirstComp.dir/CommonBehavior.cpp.o -c /home/carlos/robocomp/components/CordeBot/component/CommonBehavior.cpp
 
 CMakeFiles/MyFirstComp.dir/CommonBehavior.cpp.i: cmake_force
@@ -327,7 +334,7 @@ CMakeFiles/MyFirstComp.dir/CommonBehavior.cpp.o.provides.build: CMakeFiles/MyFir
 
 CMakeFiles/MyFirstComp.dir/GenericBase.cpp.o: CMakeFiles/MyFirstComp.dir/flags.make
 CMakeFiles/MyFirstComp.dir/GenericBase.cpp.o: GenericBase.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/carlos/robocomp/components/CordeBot/component/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building CXX object CMakeFiles/MyFirstComp.dir/GenericBase.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/carlos/robocomp/components/CordeBot/component/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Building CXX object CMakeFiles/MyFirstComp.dir/GenericBase.cpp.o"
 	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/MyFirstComp.dir/GenericBase.cpp.o -c /home/carlos/robocomp/components/CordeBot/component/GenericBase.cpp
 
 CMakeFiles/MyFirstComp.dir/GenericBase.cpp.i: cmake_force
@@ -351,7 +358,7 @@ CMakeFiles/MyFirstComp.dir/GenericBase.cpp.o.provides.build: CMakeFiles/MyFirstC
 
 CMakeFiles/MyFirstComp.dir/DifferentialRobot.cpp.o: CMakeFiles/MyFirstComp.dir/flags.make
 CMakeFiles/MyFirstComp.dir/DifferentialRobot.cpp.o: DifferentialRobot.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/carlos/robocomp/components/CordeBot/component/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Building CXX object CMakeFiles/MyFirstComp.dir/DifferentialRobot.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/carlos/robocomp/components/CordeBot/component/CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Building CXX object CMakeFiles/MyFirstComp.dir/DifferentialRobot.cpp.o"
 	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/MyFirstComp.dir/DifferentialRobot.cpp.o -c /home/carlos/robocomp/components/CordeBot/component/DifferentialRobot.cpp
 
 CMakeFiles/MyFirstComp.dir/DifferentialRobot.cpp.i: cmake_force
@@ -373,9 +380,33 @@ CMakeFiles/MyFirstComp.dir/DifferentialRobot.cpp.o.provides: CMakeFiles/MyFirstC
 CMakeFiles/MyFirstComp.dir/DifferentialRobot.cpp.o.provides.build: CMakeFiles/MyFirstComp.dir/DifferentialRobot.cpp.o
 
 
+CMakeFiles/MyFirstComp.dir/InnerModelManager.cpp.o: CMakeFiles/MyFirstComp.dir/flags.make
+CMakeFiles/MyFirstComp.dir/InnerModelManager.cpp.o: InnerModelManager.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/carlos/robocomp/components/CordeBot/component/CMakeFiles --progress-num=$(CMAKE_PROGRESS_18) "Building CXX object CMakeFiles/MyFirstComp.dir/InnerModelManager.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/MyFirstComp.dir/InnerModelManager.cpp.o -c /home/carlos/robocomp/components/CordeBot/component/InnerModelManager.cpp
+
+CMakeFiles/MyFirstComp.dir/InnerModelManager.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/MyFirstComp.dir/InnerModelManager.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/carlos/robocomp/components/CordeBot/component/InnerModelManager.cpp > CMakeFiles/MyFirstComp.dir/InnerModelManager.cpp.i
+
+CMakeFiles/MyFirstComp.dir/InnerModelManager.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/MyFirstComp.dir/InnerModelManager.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/carlos/robocomp/components/CordeBot/component/InnerModelManager.cpp -o CMakeFiles/MyFirstComp.dir/InnerModelManager.cpp.s
+
+CMakeFiles/MyFirstComp.dir/InnerModelManager.cpp.o.requires:
+
+.PHONY : CMakeFiles/MyFirstComp.dir/InnerModelManager.cpp.o.requires
+
+CMakeFiles/MyFirstComp.dir/InnerModelManager.cpp.o.provides: CMakeFiles/MyFirstComp.dir/InnerModelManager.cpp.o.requires
+	$(MAKE) -f CMakeFiles/MyFirstComp.dir/build.make CMakeFiles/MyFirstComp.dir/InnerModelManager.cpp.o.provides.build
+.PHONY : CMakeFiles/MyFirstComp.dir/InnerModelManager.cpp.o.provides
+
+CMakeFiles/MyFirstComp.dir/InnerModelManager.cpp.o.provides.build: CMakeFiles/MyFirstComp.dir/InnerModelManager.cpp.o
+
+
 CMakeFiles/MyFirstComp.dir/Laser.cpp.o: CMakeFiles/MyFirstComp.dir/flags.make
 CMakeFiles/MyFirstComp.dir/Laser.cpp.o: Laser.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/carlos/robocomp/components/CordeBot/component/CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Building CXX object CMakeFiles/MyFirstComp.dir/Laser.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/carlos/robocomp/components/CordeBot/component/CMakeFiles --progress-num=$(CMAKE_PROGRESS_19) "Building CXX object CMakeFiles/MyFirstComp.dir/Laser.cpp.o"
 	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/MyFirstComp.dir/Laser.cpp.o -c /home/carlos/robocomp/components/CordeBot/component/Laser.cpp
 
 CMakeFiles/MyFirstComp.dir/Laser.cpp.i: cmake_force
@@ -399,7 +430,7 @@ CMakeFiles/MyFirstComp.dir/Laser.cpp.o.provides.build: CMakeFiles/MyFirstComp.di
 
 CMakeFiles/MyFirstComp.dir/MyFirstComp_autogen/mocs_compilation.cpp.o: CMakeFiles/MyFirstComp.dir/flags.make
 CMakeFiles/MyFirstComp.dir/MyFirstComp_autogen/mocs_compilation.cpp.o: MyFirstComp_autogen/mocs_compilation.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/carlos/robocomp/components/CordeBot/component/CMakeFiles --progress-num=$(CMAKE_PROGRESS_18) "Building CXX object CMakeFiles/MyFirstComp.dir/MyFirstComp_autogen/mocs_compilation.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/carlos/robocomp/components/CordeBot/component/CMakeFiles --progress-num=$(CMAKE_PROGRESS_20) "Building CXX object CMakeFiles/MyFirstComp.dir/MyFirstComp_autogen/mocs_compilation.cpp.o"
 	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/MyFirstComp.dir/MyFirstComp_autogen/mocs_compilation.cpp.o -c /home/carlos/robocomp/components/CordeBot/component/MyFirstComp_autogen/mocs_compilation.cpp
 
 CMakeFiles/MyFirstComp.dir/MyFirstComp_autogen/mocs_compilation.cpp.i: cmake_force
@@ -435,6 +466,7 @@ MyFirstComp_OBJECTS = \
 "CMakeFiles/MyFirstComp.dir/CommonBehavior.cpp.o" \
 "CMakeFiles/MyFirstComp.dir/GenericBase.cpp.o" \
 "CMakeFiles/MyFirstComp.dir/DifferentialRobot.cpp.o" \
+"CMakeFiles/MyFirstComp.dir/InnerModelManager.cpp.o" \
 "CMakeFiles/MyFirstComp.dir/Laser.cpp.o" \
 "CMakeFiles/MyFirstComp.dir/MyFirstComp_autogen/mocs_compilation.cpp.o"
 
@@ -453,6 +485,7 @@ MyFirstComp_EXTERNAL_OBJECTS =
 /bin/MyFirstComp: CMakeFiles/MyFirstComp.dir/CommonBehavior.cpp.o
 /bin/MyFirstComp: CMakeFiles/MyFirstComp.dir/GenericBase.cpp.o
 /bin/MyFirstComp: CMakeFiles/MyFirstComp.dir/DifferentialRobot.cpp.o
+/bin/MyFirstComp: CMakeFiles/MyFirstComp.dir/InnerModelManager.cpp.o
 /bin/MyFirstComp: CMakeFiles/MyFirstComp.dir/Laser.cpp.o
 /bin/MyFirstComp: CMakeFiles/MyFirstComp.dir/MyFirstComp_autogen/mocs_compilation.cpp.o
 /bin/MyFirstComp: CMakeFiles/MyFirstComp.dir/build.make
@@ -467,7 +500,7 @@ MyFirstComp_EXTERNAL_OBJECTS =
 /bin/MyFirstComp: /usr/lib/x86_64-linux-gnu/libQt5Network.so.5.9.5
 /bin/MyFirstComp: /usr/lib/x86_64-linux-gnu/libQt5Core.so.5.9.5
 /bin/MyFirstComp: CMakeFiles/MyFirstComp.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/carlos/robocomp/components/CordeBot/component/CMakeFiles --progress-num=$(CMAKE_PROGRESS_19) "Linking CXX executable /bin/MyFirstComp"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/carlos/robocomp/components/CordeBot/component/CMakeFiles --progress-num=$(CMAKE_PROGRESS_21) "Linking CXX executable /bin/MyFirstComp"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/MyFirstComp.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -487,6 +520,7 @@ CMakeFiles/MyFirstComp.dir/requires: CMakeFiles/MyFirstComp.dir/genericworker.cp
 CMakeFiles/MyFirstComp.dir/requires: CMakeFiles/MyFirstComp.dir/CommonBehavior.cpp.o.requires
 CMakeFiles/MyFirstComp.dir/requires: CMakeFiles/MyFirstComp.dir/GenericBase.cpp.o.requires
 CMakeFiles/MyFirstComp.dir/requires: CMakeFiles/MyFirstComp.dir/DifferentialRobot.cpp.o.requires
+CMakeFiles/MyFirstComp.dir/requires: CMakeFiles/MyFirstComp.dir/InnerModelManager.cpp.o.requires
 CMakeFiles/MyFirstComp.dir/requires: CMakeFiles/MyFirstComp.dir/Laser.cpp.o.requires
 CMakeFiles/MyFirstComp.dir/requires: CMakeFiles/MyFirstComp.dir/MyFirstComp_autogen/mocs_compilation.cpp.o.requires
 
@@ -502,6 +536,8 @@ CMakeFiles/MyFirstComp.dir/depend: GenericBase.cpp
 CMakeFiles/MyFirstComp.dir/depend: GenericBase.h
 CMakeFiles/MyFirstComp.dir/depend: DifferentialRobot.cpp
 CMakeFiles/MyFirstComp.dir/depend: DifferentialRobot.h
+CMakeFiles/MyFirstComp.dir/depend: InnerModelManager.cpp
+CMakeFiles/MyFirstComp.dir/depend: InnerModelManager.h
 CMakeFiles/MyFirstComp.dir/depend: Laser.cpp
 CMakeFiles/MyFirstComp.dir/depend: Laser.h
 	cd /home/carlos/robocomp/components/CordeBot/component && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/robocomp/robocomp/components/CordeBot/component/src /home/robocomp/robocomp/components/CordeBot/component/src /home/carlos/robocomp/components/CordeBot/component /home/carlos/robocomp/components/CordeBot/component /home/carlos/robocomp/components/CordeBot/component/CMakeFiles/MyFirstComp.dir/DependInfo.cmake --color=$(COLOR)

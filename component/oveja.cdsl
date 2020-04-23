@@ -1,11 +1,13 @@
 import "DifferentialRobot.idsl";
 import "Laser.idsl";
+import "InnerModelManager.idsl";
+
 
 Component MyFirstComp
 {
     Communications
     {
-        requires DifferentialRobot, Laser;
+        requires DifferentialRobot, Laser, InnerModelManager;
     };
 
 language Cpp;

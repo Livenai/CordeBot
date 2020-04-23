@@ -263,6 +263,33 @@ GenericBase.cpp.s:
 	$(MAKE) -f CMakeFiles/MyFirstComp.dir/build.make CMakeFiles/MyFirstComp.dir/GenericBase.cpp.s
 .PHONY : GenericBase.cpp.s
 
+InnerModelManager.o: InnerModelManager.cpp.o
+
+.PHONY : InnerModelManager.o
+
+# target to build an object file
+InnerModelManager.cpp.o:
+	$(MAKE) -f CMakeFiles/MyFirstComp.dir/build.make CMakeFiles/MyFirstComp.dir/InnerModelManager.cpp.o
+.PHONY : InnerModelManager.cpp.o
+
+InnerModelManager.i: InnerModelManager.cpp.i
+
+.PHONY : InnerModelManager.i
+
+# target to preprocess a source file
+InnerModelManager.cpp.i:
+	$(MAKE) -f CMakeFiles/MyFirstComp.dir/build.make CMakeFiles/MyFirstComp.dir/InnerModelManager.cpp.i
+.PHONY : InnerModelManager.cpp.i
+
+InnerModelManager.s: InnerModelManager.cpp.s
+
+.PHONY : InnerModelManager.s
+
+# target to generate assembly for a file
+InnerModelManager.cpp.s:
+	$(MAKE) -f CMakeFiles/MyFirstComp.dir/build.make CMakeFiles/MyFirstComp.dir/InnerModelManager.cpp.s
+.PHONY : InnerModelManager.cpp.s
+
 Laser.o: Laser.cpp.o
 
 .PHONY : Laser.o
@@ -583,6 +610,9 @@ help:
 	@echo "... GenericBase.o"
 	@echo "... GenericBase.i"
 	@echo "... GenericBase.s"
+	@echo "... InnerModelManager.o"
+	@echo "... InnerModelManager.i"
+	@echo "... InnerModelManager.s"
 	@echo "... Laser.o"
 	@echo "... Laser.i"
 	@echo "... Laser.s"

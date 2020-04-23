@@ -96,6 +96,17 @@ class ActionInitSleep : public BrainTree::Node
             { 
              // sp->differentialrobot_proxy -> setSpeedBase(0,0);
                 qDebug() << "Empiezo a dormir";
+                //////////////////////////////////////////bajo la posicion de la oveja para que parezca dormida
+                
+                RoboCompInnerModelManager::Pose3D pose;
+                sp->innermodelmanager_proxy->getPoseFromParent("base", pose);
+                
+                qDebug() << "------------------------------- POSE -------------------------------" << endl << "x= " << pose.x << endl << "y= " << pose.y << endl << "z= " << pose.z << endl;
+                
+                pose.y = pose.y - 200;
+                sp->innermodelmanager_proxy->setPoseFromParent("base", pose);
+                
+
                 reloj.restart();
                 first_epoch = false;
                 sp->differentialrobot_proxy -> setSpeedBase(0,0);
@@ -107,6 +118,17 @@ class ActionInitSleep : public BrainTree::Node
                 if(reloj.elapsed() > 4000)
                 {
                     qDebug() << "Dormi suficiente";
+                    //////////////////////////////////////subo la posicion de la oveja para despertarla
+	            RoboCompInnerModelManager::Pose3D pose;
+	            sp->innermodelmanager_proxy->getPoseFromParent("base", pose);
+	        
+	            qDebug() << "------------------------------- POSE -------------------------------" << endl << "x= " << pose.x << endl << "y= " << pose.y << endl << "z= " << pose.z << endl;
+	        
+	            pose.y = pose.y + 200;
+	            sp->innermodelmanager_proxy->setPoseFromParent("base", pose);                    
+
+
+
                     first_epoch = true;
                   //  qDebug() << "Posicion X en findormir" << sp->bState.x;
                   //  qDebug() << "Posicion Y en findormir" << sp->bState.z;

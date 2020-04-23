@@ -11,6 +11,9 @@ CMakeFiles/MyFirstComp.dir/DifferentialRobot.cpp.o: GenericBase.h
 CMakeFiles/MyFirstComp.dir/GenericBase.cpp.o: GenericBase.cpp
 CMakeFiles/MyFirstComp.dir/GenericBase.cpp.o: GenericBase.h
 
+CMakeFiles/MyFirstComp.dir/InnerModelManager.cpp.o: InnerModelManager.cpp
+CMakeFiles/MyFirstComp.dir/InnerModelManager.cpp.o: InnerModelManager.h
+
 CMakeFiles/MyFirstComp.dir/Laser.cpp.o: Laser.cpp
 CMakeFiles/MyFirstComp.dir/Laser.cpp.o: GenericBase.h
 CMakeFiles/MyFirstComp.dir/Laser.cpp.o: Laser.h
@@ -516,6 +519,7 @@ CMakeFiles/MyFirstComp.dir/MyFirstComp_autogen/mocs_compilation.cpp.o: /usr/incl
 CMakeFiles/MyFirstComp.dir/MyFirstComp_autogen/mocs_compilation.cpp.o: CommonBehavior.h
 CMakeFiles/MyFirstComp.dir/MyFirstComp_autogen/mocs_compilation.cpp.o: DifferentialRobot.h
 CMakeFiles/MyFirstComp.dir/MyFirstComp_autogen/mocs_compilation.cpp.o: GenericBase.h
+CMakeFiles/MyFirstComp.dir/MyFirstComp_autogen/mocs_compilation.cpp.o: InnerModelManager.h
 CMakeFiles/MyFirstComp.dir/MyFirstComp_autogen/mocs_compilation.cpp.o: Laser.h
 CMakeFiles/MyFirstComp.dir/MyFirstComp_autogen/mocs_compilation.cpp.o: MyFirstComp_autogen/include/ui_mainUI.h
 
@@ -980,6 +984,7 @@ CMakeFiles/MyFirstComp.dir/commonbehaviorI.cpp.o: /usr/include/x86_64-linux-gnu/
 CMakeFiles/MyFirstComp.dir/commonbehaviorI.cpp.o: CommonBehavior.h
 CMakeFiles/MyFirstComp.dir/commonbehaviorI.cpp.o: DifferentialRobot.h
 CMakeFiles/MyFirstComp.dir/commonbehaviorI.cpp.o: GenericBase.h
+CMakeFiles/MyFirstComp.dir/commonbehaviorI.cpp.o: InnerModelManager.h
 CMakeFiles/MyFirstComp.dir/commonbehaviorI.cpp.o: Laser.h
 CMakeFiles/MyFirstComp.dir/commonbehaviorI.cpp.o: MyFirstComp_autogen/include/ui_mainUI.h
 
@@ -1443,6 +1448,7 @@ CMakeFiles/MyFirstComp.dir/genericmonitor.cpp.o: /usr/include/x86_64-linux-gnu/q
 CMakeFiles/MyFirstComp.dir/genericmonitor.cpp.o: CommonBehavior.h
 CMakeFiles/MyFirstComp.dir/genericmonitor.cpp.o: DifferentialRobot.h
 CMakeFiles/MyFirstComp.dir/genericmonitor.cpp.o: GenericBase.h
+CMakeFiles/MyFirstComp.dir/genericmonitor.cpp.o: InnerModelManager.h
 CMakeFiles/MyFirstComp.dir/genericmonitor.cpp.o: Laser.h
 CMakeFiles/MyFirstComp.dir/genericmonitor.cpp.o: MyFirstComp_autogen/include/ui_mainUI.h
 
@@ -1905,6 +1911,7 @@ CMakeFiles/MyFirstComp.dir/genericworker.cpp.o: /usr/include/x86_64-linux-gnu/qt
 CMakeFiles/MyFirstComp.dir/genericworker.cpp.o: CommonBehavior.h
 CMakeFiles/MyFirstComp.dir/genericworker.cpp.o: DifferentialRobot.h
 CMakeFiles/MyFirstComp.dir/genericworker.cpp.o: GenericBase.h
+CMakeFiles/MyFirstComp.dir/genericworker.cpp.o: InnerModelManager.h
 CMakeFiles/MyFirstComp.dir/genericworker.cpp.o: Laser.h
 CMakeFiles/MyFirstComp.dir/genericworker.cpp.o: MyFirstComp_autogen/include/ui_mainUI.h
 
@@ -2851,6 +2858,7 @@ CMakeFiles/MyFirstComp.dir/main.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtWidge
 CMakeFiles/MyFirstComp.dir/main.cpp.o: CommonBehavior.h
 CMakeFiles/MyFirstComp.dir/main.cpp.o: DifferentialRobot.h
 CMakeFiles/MyFirstComp.dir/main.cpp.o: GenericBase.h
+CMakeFiles/MyFirstComp.dir/main.cpp.o: InnerModelManager.h
 CMakeFiles/MyFirstComp.dir/main.cpp.o: Laser.h
 CMakeFiles/MyFirstComp.dir/main.cpp.o: MyFirstComp_autogen/include/ui_mainUI.h
 
@@ -3315,6 +3323,7 @@ CMakeFiles/MyFirstComp.dir/specificmonitor.cpp.o: /usr/include/x86_64-linux-gnu/
 CMakeFiles/MyFirstComp.dir/specificmonitor.cpp.o: CommonBehavior.h
 CMakeFiles/MyFirstComp.dir/specificmonitor.cpp.o: DifferentialRobot.h
 CMakeFiles/MyFirstComp.dir/specificmonitor.cpp.o: GenericBase.h
+CMakeFiles/MyFirstComp.dir/specificmonitor.cpp.o: InnerModelManager.h
 CMakeFiles/MyFirstComp.dir/specificmonitor.cpp.o: Laser.h
 CMakeFiles/MyFirstComp.dir/specificmonitor.cpp.o: MyFirstComp_autogen/include/ui_mainUI.h
 
@@ -3813,6 +3822,7 @@ CMakeFiles/MyFirstComp.dir/specificworker.cpp.o: /usr/include/x86_64-linux-gnu/q
 CMakeFiles/MyFirstComp.dir/specificworker.cpp.o: CommonBehavior.h
 CMakeFiles/MyFirstComp.dir/specificworker.cpp.o: DifferentialRobot.h
 CMakeFiles/MyFirstComp.dir/specificworker.cpp.o: GenericBase.h
+CMakeFiles/MyFirstComp.dir/specificworker.cpp.o: InnerModelManager.h
 CMakeFiles/MyFirstComp.dir/specificworker.cpp.o: Laser.h
 CMakeFiles/MyFirstComp.dir/specificworker.cpp.o: MyFirstComp_autogen/include/ui_mainUI.h
 

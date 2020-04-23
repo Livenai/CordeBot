@@ -1,5 +1,5 @@
 /*
- *    Copyright (C)2019 by YOUR NAME HERE
+ *    Copyright (C)2020 by YOUR NAME HERE
  *
  *    This file is part of RoboComp
  *
@@ -33,7 +33,9 @@
 
 #include <GenericBase.h>
 #include <DifferentialRobot.h>
+#include <InnerModelManager.h>
 #include <Laser.h>
+
 
 #define CHECK_PERIOD 5000
 #define BASIC_PERIOD 100
@@ -41,6 +43,7 @@
 using namespace std;
 using namespace RoboCompGenericBase;
 using namespace RoboCompDifferentialRobot;
+using namespace RoboCompInnerModelManager;
 using namespace RoboCompLaser;
 
 typedef map <string,::IceProxy::Ice::Object*> MapPrx;
@@ -65,6 +68,7 @@ public:
 
 
 	DifferentialRobotPrx differentialrobot_proxy;
+	InnerModelManagerPrx innermodelmanager_proxy;
 	LaserPrx laser_proxy;
 
 

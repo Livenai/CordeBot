@@ -7,6 +7,7 @@ set(CMAKE_DEPENDS_CHECK_CXX
   "/home/carlos/robocomp/components/CordeBot/component/CommonBehavior.cpp" "/home/carlos/robocomp/components/CordeBot/component/CMakeFiles/MyFirstComp.dir/CommonBehavior.cpp.o"
   "/home/carlos/robocomp/components/CordeBot/component/DifferentialRobot.cpp" "/home/carlos/robocomp/components/CordeBot/component/CMakeFiles/MyFirstComp.dir/DifferentialRobot.cpp.o"
   "/home/carlos/robocomp/components/CordeBot/component/GenericBase.cpp" "/home/carlos/robocomp/components/CordeBot/component/CMakeFiles/MyFirstComp.dir/GenericBase.cpp.o"
+  "/home/carlos/robocomp/components/CordeBot/component/InnerModelManager.cpp" "/home/carlos/robocomp/components/CordeBot/component/CMakeFiles/MyFirstComp.dir/InnerModelManager.cpp.o"
   "/home/carlos/robocomp/components/CordeBot/component/Laser.cpp" "/home/carlos/robocomp/components/CordeBot/component/CMakeFiles/MyFirstComp.dir/Laser.cpp.o"
   "/home/carlos/robocomp/components/CordeBot/component/MyFirstComp_autogen/mocs_compilation.cpp" "/home/carlos/robocomp/components/CordeBot/component/CMakeFiles/MyFirstComp.dir/MyFirstComp_autogen/mocs_compilation.cpp.o"
   "/home/robocomp/robocomp/components/CordeBot/component/src/commonbehaviorI.cpp" "/home/carlos/robocomp/components/CordeBot/component/CMakeFiles/MyFirstComp.dir/commonbehaviorI.cpp.o"
@@ -62,6 +63,7 @@ set(CMAKE_MULTIPLE_OUTPUT_PAIRS
   "/home/carlos/robocomp/components/CordeBot/component/CommonBehavior.h" "/home/carlos/robocomp/components/CordeBot/component/CommonBehavior.cpp"
   "/home/carlos/robocomp/components/CordeBot/component/DifferentialRobot.h" "/home/carlos/robocomp/components/CordeBot/component/DifferentialRobot.cpp"
   "/home/carlos/robocomp/components/CordeBot/component/GenericBase.h" "/home/carlos/robocomp/components/CordeBot/component/GenericBase.cpp"
+  "/home/carlos/robocomp/components/CordeBot/component/InnerModelManager.h" "/home/carlos/robocomp/components/CordeBot/component/InnerModelManager.cpp"
   "/home/carlos/robocomp/components/CordeBot/component/Laser.h" "/home/carlos/robocomp/components/CordeBot/component/Laser.cpp"
   )
 

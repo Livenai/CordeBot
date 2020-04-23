@@ -11,6 +11,9 @@ CMakeFiles/MyFirstComp.dir/DifferentialRobot.cpp.o
 CMakeFiles/MyFirstComp.dir/GenericBase.cpp.o
  /home/carlos/robocomp/components/CordeBot/component/GenericBase.cpp
  GenericBase.h
+CMakeFiles/MyFirstComp.dir/InnerModelManager.cpp.o
+ /home/carlos/robocomp/components/CordeBot/component/InnerModelManager.cpp
+ InnerModelManager.h
 CMakeFiles/MyFirstComp.dir/Laser.cpp.o
  /home/carlos/robocomp/components/CordeBot/component/Laser.cpp
  GenericBase.h
@@ -517,6 +520,7 @@ CMakeFiles/MyFirstComp.dir/MyFirstComp_autogen/mocs_compilation.cpp.o
  CommonBehavior.h
  DifferentialRobot.h
  GenericBase.h
+ InnerModelManager.h
  Laser.h
  MyFirstComp_autogen/include/ui_mainUI.h
 CMakeFiles/MyFirstComp.dir/commonbehaviorI.cpp.o
@@ -981,6 +985,7 @@ CMakeFiles/MyFirstComp.dir/commonbehaviorI.cpp.o
  CommonBehavior.h
  DifferentialRobot.h
  GenericBase.h
+ InnerModelManager.h
  Laser.h
  MyFirstComp_autogen/include/ui_mainUI.h
 CMakeFiles/MyFirstComp.dir/genericmonitor.cpp.o
@@ -1444,6 +1449,7 @@ CMakeFiles/MyFirstComp.dir/genericmonitor.cpp.o
  CommonBehavior.h
  DifferentialRobot.h
  GenericBase.h
+ InnerModelManager.h
  Laser.h
  MyFirstComp_autogen/include/ui_mainUI.h
 CMakeFiles/MyFirstComp.dir/genericworker.cpp.o
@@ -1906,6 +1912,7 @@ CMakeFiles/MyFirstComp.dir/genericworker.cpp.o
  CommonBehavior.h
  DifferentialRobot.h
  GenericBase.h
+ InnerModelManager.h
  Laser.h
  MyFirstComp_autogen/include/ui_mainUI.h
 CMakeFiles/MyFirstComp.dir/home/carlos/robocomp/classes/qlog/qlog.cpp.o
@@ -2852,6 +2859,7 @@ CMakeFiles/MyFirstComp.dir/main.cpp.o
  CommonBehavior.h
  DifferentialRobot.h
  GenericBase.h
+ InnerModelManager.h
  Laser.h
  MyFirstComp_autogen/include/ui_mainUI.h
 CMakeFiles/MyFirstComp.dir/specificmonitor.cpp.o
@@ -3316,6 +3324,7 @@ CMakeFiles/MyFirstComp.dir/specificmonitor.cpp.o
  CommonBehavior.h
  DifferentialRobot.h
  GenericBase.h
+ InnerModelManager.h
  Laser.h
  MyFirstComp_autogen/include/ui_mainUI.h
 CMakeFiles/MyFirstComp.dir/specificworker.cpp.o
@@ -3814,5 +3823,6 @@ CMakeFiles/MyFirstComp.dir/specificworker.cpp.o
  CommonBehavior.h
  DifferentialRobot.h
  GenericBase.h
+ InnerModelManager.h
  Laser.h
  MyFirstComp_autogen/include/ui_mainUI.h

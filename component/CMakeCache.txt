@@ -130,7 +130,7 @@ CMAKE_OBJCOPY:FILEPATH=/usr/bin/objcopy
 CMAKE_OBJDUMP:FILEPATH=/usr/bin/objdump
 
 //Value Computed by CMake
-CMAKE_PROJECT_NAME:STATIC=MyFirstComp
+CMAKE_PROJECT_NAME:STATIC=Project
 
 //Path to a program.
 CMAKE_RANLIB:FILEPATH=/usr/bin/ranlib
@@ -351,6 +351,12 @@ MyFirstComp_BINARY_DIR:STATIC=/home/carlos/robocomp/components/CordeBot/componen
 
 //Value Computed by CMake
 MyFirstComp_SOURCE_DIR:STATIC=/home/robocomp/robocomp/components/CordeBot/component/src
+
+//Value Computed by CMake
+Project_BINARY_DIR:STATIC=/home/carlos/robocomp/components/CordeBot/component
+
+//Value Computed by CMake
+Project_SOURCE_DIR:STATIC=/home/robocomp/robocomp/components/CordeBot/component/src
 
 //The directory containing a CMake configuration file for Qt5Core.
 Qt5Core_DIR:PATH=/usr/lib/x86_64-linux-gnu/cmake/Qt5Core

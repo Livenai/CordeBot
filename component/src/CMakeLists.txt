@@ -1,5 +1,4 @@
 cmake_minimum_required(VERSION 2.8.11)
-PROJECT( MyFirstComp )
 
 
 IF ( "$ENV{ROBOCOMP}" STREQUAL "")
@@ -32,7 +31,7 @@ SET ( SOURCES
 
 #ROBOCOMP
 ROBOCOMP_INITIALIZE( $ENV{ROBOCOMP}/ )
-ROBOCOMP_WRAP_ICE( CommonBehavior GenericBase DifferentialRobot Laser)
+ROBOCOMP_WRAP_ICE( CommonBehavior GenericBase DifferentialRobot InnerModelManager Laser)
 SET (EXECUTABLE_OUTPUT_PATH ${RC_COMPONENT_DEVEL_PATH}/bin)
 
 QT_WRAP_UI( UI_HEADERS mainUI.ui )
