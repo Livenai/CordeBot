@@ -379,9 +379,9 @@ void SpecificWorker::readRobotState()
 
 void SpecificWorker::loadPoints(){
     foodDispenser.setX(1868.15);
-    foodDispenser.setY(1773.39);
+    foodDispenser.setY(1373.39);
     waterDispenser.setX(-1868.15);
-    waterDispenser.setY(-1773.39);
+    waterDispenser.setY(-1373.39);
 }
 
 

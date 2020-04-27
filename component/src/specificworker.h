@@ -78,16 +78,20 @@ public:
     BrainTree::BehaviorTree btree3;
     BrainTree::BehaviorTree btree4;
     QTime timeAction;
+
 private:    
 };
 
 class ActionInitSleep : public BrainTree::Node
 {
     public:
+        std::string nombreRobot;
+
         ActionInitSleep(SpecificWorker *x)
         {
             qDebug() << "Constructor initSleep";
             this->sp = x;
+            nombreRobot = x->robotName;
         }
         Status update() override 
         {
@@ -95,17 +99,18 @@ class ActionInitSleep : public BrainTree::Node
             if(first_epoch)
             { 
              // sp->differentialrobot_proxy -> setSpeedBase(0,0);
-                qDebug() << "Empiezo a dormir";
+                qDebug() << "Empiezo a dormir ==================================================================";
                 //////////////////////////////////////////bajo la posicion de la oveja para que parezca dormida
+                qDebug() << "Nombre del robot: \"" << nombreRobot.c_str() << "\"";
                 
                 RoboCompInnerModelManager::Pose3D pose;
-                sp->innermodelmanager_proxy->getPoseFromParent("base", pose);
-                
-                qDebug() << "------------------------------- POSE -------------------------------" << endl << "x= " << pose.x << endl << "y= " << pose.y << endl << "z= " << pose.z << endl;
-                
-                pose.y = pose.y - 200;
-                sp->innermodelmanager_proxy->setPoseFromParent("base", pose);
-                
+                qDebug() << "1";
+                sp->innermodelmanager_proxy->getPoseFromParent(nombreRobot, pose);
+                qDebug() << "2";                
+                pose.y = pose.y - 250;
+                qDebug() << "3";
+                sp->innermodelmanager_proxy->setPoseFromParent(nombreRobot, pose);
+                qDebug() << "4";
 
                 reloj.restart();
                 first_epoch = false;
@@ -117,15 +122,15 @@ class ActionInitSleep : public BrainTree::Node
                 qDebug() << "Durmiendo...";
                 if(reloj.elapsed() > 4000)
                 {
-                    qDebug() << "Dormi suficiente";
+                    qDebug() << "Dormi suficiente ==================================================================";
                     //////////////////////////////////////subo la posicion de la oveja para despertarla
+                    qDebug() << "Nombre del robot: " << nombreRobot.c_str();
+
 	            RoboCompInnerModelManager::Pose3D pose;
-	            sp->innermodelmanager_proxy->getPoseFromParent("base", pose);
+	            sp->innermodelmanager_proxy->getPoseFromParent(nombreRobot, pose);
 	        
-	            qDebug() << "------------------------------- POSE -------------------------------" << endl << "x= " << pose.x << endl << "y= " << pose.y << endl << "z= " << pose.z << endl;
-	        
-	            pose.y = pose.y + 200;
-	            sp->innermodelmanager_proxy->setPoseFromParent("base", pose);                    
+	            pose.y = pose.y + 250;
+	            sp->innermodelmanager_proxy->setPoseFromParent(nombreRobot, pose);                    
 
 
 
