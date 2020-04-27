@@ -12,7 +12,7 @@ Pasos para ejecutar el componente:
 
   1) Compilar el componente:
     
-    (en CordeBot/oveja)
+    (en CordeBot/component)
     cmake .
     make {es posible que senecesite sudo}
     
