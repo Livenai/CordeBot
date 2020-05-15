@@ -16,6 +16,7 @@
 #include <QtGui/QHeaderView>
 #include <QtGui/QWidget>
 
+
 QT_BEGIN_NAMESPACE
 
 class Ui_guiDlg
@@ -35,7 +36,7 @@ public:
 
     void retranslateUi(QWidget *guiDlg)
     {
-        guiDlg->setWindowTitle(QApplication::translate("guiDlg", "MyFirstComp", 0, QApplication::UnicodeUTF8));
+        guiDlg->setWindowTitle(QApplication::translate("guiDlg", "RadioPlot", 0, QApplication::UnicodeUTF8));
     } // retranslateUi
 
 };

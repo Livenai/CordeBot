@@ -134,30 +134,13 @@ int ::MyFirstComp::run(int argc, char* argv[])
 
 	int status=EXIT_SUCCESS;
 
-	DifferentialRobotPrx differentialrobot_proxy;
 	InnerModelManagerPrx innermodelmanager_proxy;
 	LaserPrx laser_proxy;
+	OmniRobotPrx omnirobot_proxy;
 
 	string proxy, tmp;
 	initialize();
 
-
-	try
-	{
-		if (not GenericMonitor::configGetString(communicator(), prefix, "DifferentialRobotProxy", proxy, ""))
-		{
-			cout << "[" << PROGRAM_NAME << "]: Can't read configuration for proxy DifferentialRobotProxy\n";
-		}
-		differentialrobot_proxy = DifferentialRobotPrx::uncheckedCast( communicator()->stringToProxy( proxy ) );
-	}
-	catch(const Ice::Exception& ex)
-	{
-		cout << "[" << PROGRAM_NAME << "]: Exception creating proxy DifferentialRobot: " << ex;
-		return EXIT_FAILURE;
-	}
-	rInfo("DifferentialRobotProxy initialized Ok!");
-
-	mprx["DifferentialRobotProxy"] = (::IceProxy::Ice::Object*)(&differentialrobot_proxy);//Remote server proxy creation example
 
 	try
 	{
@@ -192,6 +175,23 @@ int ::MyFirstComp::run(int argc, char* argv[])
 	rInfo("LaserProxy initialized Ok!");
 
 	mprx["LaserProxy"] = (::IceProxy::Ice::Object*)(&laser_proxy);//Remote server proxy creation example
+
+	try
+	{
+		if (not GenericMonitor::configGetString(communicator(), prefix, "OmniRobotProxy", proxy, ""))
+		{
+			cout << "[" << PROGRAM_NAME << "]: Can't read configuration for proxy OmniRobotProxy\n";
+		}
+		omnirobot_proxy = OmniRobotPrx::uncheckedCast( communicator()->stringToProxy( proxy ) );
+	}
+	catch(const Ice::Exception& ex)
+	{
+		cout << "[" << PROGRAM_NAME << "]: Exception creating proxy OmniRobot: " << ex;
+		return EXIT_FAILURE;
+	}
+	rInfo("OmniRobotProxy initialized Ok!");
+
+	mprx["OmniRobotProxy"] = (::IceProxy::Ice::Object*)(&omnirobot_proxy);//Remote server proxy creation example
 
 	SpecificWorker *worker = new SpecificWorker(mprx);
 	//Monitor thread

@@ -44,7 +44,10 @@ bool SpecificWorker::setParams(RoboCompCommonBehavior::ParameterList params)
 		std::string innermodel_path = par.value;
 		innerModel = std::make_shared<InnerModel> (innermodel_path);
 
-        robotName = params.at("RobotName").value;
+                robotName = params.at("RobotName").value;
+    
+		// PARAMETROS DE navigation.h
+                //confParams  = std::make_shared<RoboCompCommonBehavior::ParameterList>(params);
 	}
 	catch(std::exception e) { qFatal("Error reading config params"); }
 	return true;
@@ -58,8 +61,9 @@ void SpecificWorker::initialize(int period)
     timeAction.start();
 	this->Period = period;
 	timer.start(Period);
-  //  std::thread t1(&SpecificWorker::initCron);
-  //  t1.join();
+
+    //  INICIALIZANDO PLANIFICADOR DE RUTAS (navigation.h)
+    //navigation.initialize(innerModel, viewer, confParams, omnirobot_proxy);
 }
 
 void SpecificWorker::compute()
@@ -366,7 +370,7 @@ void SpecificWorker::readRobotState()
     {
       //  qDebug() << "EN METODO READROBOTSTATE";
       //  qDebug() << "y: " << bState.z;
-        differentialrobot_proxy->getBaseState(bState);
+        omnirobot_proxy->getBaseState(bState);
         innerModel->updateTransformValues(robotName.c_str(), bState.x, 0, bState.z, 0, bState.alpha, 0);
        // qDebug() << "EN METODO READROBOTSTATE fin";
       //  qDebug() << "y: " << bState.z;
@@ -480,7 +484,7 @@ void SpecificWorker::crearArboles()
     if(robotName == "base4") createTree4(btree4);
 
     
-   // differentialrobot_proxy -> setOdometerPose(500,0,bState.alpha);
+   // omnirobot_proxy -> setOdometerPose(500,0,bState.alpha);
    // createTree1(btree1);
    // createTree2(btree2);
    // createTree2(btree3);

@@ -29,9 +29,9 @@ QObject()
 
 {
 
-	differentialrobot_proxy = (*(DifferentialRobotPrx*)mprx["DifferentialRobotProxy"]);
 	innermodelmanager_proxy = (*(InnerModelManagerPrx*)mprx["InnerModelManagerProxy"]);
 	laser_proxy = (*(LaserPrx*)mprx["LaserProxy"]);
+	omnirobot_proxy = (*(OmniRobotPrx*)mprx["OmniRobotProxy"]);
 
 	mutex = new QMutex(QMutex::Recursive);
 

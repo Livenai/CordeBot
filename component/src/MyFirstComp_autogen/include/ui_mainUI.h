@@ -35,7 +35,7 @@ public:
 
     void retranslateUi(QWidget *guiDlg)
     {
-        guiDlg->setWindowTitle(QApplication::translate("guiDlg", "MyFirstComp", Q_NULLPTR));
+        guiDlg->setWindowTitle(QApplication::translate("guiDlg", "RadioPlot", Q_NULLPTR));
     } // retranslateUi
 
 };

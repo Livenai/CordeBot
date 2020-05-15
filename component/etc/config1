@@ -3,7 +3,7 @@ CommonBehavior.Endpoints=tcp -p 11000
 
 # Proxies for required interfaces
 LaserProxy = laser:tcp -h localhost -p 11003
-DifferentialRobotProxy = differentialrobot:tcp -h localhost -p 11004
+OmniRobotProxy = omnirobot:tcp -h localhost -p 11004
 InnerModelManagerProxy = innermodelmanager:tcp -h localhost -p 11175
 
 RobotName = base1

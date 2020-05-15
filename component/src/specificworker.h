@@ -39,6 +39,10 @@
 //#include <Scheduler/Scheduler.h>
 #include <thread>
 
+
+#include "navigation.h"
+
+
 class SpecificWorker : public GenericWorker
 {
 Q_OBJECT
@@ -78,8 +82,9 @@ public:
     BrainTree::BehaviorTree btree3;
     BrainTree::BehaviorTree btree4;
     QTime timeAction;
+    //Navigation<Grid<>,Controller> navigation;
 
-private:    
+private:  
 };
 
 class ActionInitSleep : public BrainTree::Node
@@ -98,23 +103,21 @@ class ActionInitSleep : public BrainTree::Node
             
             if(first_epoch)
             { 
-             // sp->differentialrobot_proxy -> setSpeedBase(0,0);
+             // sp->omnirobot_proxy -> setSpeedBase(0,0,0);
                 qDebug() << "Empiezo a dormir ==================================================================";
                 //////////////////////////////////////////bajo la posicion de la oveja para que parezca dormida
                 qDebug() << "Nombre del robot: \"" << nombreRobot.c_str() << "\"";
                 
                 RoboCompInnerModelManager::Pose3D pose;
-                qDebug() << "1";
                 sp->innermodelmanager_proxy->getPoseFromParent(nombreRobot, pose);
-                qDebug() << "2";                
+
                 pose.y = pose.y - 250;
-                qDebug() << "3";
                 sp->innermodelmanager_proxy->setPoseFromParent(nombreRobot, pose);
-                qDebug() << "4";
+
 
                 reloj.restart();
                 first_epoch = false;
-                sp->differentialrobot_proxy -> setSpeedBase(0,0);
+                sp->omnirobot_proxy -> setSpeedBase(0,0,0);
                 return Node::Status::Running;        
             }
             else
@@ -178,12 +181,12 @@ class ActionStandToEat : public BrainTree::Node
             qDebug() << "------------------------------------------------";
             if(fabs(angle) < 0.001)
             {
-                sp->differentialrobot_proxy -> setSpeedBase(0,0);
+                sp->omnirobot_proxy -> setSpeedBase(0,0,0);
                 qDebug() << "Stand to eat --------> SUCCESS";
                 return Node::Status::Success;
             }else
             {
-                sp->differentialrobot_proxy -> setSpeedBase(0,angle);  
+                sp->omnirobot_proxy -> setSpeedBase(0,0,angle);  
                 qDebug() << "Stand to eat --------> RUNNING";
                 return Node::Status::Running;
             }
@@ -210,7 +213,7 @@ class ActionGoToEat : public BrainTree::Node
             coordY = sp->getCoordYFood();
             if((((coordX - sp->bState.x) < 20) && (coordX - sp->bState.x) > -20) && (((coordY - sp->bState.z) < 20) && (coordY - sp->bState.z) > -20))
 	        {
-	        	sp->differentialrobot_proxy -> setSpeedBase(0,0);
+	        	sp->omnirobot_proxy -> setSpeedBase(0,0,0);
                 qDebug() << "Go to eat --------> SUCCESS";
 	        	return Node::Status::Success;
 	        }
@@ -226,7 +229,7 @@ class ActionGoToEat : public BrainTree::Node
 
                 if((ldata.front().dist < 450 || center < 450))
 	            {
- 		            sp->differentialrobot_proxy->setSpeedBase(0, -0.6);
+ 		            sp->omnirobot_proxy->setSpeedBase(0,0, -0.6);
                     qDebug() << " Comprobando si choco ";
                     if(right > 450){
                         esquivar = true;
@@ -241,7 +244,7 @@ class ActionGoToEat : public BrainTree::Node
                     
                 }else
                 {
-		            sp->differentialrobot_proxy -> setSpeedBase(500,0);
+		            sp->omnirobot_proxy -> setSpeedBase(0,500,0);
                     qDebug() << "Go to eat --------> RUNNING";
                     return Node::Status::Running;
                 }
@@ -258,13 +261,13 @@ class ActionGoToEat : public BrainTree::Node
             qDebug() << "Angulo = " << angle;
             if( fabs(angle) < 0.001)
             {
-                sp->differentialrobot_proxy -> setSpeedBase(0,0);
+                sp->omnirobot_proxy -> setSpeedBase(0,0,0);
                 qDebug() << "colocarse : estoy colocado";
                 esquivar = false;
                 return Node::Status::Running;
             }else
             {
-                sp->differentialrobot_proxy -> setSpeedBase(0,angle);  
+                sp->omnirobot_proxy -> setSpeedBase(0,0,angle);  
                 qDebug() << "colocarse : colocandome";
                 return Node::Status::Running;
             }
@@ -276,7 +279,7 @@ class ActionGoToEat : public BrainTree::Node
             if(r > 400 && r < 500 && c > 450)
             {
                 qDebug() << "rodear : avanzo ";
-                sp->differentialrobot_proxy -> setSpeedBase(100,0);
+                sp->omnirobot_proxy -> setSpeedBase(0,100,0);
                 esquivar = true;
                 return Node::Status::Running;
             }
@@ -285,13 +288,13 @@ class ActionGoToEat : public BrainTree::Node
                 if(r < 400 || c < 350)
 		        {
                     qDebug() << "rodear : giro izq ";
-				    sp->differentialrobot_proxy -> setSpeedBase(100,-0.6);
+				    sp->omnirobot_proxy -> setSpeedBase(0,100,-0.6);
                     return Node::Status::Running;
 		        }
 		        else if(r > 500)
 		        {
                     qDebug() << "rodear giro derecha";
-			    	sp->differentialrobot_proxy -> setSpeedBase(100,0.25);
+			    	sp->omnirobot_proxy -> setSpeedBase(0,100,0.25);
                     return Node::Status::Running;
 		        }
             }
@@ -360,12 +363,12 @@ class ActionStandToDrink : public BrainTree::Node
             qDebug() << "Angulo = " << angle;
             if( fabs(angle) < 0.001)
             {
-                sp->differentialrobot_proxy -> setSpeedBase(0,0);
+                sp->omnirobot_proxy -> setSpeedBase(0,0,0);
                 qDebug() << "Stand to drink --------> SUCCESS";
                 return Node::Status::Success;
             }else
             {
-                sp->differentialrobot_proxy -> setSpeedBase(0,angle);  
+                sp->omnirobot_proxy -> setSpeedBase(0,0,angle);  
                 qDebug() << "Stand to drink --------> RUNNING";
                 return Node::Status::Running;
             }
@@ -392,7 +395,7 @@ class ActionGoToDrink : public BrainTree::Node
             coordY = sp->getCoordYWater();
             if((((coordX - sp->bState.x) < 20) && (coordX - sp->bState.x) > -20) && (((coordY - sp->bState.z) < 20) && (coordY - sp->bState.z) > -20))
 	        {
-	        	sp->differentialrobot_proxy -> setSpeedBase(0,0);
+	        	sp->omnirobot_proxy -> setSpeedBase(0,0,0);
                 qDebug() << "Go to drink --------> SUCCESS";
 	        	return Node::Status::Success;
 	        }
@@ -407,7 +410,7 @@ class ActionGoToDrink : public BrainTree::Node
 
                 if((ldata.front().dist < 350 || center < 350))
 	            {
- 		            sp->differentialrobot_proxy->setSpeedBase(0, -0.6);
+ 		            sp->omnirobot_proxy->setSpeedBase(0,0, -0.6);
                     qDebug() << " Comprobando si choco ";
                     if(right > 450){
                         esquivar = true;
@@ -422,7 +425,7 @@ class ActionGoToDrink : public BrainTree::Node
                     
                 }else
                 {
-		            sp->differentialrobot_proxy -> setSpeedBase(500,0);
+		            sp->omnirobot_proxy -> setSpeedBase(0,500,0);
                     qDebug() << "Go to eat --------> RUNNING";
                     return Node::Status::Running;
                 }
@@ -439,13 +442,13 @@ class ActionGoToDrink : public BrainTree::Node
             qDebug() << "Angulo = " << angle;
             if( fabs(angle) < 0.001)
             {
-                sp->differentialrobot_proxy -> setSpeedBase(0,0);
+                sp->omnirobot_proxy -> setSpeedBase(0,0,0);
                 qDebug() << "colocarse : estoy colocado";
                 esquivar = false;
                 return Node::Status::Running;
             }else
             {
-                sp->differentialrobot_proxy -> setSpeedBase(0,angle);  
+                sp->omnirobot_proxy -> setSpeedBase(0,0,angle);  
                 qDebug() << "colocarse : colocandome";
                 return Node::Status::Running;
             }
@@ -456,7 +459,7 @@ class ActionGoToDrink : public BrainTree::Node
             if(r > 400 && r < 500 && c > 450)
             {
                 qDebug() << "rodear : avanzo ";
-                sp->differentialrobot_proxy -> setSpeedBase(100,0);
+                sp->omnirobot_proxy -> setSpeedBase(0,100,0);
                 esquivar = true;
                 return Node::Status::Running;
             }
@@ -465,13 +468,13 @@ class ActionGoToDrink : public BrainTree::Node
                 if(r < 400 || c < 350)
 		        {
                     qDebug() << "rodear : giro izq ";
-				    sp->differentialrobot_proxy -> setSpeedBase(100,-0.6);
+				    sp->omnirobot_proxy -> setSpeedBase(0,100,-0.6);
                     return Node::Status::Running;
 		        }
 		        else if(r > 500)
 		        {
                     qDebug() << "rodear giro derecha";
-			    	sp->differentialrobot_proxy -> setSpeedBase(100,0.25);
+			    	sp->omnirobot_proxy -> setSpeedBase(0,100,0.25);
                     return Node::Status::Running;
 		        }
             }
@@ -550,7 +553,7 @@ class ActionWalk : public BrainTree::Node
             qDebug() << "Walking";
             int waitingTime = 30000; // 15 seconds sleeping
             if(sp->timeAction.elapsed() > waitingTime){
-                sp->differentialrobot_proxy->setSpeedBase(0,0);
+                sp->omnirobot_proxy->setSpeedBase(0,0,0);
                 return Node::Status::Success;
             }
             else
@@ -565,7 +568,7 @@ class ActionWalk : public BrainTree::Node
                     if(nr == 0){
                         nr = -1;
                     }*/
- 		            sp->differentialrobot_proxy->setSpeedBase(5, 0.6);
+ 		            sp->omnirobot_proxy->setSpeedBase(0,5, 0.6);
 		            usleep(rand()%(1500000-100000 + 1) + 100000);  // random wait between 1.5s and 0.1sec
 	            }
                 else
@@ -573,11 +576,11 @@ class ActionWalk : public BrainTree::Node
                   /*  int nrand = rand() % 2;
                     if(nrand  == 0 )
                     {
-                        sp->differentialrobot_proxy->setSpeedBase(700, 0);
+                        sp->omnirobot_proxy->setSpeedBase(0,700, 0);
                     }
                     else
                     {*/
-                        sp->differentialrobot_proxy->setSpeedBase(700,0.05);
+                        sp->omnirobot_proxy->setSpeedBase(0,700,0.05);
                  //   }
                     
                 }

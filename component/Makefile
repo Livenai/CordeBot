@@ -209,33 +209,6 @@ CommonBehavior.cpp.s:
 	$(MAKE) -f CMakeFiles/MyFirstComp.dir/build.make CMakeFiles/MyFirstComp.dir/CommonBehavior.cpp.s
 .PHONY : CommonBehavior.cpp.s
 
-DifferentialRobot.o: DifferentialRobot.cpp.o
-
-.PHONY : DifferentialRobot.o
-
-# target to build an object file
-DifferentialRobot.cpp.o:
-	$(MAKE) -f CMakeFiles/MyFirstComp.dir/build.make CMakeFiles/MyFirstComp.dir/DifferentialRobot.cpp.o
-.PHONY : DifferentialRobot.cpp.o
-
-DifferentialRobot.i: DifferentialRobot.cpp.i
-
-.PHONY : DifferentialRobot.i
-
-# target to preprocess a source file
-DifferentialRobot.cpp.i:
-	$(MAKE) -f CMakeFiles/MyFirstComp.dir/build.make CMakeFiles/MyFirstComp.dir/DifferentialRobot.cpp.i
-.PHONY : DifferentialRobot.cpp.i
-
-DifferentialRobot.s: DifferentialRobot.cpp.s
-
-.PHONY : DifferentialRobot.s
-
-# target to generate assembly for a file
-DifferentialRobot.cpp.s:
-	$(MAKE) -f CMakeFiles/MyFirstComp.dir/build.make CMakeFiles/MyFirstComp.dir/DifferentialRobot.cpp.s
-.PHONY : DifferentialRobot.cpp.s
-
 GenericBase.o: GenericBase.cpp.o
 
 .PHONY : GenericBase.o
@@ -344,6 +317,33 @@ MyFirstComp_autogen/mocs_compilation.cpp.s:
 	$(MAKE) -f CMakeFiles/MyFirstComp.dir/build.make CMakeFiles/MyFirstComp.dir/MyFirstComp_autogen/mocs_compilation.cpp.s
 .PHONY : MyFirstComp_autogen/mocs_compilation.cpp.s
 
+OmniRobot.o: OmniRobot.cpp.o
+
+.PHONY : OmniRobot.o
+
+# target to build an object file
+OmniRobot.cpp.o:
+	$(MAKE) -f CMakeFiles/MyFirstComp.dir/build.make CMakeFiles/MyFirstComp.dir/OmniRobot.cpp.o
+.PHONY : OmniRobot.cpp.o
+
+OmniRobot.i: OmniRobot.cpp.i
+
+.PHONY : OmniRobot.i
+
+# target to preprocess a source file
+OmniRobot.cpp.i:
+	$(MAKE) -f CMakeFiles/MyFirstComp.dir/build.make CMakeFiles/MyFirstComp.dir/OmniRobot.cpp.i
+.PHONY : OmniRobot.cpp.i
+
+OmniRobot.s: OmniRobot.cpp.s
+
+.PHONY : OmniRobot.s
+
+# target to generate assembly for a file
+OmniRobot.cpp.s:
+	$(MAKE) -f CMakeFiles/MyFirstComp.dir/build.make CMakeFiles/MyFirstComp.dir/OmniRobot.cpp.s
+.PHONY : OmniRobot.cpp.s
+
 commonbehaviorI.o: commonbehaviorI.cpp.o
 
 .PHONY : commonbehaviorI.o
@@ -425,87 +425,6 @@ genericworker.cpp.s:
 	$(MAKE) -f CMakeFiles/MyFirstComp.dir/build.make CMakeFiles/MyFirstComp.dir/genericworker.cpp.s
 .PHONY : genericworker.cpp.s
 
-home/carlos/robocomp/classes/qlog/qlog.o: home/carlos/robocomp/classes/qlog/qlog.cpp.o
-
-.PHONY : home/carlos/robocomp/classes/qlog/qlog.o
-
-# target to build an object file
-home/carlos/robocomp/classes/qlog/qlog.cpp.o:
-	$(MAKE) -f CMakeFiles/MyFirstComp.dir/build.make CMakeFiles/MyFirstComp.dir/home/carlos/robocomp/classes/qlog/qlog.cpp.o
-.PHONY : home/carlos/robocomp/classes/qlog/qlog.cpp.o
-
-home/carlos/robocomp/classes/qlog/qlog.i: home/carlos/robocomp/classes/qlog/qlog.cpp.i
-
-.PHONY : home/carlos/robocomp/classes/qlog/qlog.i
-
-# target to preprocess a source file
-home/carlos/robocomp/classes/qlog/qlog.cpp.i:
-	$(MAKE) -f CMakeFiles/MyFirstComp.dir/build.make CMakeFiles/MyFirstComp.dir/home/carlos/robocomp/classes/qlog/qlog.cpp.i
-.PHONY : home/carlos/robocomp/classes/qlog/qlog.cpp.i
-
-home/carlos/robocomp/classes/qlog/qlog.s: home/carlos/robocomp/classes/qlog/qlog.cpp.s
-
-.PHONY : home/carlos/robocomp/classes/qlog/qlog.s
-
-# target to generate assembly for a file
-home/carlos/robocomp/classes/qlog/qlog.cpp.s:
-	$(MAKE) -f CMakeFiles/MyFirstComp.dir/build.make CMakeFiles/MyFirstComp.dir/home/carlos/robocomp/classes/qlog/qlog.cpp.s
-.PHONY : home/carlos/robocomp/classes/qlog/qlog.cpp.s
-
-home/carlos/robocomp/classes/rapplication/rapplication.o: home/carlos/robocomp/classes/rapplication/rapplication.cpp.o
-
-.PHONY : home/carlos/robocomp/classes/rapplication/rapplication.o
-
-# target to build an object file
-home/carlos/robocomp/classes/rapplication/rapplication.cpp.o:
-	$(MAKE) -f CMakeFiles/MyFirstComp.dir/build.make CMakeFiles/MyFirstComp.dir/home/carlos/robocomp/classes/rapplication/rapplication.cpp.o
-.PHONY : home/carlos/robocomp/classes/rapplication/rapplication.cpp.o
-
-home/carlos/robocomp/classes/rapplication/rapplication.i: home/carlos/robocomp/classes/rapplication/rapplication.cpp.i
-
-.PHONY : home/carlos/robocomp/classes/rapplication/rapplication.i
-
-# target to preprocess a source file
-home/carlos/robocomp/classes/rapplication/rapplication.cpp.i:
-	$(MAKE) -f CMakeFiles/MyFirstComp.dir/build.make CMakeFiles/MyFirstComp.dir/home/carlos/robocomp/classes/rapplication/rapplication.cpp.i
-.PHONY : home/carlos/robocomp/classes/rapplication/rapplication.cpp.i
-
-home/carlos/robocomp/classes/rapplication/rapplication.s: home/carlos/robocomp/classes/rapplication/rapplication.cpp.s
-
-.PHONY : home/carlos/robocomp/classes/rapplication/rapplication.s
-
-# target to generate assembly for a file
-home/carlos/robocomp/classes/rapplication/rapplication.cpp.s:
-	$(MAKE) -f CMakeFiles/MyFirstComp.dir/build.make CMakeFiles/MyFirstComp.dir/home/carlos/robocomp/classes/rapplication/rapplication.cpp.s
-.PHONY : home/carlos/robocomp/classes/rapplication/rapplication.cpp.s
-
-home/carlos/robocomp/classes/sigwatch/sigwatch.o: home/carlos/robocomp/classes/sigwatch/sigwatch.cpp.o
-
-.PHONY : home/carlos/robocomp/classes/sigwatch/sigwatch.o
-
-# target to build an object file
-home/carlos/robocomp/classes/sigwatch/sigwatch.cpp.o:
-	$(MAKE) -f CMakeFiles/MyFirstComp.dir/build.make CMakeFiles/MyFirstComp.dir/home/carlos/robocomp/classes/sigwatch/sigwatch.cpp.o
-.PHONY : home/carlos/robocomp/classes/sigwatch/sigwatch.cpp.o
-
-home/carlos/robocomp/classes/sigwatch/sigwatch.i: home/carlos/robocomp/classes/sigwatch/sigwatch.cpp.i
-
-.PHONY : home/carlos/robocomp/classes/sigwatch/sigwatch.i
-
-# target to preprocess a source file
-home/carlos/robocomp/classes/sigwatch/sigwatch.cpp.i:
-	$(MAKE) -f CMakeFiles/MyFirstComp.dir/build.make CMakeFiles/MyFirstComp.dir/home/carlos/robocomp/classes/sigwatch/sigwatch.cpp.i
-.PHONY : home/carlos/robocomp/classes/sigwatch/sigwatch.cpp.i
-
-home/carlos/robocomp/classes/sigwatch/sigwatch.s: home/carlos/robocomp/classes/sigwatch/sigwatch.cpp.s
-
-.PHONY : home/carlos/robocomp/classes/sigwatch/sigwatch.s
-
-# target to generate assembly for a file
-home/carlos/robocomp/classes/sigwatch/sigwatch.cpp.s:
-	$(MAKE) -f CMakeFiles/MyFirstComp.dir/build.make CMakeFiles/MyFirstComp.dir/home/carlos/robocomp/classes/sigwatch/sigwatch.cpp.s
-.PHONY : home/carlos/robocomp/classes/sigwatch/sigwatch.cpp.s
-
 main.o: main.cpp.o
 
 .PHONY : main.o
@@ -532,6 +451,87 @@ main.s: main.cpp.s
 main.cpp.s:
 	$(MAKE) -f CMakeFiles/MyFirstComp.dir/build.make CMakeFiles/MyFirstComp.dir/main.cpp.s
 .PHONY : main.cpp.s
+
+opt/robocomp/classes/qlog/qlog.o: opt/robocomp/classes/qlog/qlog.cpp.o
+
+.PHONY : opt/robocomp/classes/qlog/qlog.o
+
+# target to build an object file
+opt/robocomp/classes/qlog/qlog.cpp.o:
+	$(MAKE) -f CMakeFiles/MyFirstComp.dir/build.make CMakeFiles/MyFirstComp.dir/opt/robocomp/classes/qlog/qlog.cpp.o
+.PHONY : opt/robocomp/classes/qlog/qlog.cpp.o
+
+opt/robocomp/classes/qlog/qlog.i: opt/robocomp/classes/qlog/qlog.cpp.i
+
+.PHONY : opt/robocomp/classes/qlog/qlog.i
+
+# target to preprocess a source file
+opt/robocomp/classes/qlog/qlog.cpp.i:
+	$(MAKE) -f CMakeFiles/MyFirstComp.dir/build.make CMakeFiles/MyFirstComp.dir/opt/robocomp/classes/qlog/qlog.cpp.i
+.PHONY : opt/robocomp/classes/qlog/qlog.cpp.i
+
+opt/robocomp/classes/qlog/qlog.s: opt/robocomp/classes/qlog/qlog.cpp.s
+
+.PHONY : opt/robocomp/classes/qlog/qlog.s
+
+# target to generate assembly for a file
+opt/robocomp/classes/qlog/qlog.cpp.s:
+	$(MAKE) -f CMakeFiles/MyFirstComp.dir/build.make CMakeFiles/MyFirstComp.dir/opt/robocomp/classes/qlog/qlog.cpp.s
+.PHONY : opt/robocomp/classes/qlog/qlog.cpp.s
+
+opt/robocomp/classes/rapplication/rapplication.o: opt/robocomp/classes/rapplication/rapplication.cpp.o
+
+.PHONY : opt/robocomp/classes/rapplication/rapplication.o
+
+# target to build an object file
+opt/robocomp/classes/rapplication/rapplication.cpp.o:
+	$(MAKE) -f CMakeFiles/MyFirstComp.dir/build.make CMakeFiles/MyFirstComp.dir/opt/robocomp/classes/rapplication/rapplication.cpp.o
+.PHONY : opt/robocomp/classes/rapplication/rapplication.cpp.o
+
+opt/robocomp/classes/rapplication/rapplication.i: opt/robocomp/classes/rapplication/rapplication.cpp.i
+
+.PHONY : opt/robocomp/classes/rapplication/rapplication.i
+
+# target to preprocess a source file
+opt/robocomp/classes/rapplication/rapplication.cpp.i:
+	$(MAKE) -f CMakeFiles/MyFirstComp.dir/build.make CMakeFiles/MyFirstComp.dir/opt/robocomp/classes/rapplication/rapplication.cpp.i
+.PHONY : opt/robocomp/classes/rapplication/rapplication.cpp.i
+
+opt/robocomp/classes/rapplication/rapplication.s: opt/robocomp/classes/rapplication/rapplication.cpp.s
+
+.PHONY : opt/robocomp/classes/rapplication/rapplication.s
+
+# target to generate assembly for a file
+opt/robocomp/classes/rapplication/rapplication.cpp.s:
+	$(MAKE) -f CMakeFiles/MyFirstComp.dir/build.make CMakeFiles/MyFirstComp.dir/opt/robocomp/classes/rapplication/rapplication.cpp.s
+.PHONY : opt/robocomp/classes/rapplication/rapplication.cpp.s
+
+opt/robocomp/classes/sigwatch/sigwatch.o: opt/robocomp/classes/sigwatch/sigwatch.cpp.o
+
+.PHONY : opt/robocomp/classes/sigwatch/sigwatch.o
+
+# target to build an object file
+opt/robocomp/classes/sigwatch/sigwatch.cpp.o:
+	$(MAKE) -f CMakeFiles/MyFirstComp.dir/build.make CMakeFiles/MyFirstComp.dir/opt/robocomp/classes/sigwatch/sigwatch.cpp.o
+.PHONY : opt/robocomp/classes/sigwatch/sigwatch.cpp.o
+
+opt/robocomp/classes/sigwatch/sigwatch.i: opt/robocomp/classes/sigwatch/sigwatch.cpp.i
+
+.PHONY : opt/robocomp/classes/sigwatch/sigwatch.i
+
+# target to preprocess a source file
+opt/robocomp/classes/sigwatch/sigwatch.cpp.i:
+	$(MAKE) -f CMakeFiles/MyFirstComp.dir/build.make CMakeFiles/MyFirstComp.dir/opt/robocomp/classes/sigwatch/sigwatch.cpp.i
+.PHONY : opt/robocomp/classes/sigwatch/sigwatch.cpp.i
+
+opt/robocomp/classes/sigwatch/sigwatch.s: opt/robocomp/classes/sigwatch/sigwatch.cpp.s
+
+.PHONY : opt/robocomp/classes/sigwatch/sigwatch.s
+
+# target to generate assembly for a file
+opt/robocomp/classes/sigwatch/sigwatch.cpp.s:
+	$(MAKE) -f CMakeFiles/MyFirstComp.dir/build.make CMakeFiles/MyFirstComp.dir/opt/robocomp/classes/sigwatch/sigwatch.cpp.s
+.PHONY : opt/robocomp/classes/sigwatch/sigwatch.cpp.s
 
 specificmonitor.o: specificmonitor.cpp.o
 
@@ -604,9 +604,6 @@ help:
 	@echo "... CommonBehavior.o"
 	@echo "... CommonBehavior.i"
 	@echo "... CommonBehavior.s"
-	@echo "... DifferentialRobot.o"
-	@echo "... DifferentialRobot.i"
-	@echo "... DifferentialRobot.s"
 	@echo "... GenericBase.o"
 	@echo "... GenericBase.i"
 	@echo "... GenericBase.s"
@@ -619,6 +616,9 @@ help:
 	@echo "... MyFirstComp_autogen/mocs_compilation.o"
 	@echo "... MyFirstComp_autogen/mocs_compilation.i"
 	@echo "... MyFirstComp_autogen/mocs_compilation.s"
+	@echo "... OmniRobot.o"
+	@echo "... OmniRobot.i"
+	@echo "... OmniRobot.s"
 	@echo "... commonbehaviorI.o"
 	@echo "... commonbehaviorI.i"
 	@echo "... commonbehaviorI.s"
@@ -628,18 +628,18 @@ help:
 	@echo "... genericworker.o"
 	@echo "... genericworker.i"
 	@echo "... genericworker.s"
-	@echo "... home/carlos/robocomp/classes/qlog/qlog.o"
-	@echo "... home/carlos/robocomp/classes/qlog/qlog.i"
-	@echo "... home/carlos/robocomp/classes/qlog/qlog.s"
-	@echo "... home/carlos/robocomp/classes/rapplication/rapplication.o"
-	@echo "... home/carlos/robocomp/classes/rapplication/rapplication.i"
-	@echo "... home/carlos/robocomp/classes/rapplication/rapplication.s"
-	@echo "... home/carlos/robocomp/classes/sigwatch/sigwatch.o"
-	@echo "... home/carlos/robocomp/classes/sigwatch/sigwatch.i"
-	@echo "... home/carlos/robocomp/classes/sigwatch/sigwatch.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
+	@echo "... opt/robocomp/classes/qlog/qlog.o"
+	@echo "... opt/robocomp/classes/qlog/qlog.i"
+	@echo "... opt/robocomp/classes/qlog/qlog.s"
+	@echo "... opt/robocomp/classes/rapplication/rapplication.o"
+	@echo "... opt/robocomp/classes/rapplication/rapplication.i"
+	@echo "... opt/robocomp/classes/rapplication/rapplication.s"
+	@echo "... opt/robocomp/classes/sigwatch/sigwatch.o"
+	@echo "... opt/robocomp/classes/sigwatch/sigwatch.i"
+	@echo "... opt/robocomp/classes/sigwatch/sigwatch.s"
 	@echo "... specificmonitor.o"
 	@echo "... specificmonitor.i"
 	@echo "... specificmonitor.s"

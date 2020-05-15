@@ -32,9 +32,9 @@
 #include <CommonBehavior.h>
 
 #include <GenericBase.h>
-#include <DifferentialRobot.h>
 #include <InnerModelManager.h>
 #include <Laser.h>
+#include <OmniRobot.h>
 
 
 #define CHECK_PERIOD 5000
@@ -42,9 +42,9 @@
 
 using namespace std;
 using namespace RoboCompGenericBase;
-using namespace RoboCompDifferentialRobot;
 using namespace RoboCompInnerModelManager;
 using namespace RoboCompLaser;
+using namespace RoboCompOmniRobot;
 
 typedef map <string,::IceProxy::Ice::Object*> MapPrx;
 
@@ -67,9 +67,9 @@ public:
 	QMutex *mutex;
 
 
-	DifferentialRobotPrx differentialrobot_proxy;
 	InnerModelManagerPrx innermodelmanager_proxy;
 	LaserPrx laser_proxy;
+	OmniRobotPrx omnirobot_proxy;
 
 
 protected:

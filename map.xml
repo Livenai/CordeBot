@@ -17,88 +17,62 @@
 			-->
 		</transform>
 
-		<!--OBSTACLES
-		<transform id="caja1" tx="0" tz="1000" ty="0" >
-			<plane id="cajaMesh1" nx="1" size="400,400,400"  texture="/home/robocomp/robocomp/files/osgModels/textures/Metal.jpg" collide="1"/>
-		</transform>
 
-		<transform id="caja2" tx="1300" tz="1200" ty="0" >
-			<plane id="cajaMesh2" nx="1" size="400,400,400"  texture="/home/robocomp/robocomp/files/osgModels/textures/Metal.jpg" collide="1"/>
-		</transform>
-
-		<transform id="caja3" tx="-1300" tz="-1200" ty="0" >
-			<plane id="cajaMesh3" nx="1" size="400,400,400"  texture="/home/robocomp/robocomp/files/osgModels/textures/Metal.jpg" collide="1"/>
-		</transform>
-		
-		<transform id="caja4" tx="1300" tz="-1200" ty="0" >
-			<plane id="cajaMesh4" nx="1" size="400,400,400"  texture="/home/robocomp/robocomp/files/osgModels/textures/Metal.jpg" collide="1"/>
-		</transform>
-		
-		<transform id="caja5" tx="0" tz="-1500" ty="0" >
-			<plane id="cajaMesh5" nx="1" size="400,400,400"  texture="/home/robocomp/robocomp/files/osgModels/textures/Metal.jpg" collide="1"/>
-		</transform>
-		
-		<transform id="caja6" tx="-1300" tz="1200" ty="0" >
-			<plane id="cajaMesh6" nx="1" size="400,400,400"  texture="/home/robocomp/robocomp/files/osgModels/textures/Metal.jpg" collide="1"/>
-		</transform>-->
-			
-		<!-- <axes id="axis" length="1000"/>
-		 -->
 			<!---->
 		
-			<differentialrobot id="base" port="10004">
+			<omnirobot id="base" port="10004">
 			<mesh id="base_robex" file="/home/robocomp/robocomp/components/CordeBot/models/sheep/sheep_textured.ive"  tx="0" ty="0" tz="0" scale="6" rx="3.14"  ry="3.14" collide="1"/>
 				<translation id="laserPose" tx="0" ty="140" tz="200">
 					<laser id="laser" port="10003" measures="100" min="100" max="30000" angle="3" ifconfig="10000" />
-						<plane id="sensorL" nz="1" pz="-200" size="1" repeat="1" texture="#ff0000" /> 
+						<plane id="sensorL" nz="1" pz="-250" py="248"  size="30,8,210" repeat="1" texture="#ff55ff" /> 
 				</translation>	
 				<translation id="robotGeometricCenter" tx="0" ty="0" tz="50">
 				</translation>
-			</differentialrobot>
+			</omnirobot>
 		
-				
 			
-			<differentialrobot id="base1" port="11004">
+			
+			<omnirobot id="base1" port="11004">
 			<mesh id="base_robex1" file="/home/robocomp/robocomp/components/CordeBot/models/sheep/sheep_textured.ive"  tx="0" ty="0" tz="0" scale="7" rx="3.14"  ry="3.14" collide="1"/>
 				<translation id="laserPose1" tx="0" ty="140" tz="200">
 					<laser id="laser1" port="11003" measures="100" min="100" max="30000" angle="3" ifconfig="10000" />
-						<plane id="sensorL1" nz="1" pz="-200" size="1" repeat="1" texture="#ff0000" /> 
+						<plane id="sensorL1" nz="1" pz="-250" py="315"  size="30,8,270" repeat="1" texture="#ffffff" /> 
 				</translation>	
 				<translation id="robotGeometricCenter1" tx="0" ty="0" tz="50">
 				</translation>
-			</differentialrobot>
-		-->
-			<differentialrobot id="base2" port="12004">
+			</omnirobot>
+		
+			<omnirobot id="base2" port="12004">
 			<mesh id="base_robex2" file="/home/robocomp/robocomp/components/CordeBot/models/sheep/sheep_textured.ive"  tx="0" ty="0" tz="0" scale="8" rx="3.14"  ry="3.14" collide="1"/>
 				<translation id="laserPose2" tx="0" ty="140" tz="200">
 					<laser id="laser2" port="12003" measures="100" min="100" max="30000" angle="3" ifconfig="10000" />
-						<plane id="sensorL2" nz="1" pz="-200" size="1" repeat="1" texture="#ff0000" /> 
+						<plane id="sensorL2" nz="1" pz="-250" py="380"  size="30,8,310" repeat="1" texture="#0088ff" /> 
 				</translation>	
 				<translation id="robotGeometricCenter2" tx="0" ty="0" tz="50">
 				</translation>
-			</differentialrobot>
-		<!---->
-			<differentialrobot id="base3" port="13004">
+			</omnirobot>
+		
+			<omnirobot id="base3" port="13004">
 			<mesh id="base_robex3" file="/home/robocomp/robocomp/components/CordeBot/models/sheep/sheep_textured.ive"  tx="0" ty="0" tz="0" scale="9" rx="3.14"  ry="3.14" collide="1"/>
 				<translation id="laserPose3" tx="0" ty="140" tz="200">
 					<laser id="laser3" port="13003" measures="100" min="100" max="30000" angle="3" ifconfig="10000" />
-						<plane id="sensorL3" nz="1" pz="-200" size="1" repeat="1" texture="#ff0000" /> 
+						<plane id="sensorL3" nz="1" pz="-250" py="443"  size="30,9,350" repeat="1" texture="#00ff00" /> 
 				</translation>	
 				<translation id="robotGeometricCenter3" tx="0" ty="0" tz="50">
 				</translation>
-			</differentialrobot>
+			</omnirobot>
 		
 
-
-			<differentialrobot id="base4" port="14004">
+		
+			<omnirobot id="base4" port="14004">
 			<mesh id="base_robex4" file="/home/robocomp/robocomp/components/CordeBot/models/sheep/sheep_textured.ive"  tx="0" ty="0" tz="0" scale="10" rx="3.14"  ry="3.14" collide="1"/>
 				<translation id="laserPose4" tx="0" ty="140" tz="200">
 					<laser id="laser4" port="14003" measures="100" min="100" max="30000" angle="3" ifconfig="10000" />
-						<plane id="sensorl4" nz="1" pz="-200" size="1" repeat="1" texture="#ff0000" /> 
+						<plane id="sensorl4" nz="1" pz="-250" py="510"  size="30,10,350" repeat="1" texture="#ff6666" /> 
 				</translation>	
 				<translation id="robotGeometricCenter4" tx="0" ty="0" tz="50">
 				</translation>
-			</differentialrobot>
+			</omnirobot>
 		
 
 		-->			
@@ -125,50 +99,9 @@
 			<!-- CAMARAS   -->
 			<mesh id="cam1" file="/home/robocomp/robocomp/components/CordeBot/models/tube_cam/camera_textured.osg"  tx="0" ty="400" tz="2000" scale="2000" rx="3.14"  rz="0" collide="0"/>
 			-->
-
-
-		 
-		<!-- 
-		<transform id="OFFSET_1" tx="500" ty="0"> 
-		
-			<differentialrobot id="base1" port="11004">
-				<mesh id="base_robex1" file="/home/robocomp/robocomp/files/osgModels/robex/robex.ive"  tx="0" ty="0" tz="-0" scale="1000" collide="1"/>	
-					<translation id="laserPose1" tx="0" ty="140" tz="200">
-						<laser id="laser1" port="11003" measures="1000" min="100" max="30000" angle="3" ifconfig="10000" />
-							<plane id="sensorL1" nz="1" pz="-200" size="100" repeat="1" texture="#ff0000" /> 
-					</translation>	
-					<translation id="robotGeometricCenter1" tx="0" ty="0" tz="0"> 
-					</translation> 
-			</differentialrobot>
-
-		</transform>
-		-->	
 		
 		
 	</transform>
-
-<!--
-	</innerModel>
-	<mesh  id="mesa2" file="/home/robocomp/robocomp/files/osgModels/mobiliario/mesa_redonda.osg"  tx="0" ty="8" tz="-2000" rx="1.5707963" scale="100" />
-	<mesh  id="mesa3" file="/home/robocomp/robocomp/files/osgModels/mobiliario/mesa_redonda.osg"  tx="-4000" ty="8" tz="0" rx="1.5707963" scale="100" />
-	<mesh  id="mesa4" file="/home/robocomp/robocomp/files/osgModels/mobiliario/mesa_redonda.osg"  tx="1600" ty="8" tz="0" rx="1.5707963" scale="50,50,100" />
--->
-	
-<!--			<transform id="cameraAxis" tx="0" ty="100" tz="0"> 
-				<plane id="camx" px="0.25" nx="1" size="10,10,800" repeat="1" texture="#ff0000" />
-				<plane id="camy" py="0.25" nx="1" size="10,800,10" repeat="1" texture="#00ff00" /> 
-				<plane id="camz" pz="0.25" nx="1" size="800,10,10" repeat="1" texture="#0000ff" />
-			</transform>
--->	
-
-<!--		<transform id="target3axis" tx="0" ty="100" tz="0.0"> 
-					<plane id="target3x" px="0.25" nx="1" size="5,5,500" repeat="1" texture="#ff0000" />
-					<plane id="target3y" py="0.25" nx="1" size="10,800,10" repeat="1" texture="#00ff00" />
-					<plane id="target3z" pz="0.25" nx="1" size="800,10,10" repeat="1" texture="#0000ff" />
-				</transform>	
-	-->
-
-	
 </innerModel>
 
 

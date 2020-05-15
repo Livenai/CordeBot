@@ -7,13 +7,13 @@ set(CMAKE_DEPENDS_GENERATOR "Unix Makefiles")
 # The top level Makefile was generated from the following files:
 set(CMAKE_MAKEFILE_DEPENDS
   "CMakeCache.txt"
-  "/home/carlos/robocomp/cmake/modules/qt.cmake"
-  "/home/carlos/robocomp/cmake/robocomp.cmake"
   "CMakeFiles/3.10.2/CMakeCCompiler.cmake"
   "CMakeFiles/3.10.2/CMakeCXXCompiler.cmake"
   "CMakeFiles/3.10.2/CMakeSystem.cmake"
   "/home/robocomp/robocomp/components/CordeBot/component/src/CMakeLists.txt"
   "/home/robocomp/robocomp/components/CordeBot/component/src/CMakeListsSpecific.txt"
+  "/opt/robocomp/cmake/modules/qt.cmake"
+  "/opt/robocomp/cmake/robocomp.cmake"
   "/usr/lib/x86_64-linux-gnu/cmake/Qt5/Qt5Config.cmake"
   "/usr/lib/x86_64-linux-gnu/cmake/Qt5/Qt5ConfigVersion.cmake"
   "/usr/lib/x86_64-linux-gnu/cmake/Qt5/Qt5ModuleLocation.cmake"
