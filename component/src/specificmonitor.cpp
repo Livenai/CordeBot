@@ -95,6 +95,90 @@ void SpecificMonitor::readConfig(RoboCompCommonBehavior::ParameterList &params )
 	configGetString( "","RobotName", aux.value, "");
 	params["RobotName"] = aux;
 
+
+	// ESTABLECEMOS LA CONFIGURACION DE navigation.h
+
+	aux.editable = false;
+	configGetString("NavigationAgent", "InnerModel", aux.value,"no file");
+	params["NavigationAgent.InnerModel"] = aux;
+
+	aux.editable = false;
+	configGetString("NavigationAgent", "RobotName", aux.value,"robot");
+	params["NavigationAgent.RobotName"] = aux;
+
+	aux.editable = false;
+	configGetString( "NavigationAgent","MaxZSpeed", aux.value,"600");
+	params["MaxZSpeed"] = aux;
+
+	aux.editable = false;
+	configGetString( "NavigationAgent","MaxXSpeed", aux.value,"400");
+	params["MaxXSpeed"] = aux;
+
+	aux.editable = false;
+	configGetString( "NavigationAgent","MaxRotationSpeed", aux.value,"0.9");
+	params["MaxRotationSpeed"] = aux;
+
+	aux.editable = false;
+	configGetString( "NavigationAgent","RobotXWidth", aux.value,"500");
+	params["RobotXWidth"] = aux;
+
+	aux.editable = false;
+	configGetString( "NavigationAgent","RobotZLong", aux.value,"500");
+	params["RobotZLong"] = aux;
+
+	aux.editable = false;
+	configGetString( "NavigationAgent","RobotRadius", aux.value,"300");
+	params["RobotRadius"] = aux;
+
+	aux.editable = false;
+	configGetString( "NavigationAgent","MinControllerPeriod", aux.value,"100");
+	params["MinControllerPeriod"] = aux;
+
+	aux.editable = false;
+	configGetString( "NavigationAgent","PlannerGraphPoints", aux.value,"100");
+	params["PlannerGraphPoints"] = aux;
+
+	aux.editable = false;
+	configGetString( "NavigationAgent","PlannerGraphNeighbours", aux.value,"20");
+	params["PlannerGraphNeighbours"] = aux;
+
+	aux.editable = false;
+	configGetString( "NavigationAgent","PlannerGraphMaxDistanceToSearch", aux.value,"2500");
+	params["PlannerGraphMaxDistanceToSearch"] = aux;
+
+	aux.editable = false;
+	configGetString( "NavigationAgent","OuterRegionLeft", aux.value,"-2500");
+	params["OuterRegionLeft"] = aux;
+
+	aux.editable = false;
+	configGetString( "NavigationAgent","OuterRegionRight", aux.value,"2500");
+	params["OuterRegionRight"] = aux;
+
+	aux.editable = false;
+	configGetString( "NavigationAgent","OuterRegionBottom", aux.value,"-7500");
+	params["OuterRegionBottom"] = aux;
+
+	aux.editable = false;
+	configGetString( "NavigationAgent","OuterRegionTop", aux.value,"7500");
+	params["OuterRegionTop"] = aux;
+
+	aux.editable = false;
+	configGetString( "NavigationAgent","ExcludedObjectsInCollisionCheck", aux.value,"floor_plane");
+	params["ExcludedObjectsInCollisionCheck"] = aux;
+
+	aux.editable = false;
+	configGetString( "NavigationAgent","MinimumDetectableRotation", aux.value,"0.03");
+	params["MinimumDetectableRotation"] = aux;
+
+	aux.editable = false;
+	configGetString( "NavigationAgent","MinimumDetectableTranslation", aux.value,"10");
+	params["MinimumDetectableTranslation"] = aux;
+
+	aux.editable = false;
+	configGetString( "NavigationAgent","MinimumSafetyDistance", aux.value,"100");
+	params["MinimumSafetyDistance"] = aux;
+
+
 }
 
 //Check parameters and transform them to worker structure

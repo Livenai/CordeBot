@@ -19,10 +19,11 @@ CMakeFiles/MyFirstComp.dir/MyFirstComp_autogen/mocs_compilation.cpp.o: MyFirstCo
 CMakeFiles/MyFirstComp.dir/MyFirstComp_autogen/mocs_compilation.cpp.o: MyFirstComp_autogen/EWIEGA46WW/moc_specificmonitor.cpp
 CMakeFiles/MyFirstComp.dir/MyFirstComp_autogen/mocs_compilation.cpp.o: MyFirstComp_autogen/EWIEGA46WW/moc_specificworker.cpp
 CMakeFiles/MyFirstComp.dir/MyFirstComp_autogen/mocs_compilation.cpp.o: MyFirstComp_autogen/mocs_compilation.cpp
-CMakeFiles/MyFirstComp.dir/MyFirstComp_autogen/mocs_compilation.cpp.o: src/collisions.h
 CMakeFiles/MyFirstComp.dir/MyFirstComp_autogen/mocs_compilation.cpp.o: src/config.h
+CMakeFiles/MyFirstComp.dir/MyFirstComp_autogen/mocs_compilation.cpp.o: src/controller.h
 CMakeFiles/MyFirstComp.dir/MyFirstComp_autogen/mocs_compilation.cpp.o: src/genericmonitor.h
 CMakeFiles/MyFirstComp.dir/MyFirstComp_autogen/mocs_compilation.cpp.o: src/genericworker.h
+CMakeFiles/MyFirstComp.dir/MyFirstComp_autogen/mocs_compilation.cpp.o: src/grid.h
 CMakeFiles/MyFirstComp.dir/MyFirstComp_autogen/mocs_compilation.cpp.o: src/navigation.h
 CMakeFiles/MyFirstComp.dir/MyFirstComp_autogen/mocs_compilation.cpp.o: src/specificmonitor.h
 CMakeFiles/MyFirstComp.dir/MyFirstComp_autogen/mocs_compilation.cpp.o: src/specificworker.h
@@ -521,6 +522,7 @@ CMakeFiles/MyFirstComp.dir/MyFirstComp_autogen/mocs_compilation.cpp.o: InnerMode
 CMakeFiles/MyFirstComp.dir/MyFirstComp_autogen/mocs_compilation.cpp.o: Laser.h
 CMakeFiles/MyFirstComp.dir/MyFirstComp_autogen/mocs_compilation.cpp.o: MyFirstComp_autogen/include/ui_mainUI.h
 CMakeFiles/MyFirstComp.dir/MyFirstComp_autogen/mocs_compilation.cpp.o: OmniRobot.h
+CMakeFiles/MyFirstComp.dir/MyFirstComp_autogen/mocs_compilation.cpp.o: collisions.h
 
 CMakeFiles/MyFirstComp.dir/OmniRobot.cpp.o: OmniRobot.cpp
 CMakeFiles/MyFirstComp.dir/OmniRobot.cpp.o: GenericBase.h
@@ -1919,11 +1921,12 @@ CMakeFiles/MyFirstComp.dir/genericworker.cpp.o: MyFirstComp_autogen/include/ui_m
 CMakeFiles/MyFirstComp.dir/genericworker.cpp.o: OmniRobot.h
 
 CMakeFiles/MyFirstComp.dir/main.cpp.o: /home/robocomp/robocomp/components/CordeBot/component/src/./BrainTree.h
-CMakeFiles/MyFirstComp.dir/main.cpp.o: /home/robocomp/robocomp/components/CordeBot/component/src/collisions.h
 CMakeFiles/MyFirstComp.dir/main.cpp.o: /home/robocomp/robocomp/components/CordeBot/component/src/commonbehaviorI.h
 CMakeFiles/MyFirstComp.dir/main.cpp.o: /home/robocomp/robocomp/components/CordeBot/component/src/config.h
+CMakeFiles/MyFirstComp.dir/main.cpp.o: /home/robocomp/robocomp/components/CordeBot/component/src/controller.h
 CMakeFiles/MyFirstComp.dir/main.cpp.o: /home/robocomp/robocomp/components/CordeBot/component/src/genericmonitor.h
 CMakeFiles/MyFirstComp.dir/main.cpp.o: /home/robocomp/robocomp/components/CordeBot/component/src/genericworker.h
+CMakeFiles/MyFirstComp.dir/main.cpp.o: /home/robocomp/robocomp/components/CordeBot/component/src/grid.h
 CMakeFiles/MyFirstComp.dir/main.cpp.o: /home/robocomp/robocomp/components/CordeBot/component/src/main.cpp
 CMakeFiles/MyFirstComp.dir/main.cpp.o: /home/robocomp/robocomp/components/CordeBot/component/src/navigation.h
 CMakeFiles/MyFirstComp.dir/main.cpp.o: /home/robocomp/robocomp/components/CordeBot/component/src/specificmonitor.h
@@ -2424,6 +2427,7 @@ CMakeFiles/MyFirstComp.dir/main.cpp.o: InnerModelManager.h
 CMakeFiles/MyFirstComp.dir/main.cpp.o: Laser.h
 CMakeFiles/MyFirstComp.dir/main.cpp.o: MyFirstComp_autogen/include/ui_mainUI.h
 CMakeFiles/MyFirstComp.dir/main.cpp.o: OmniRobot.h
+CMakeFiles/MyFirstComp.dir/main.cpp.o: collisions.h
 
 CMakeFiles/MyFirstComp.dir/opt/robocomp/classes/qlog/qlog.cpp.o: /home/robocomp/robocomp/components/CordeBot/component/src/./config.h
 CMakeFiles/MyFirstComp.dir/opt/robocomp/classes/qlog/qlog.cpp.o: /opt/robocomp/classes/qlog/qlog.cpp
@@ -3336,7 +3340,8 @@ CMakeFiles/MyFirstComp.dir/specificmonitor.cpp.o: OmniRobot.h
 CMakeFiles/MyFirstComp.dir/specificworker.cpp.o: /home/robocomp/robocomp/components/CordeBot/component/src/./BrainTree.h
 CMakeFiles/MyFirstComp.dir/specificworker.cpp.o: /home/robocomp/robocomp/components/CordeBot/component/src/./config.h
 CMakeFiles/MyFirstComp.dir/specificworker.cpp.o: /home/robocomp/robocomp/components/CordeBot/component/src/./genericworker.h
-CMakeFiles/MyFirstComp.dir/specificworker.cpp.o: /home/robocomp/robocomp/components/CordeBot/component/src/collisions.h
+CMakeFiles/MyFirstComp.dir/specificworker.cpp.o: /home/robocomp/robocomp/components/CordeBot/component/src/controller.h
+CMakeFiles/MyFirstComp.dir/specificworker.cpp.o: /home/robocomp/robocomp/components/CordeBot/component/src/grid.h
 CMakeFiles/MyFirstComp.dir/specificworker.cpp.o: /home/robocomp/robocomp/components/CordeBot/component/src/navigation.h
 CMakeFiles/MyFirstComp.dir/specificworker.cpp.o: /home/robocomp/robocomp/components/CordeBot/component/src/specificworker.cpp
 CMakeFiles/MyFirstComp.dir/specificworker.cpp.o: /home/robocomp/robocomp/components/CordeBot/component/src/specificworker.h
@@ -3834,4 +3839,5 @@ CMakeFiles/MyFirstComp.dir/specificworker.cpp.o: InnerModelManager.h
 CMakeFiles/MyFirstComp.dir/specificworker.cpp.o: Laser.h
 CMakeFiles/MyFirstComp.dir/specificworker.cpp.o: MyFirstComp_autogen/include/ui_mainUI.h
 CMakeFiles/MyFirstComp.dir/specificworker.cpp.o: OmniRobot.h
+CMakeFiles/MyFirstComp.dir/specificworker.cpp.o: collisions.h
 

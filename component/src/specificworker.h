@@ -39,7 +39,8 @@
 //#include <Scheduler/Scheduler.h>
 #include <thread>
 
-
+#include "controller.h"
+#include "grid.h"
 #include "navigation.h"
 
 
@@ -82,9 +83,13 @@ public:
     BrainTree::BehaviorTree btree3;
     BrainTree::BehaviorTree btree4;
     QTime timeAction;
-    //Navigation<Grid<>,Controller> navigation;
+
+
+    Navigation<Grid<>,Controller> navigation;
+    std::shared_ptr<RoboCompCommonBehavior::ParameterList> confParams;
 
 private:  
+    RoboCompLaser::TLaserData updateLaser();
 };
 
 class ActionInitSleep : public BrainTree::Node

@@ -18,6 +18,7 @@
  */
 #include "specificworker.h"
 
+
 /**
 * \brief Default constructor
 */
@@ -36,8 +37,6 @@ SpecificWorker::~SpecificWorker()
 
 bool SpecificWorker::setParams(RoboCompCommonBehavior::ParameterList params)
 {
-//       THE FOLLOWING IS JUST AN EXAMPLE
-//	To use innerModelPath parameter you should uncomment specificmonitor.cpp readConfig method content
 	try
 	{
 		RoboCompCommonBehavior::Parameter par = params.at("InnerModelPath");
@@ -45,9 +44,13 @@ bool SpecificWorker::setParams(RoboCompCommonBehavior::ParameterList params)
 		innerModel = std::make_shared<InnerModel> (innermodel_path);
 
                 robotName = params.at("RobotName").value;
-    
-		// PARAMETROS DE navigation.h
-                //confParams  = std::make_shared<RoboCompCommonBehavior::ParameterList>(params);
+		params.at("NavigationAgent.RobotName").value = robotName;
+		//-------> LA CONFIGURACION SE ENCUENTRA EN specificmonitor.cpp <-------
+
+		// PASAMOS LA LISTA DE PARAMETROS A navigation.h
+                confParams  = std::make_shared<RoboCompCommonBehavior::ParameterList>(params);
+		
+
 	}
 	catch(std::exception e) { qFatal("Error reading config params"); }
 	return true;
@@ -56,18 +59,36 @@ bool SpecificWorker::setParams(RoboCompCommonBehavior::ParameterList params)
 void SpecificWorker::initialize(int period)
 {
 	std::cout << "Initialize worker" << std::endl;
-    crearArboles();
-    loadPoints();
-    timeAction.start();
+	crearArboles();
+	loadPoints();
+	timeAction.start();
 	this->Period = period;
 	timer.start(Period);
 
-    //  INICIALIZANDO PLANIFICADOR DE RUTAS (navigation.h)
-    //navigation.initialize(innerModel, viewer, confParams, omnirobot_proxy);
+	//  INICIALIZANDO PLANIFICADOR DE RUTAS (navigation.h)
+	navigation.initialize(innerModel, confParams, omnirobot_proxy);
+
+	navigation.newRandomTarget();
 }
 
 void SpecificWorker::compute()
 {   
+        qDebug() << "===================  Nombre del robot: " << robotName.c_str() << "  ===================";
+
+	try{
+
+  		RoboCompLaser::TLaserData laserData = updateLaser();
+		navigation.update(laserData, false); // falla aqui por un error desconocido
+	}catch(const std::exception &e){
+		qDebug() << "[!] Error en el compute";
+	}
+	/**
+	* El Initialize de collisions.h no encuentra en el parametro config (que es parecido a un dicc) las entradas corespondientes a los limites del mapa.
+	* esto hace que no puede iniciarse correctamente, aun que compile bien. la pregunta esta en: ¿hay que añadir a mano esos valores? 
+	*/
+
+
+	/*
         readRobotState();
         escribirCoords(robotName,bState.x,bState.z);
         if(robotName == "base"){
@@ -88,8 +109,9 @@ void SpecificWorker::compute()
         {
             btree4.update();
         }
-        
-        //qDebug() << "Nombre del robot: " << robotName.c_str();
+        */
+        qDebug() << "----------------------------------------------\n";
+
         
        
 
@@ -489,6 +511,28 @@ void SpecificWorker::crearArboles()
    // createTree2(btree2);
    // createTree2(btree3);
 }
+
+
+/**
+* FUNCION QUE OBTIENE LOS DATOS ACTUALIZADOS DEL laser YLOS DEVUELVE
+*/
+RoboCompLaser::TLaserData  SpecificWorker::updateLaser()
+{
+//	qDebug()<<__FUNCTION__;
+
+	RoboCompLaser::TLaserData laserData;
+
+    try
+    {
+		laserData  = laser_proxy->getLaserData();
+    }
+
+    catch(const Ice::Exception &e){ std::cout <<"Can't connect to laser --" <<e.what() << std::endl; };
+
+    return laserData;
+}
+
+
 
 
 /* //PARECE QUE ESTA FUNCION Y LA LIBRERIA (SCHEDULER.H) DE LA QUE DEPENDE SOLO SE USAN PARA DEPURAR

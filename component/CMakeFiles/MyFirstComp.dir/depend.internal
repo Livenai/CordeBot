@@ -20,10 +20,11 @@ CMakeFiles/MyFirstComp.dir/MyFirstComp_autogen/mocs_compilation.cpp.o
  /home/carlos/robocomp/components/CordeBot/component/MyFirstComp_autogen/EWIEGA46WW/moc_specificmonitor.cpp
  /home/carlos/robocomp/components/CordeBot/component/MyFirstComp_autogen/EWIEGA46WW/moc_specificworker.cpp
  /home/carlos/robocomp/components/CordeBot/component/MyFirstComp_autogen/mocs_compilation.cpp
- /home/carlos/robocomp/components/CordeBot/component/src/collisions.h
  /home/carlos/robocomp/components/CordeBot/component/src/config.h
+ /home/carlos/robocomp/components/CordeBot/component/src/controller.h
  /home/carlos/robocomp/components/CordeBot/component/src/genericmonitor.h
  /home/carlos/robocomp/components/CordeBot/component/src/genericworker.h
+ /home/carlos/robocomp/components/CordeBot/component/src/grid.h
  /home/carlos/robocomp/components/CordeBot/component/src/navigation.h
  /home/carlos/robocomp/components/CordeBot/component/src/specificmonitor.h
  /home/carlos/robocomp/components/CordeBot/component/src/specificworker.h
@@ -522,6 +523,7 @@ CMakeFiles/MyFirstComp.dir/MyFirstComp_autogen/mocs_compilation.cpp.o
  Laser.h
  MyFirstComp_autogen/include/ui_mainUI.h
  OmniRobot.h
+ collisions.h
 CMakeFiles/MyFirstComp.dir/OmniRobot.cpp.o
  /home/carlos/robocomp/components/CordeBot/component/OmniRobot.cpp
  GenericBase.h
@@ -1920,11 +1922,12 @@ CMakeFiles/MyFirstComp.dir/genericworker.cpp.o
  OmniRobot.h
 CMakeFiles/MyFirstComp.dir/main.cpp.o
  /home/robocomp/robocomp/components/CordeBot/component/src/./BrainTree.h
- /home/robocomp/robocomp/components/CordeBot/component/src/collisions.h
  /home/robocomp/robocomp/components/CordeBot/component/src/commonbehaviorI.h
  /home/robocomp/robocomp/components/CordeBot/component/src/config.h
+ /home/robocomp/robocomp/components/CordeBot/component/src/controller.h
  /home/robocomp/robocomp/components/CordeBot/component/src/genericmonitor.h
  /home/robocomp/robocomp/components/CordeBot/component/src/genericworker.h
+ /home/robocomp/robocomp/components/CordeBot/component/src/grid.h
  /home/robocomp/robocomp/components/CordeBot/component/src/main.cpp
  /home/robocomp/robocomp/components/CordeBot/component/src/navigation.h
  /home/robocomp/robocomp/components/CordeBot/component/src/specificmonitor.h
@@ -2425,6 +2428,7 @@ CMakeFiles/MyFirstComp.dir/main.cpp.o
  Laser.h
  MyFirstComp_autogen/include/ui_mainUI.h
  OmniRobot.h
+ collisions.h
 CMakeFiles/MyFirstComp.dir/opt/robocomp/classes/qlog/qlog.cpp.o
  /home/robocomp/robocomp/components/CordeBot/component/src/./config.h
  /opt/robocomp/classes/qlog/qlog.cpp
@@ -3337,7 +3341,8 @@ CMakeFiles/MyFirstComp.dir/specificworker.cpp.o
  /home/robocomp/robocomp/components/CordeBot/component/src/./BrainTree.h
  /home/robocomp/robocomp/components/CordeBot/component/src/./config.h
  /home/robocomp/robocomp/components/CordeBot/component/src/./genericworker.h
- /home/robocomp/robocomp/components/CordeBot/component/src/collisions.h
+ /home/robocomp/robocomp/components/CordeBot/component/src/controller.h
+ /home/robocomp/robocomp/components/CordeBot/component/src/grid.h
  /home/robocomp/robocomp/components/CordeBot/component/src/navigation.h
  /home/robocomp/robocomp/components/CordeBot/component/src/specificworker.cpp
  /home/robocomp/robocomp/components/CordeBot/component/src/specificworker.h
@@ -3835,3 +3840,4 @@ CMakeFiles/MyFirstComp.dir/specificworker.cpp.o
  Laser.h
  MyFirstComp_autogen/include/ui_mainUI.h
  OmniRobot.h
+ collisions.h

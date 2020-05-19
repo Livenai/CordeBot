@@ -152,13 +152,19 @@ Ice/LocalException.h
 IceUtil/PopDisableWarnings.h
 -
 
-/home/carlos/robocomp/components/CordeBot/component/src/collisions.h
-innermodel/innermodel.h
--
-CommonBehavior.h
-/home/carlos/robocomp/components/CordeBot/component/src/CommonBehavior.h
-
 /home/carlos/robocomp/components/CordeBot/component/src/config.h
+
+/home/carlos/robocomp/components/CordeBot/component/src/controller.h
+CommonBehavior.h
+-
+genericworker.h
+/home/carlos/robocomp/components/CordeBot/component/src/genericworker.h
+cppitertools/sliding_window.hpp
+-
+cppitertools/range.hpp
+-
+tuple
+-
 
 /home/carlos/robocomp/components/CordeBot/component/src/genericmonitor.h
 Ice/Ice.h
@@ -196,6 +202,24 @@ InnerModelManager.h
 Laser.h
 -
 OmniRobot.h
+-
+
+/home/carlos/robocomp/components/CordeBot/component/src/grid.h
+unordered_map
+-
+boost/functional/hash.hpp
+-
+iostream
+-
+fstream
+-
+cppitertools/zip.hpp
+-
+cppitertools/range.hpp
+-
+limits
+-
+collisions.h
 -
 
 /home/carlos/robocomp/components/CordeBot/component/src/navigation.h
@@ -255,6 +279,10 @@ QString
 -
 thread
 -
+controller.h
+/home/carlos/robocomp/components/CordeBot/component/src/controller.h
+grid.h
+/home/carlos/robocomp/components/CordeBot/component/src/grid.h
 navigation.h
 /home/carlos/robocomp/components/CordeBot/component/src/navigation.h
 
@@ -296,12 +324,6 @@ Laser.h
 OmniRobot.h
 -
 
-/home/robocomp/robocomp/components/CordeBot/component/src/collisions.h
-innermodel/innermodel.h
--
-CommonBehavior.h
-/home/robocomp/robocomp/components/CordeBot/component/src/CommonBehavior.h
-
 /home/robocomp/robocomp/components/CordeBot/component/src/commonbehaviorI.cpp
 commonbehaviorI.h
 /home/robocomp/robocomp/components/CordeBot/component/src/commonbehaviorI.h
@@ -319,6 +341,18 @@ genericmonitor.h
 /home/robocomp/robocomp/components/CordeBot/component/src/genericmonitor.h
 
 /home/robocomp/robocomp/components/CordeBot/component/src/config.h
+
+/home/robocomp/robocomp/components/CordeBot/component/src/controller.h
+CommonBehavior.h
+-
+genericworker.h
+/home/robocomp/robocomp/components/CordeBot/component/src/genericworker.h
+cppitertools/sliding_window.hpp
+-
+cppitertools/range.hpp
+-
+tuple
+-
 
 /home/robocomp/robocomp/components/CordeBot/component/src/genericmonitor.cpp
 genericmonitor.h
@@ -364,6 +398,24 @@ InnerModelManager.h
 Laser.h
 -
 OmniRobot.h
+-
+
+/home/robocomp/robocomp/components/CordeBot/component/src/grid.h
+unordered_map
+-
+boost/functional/hash.hpp
+-
+iostream
+-
+fstream
+-
+cppitertools/zip.hpp
+-
+cppitertools/range.hpp
+-
+limits
+-
+collisions.h
 -
 
 /home/robocomp/robocomp/components/CordeBot/component/src/main.cpp
@@ -465,6 +517,10 @@ QString
 -
 thread
 -
+controller.h
+/home/robocomp/robocomp/components/CordeBot/component/src/controller.h
+grid.h
+/home/robocomp/robocomp/components/CordeBot/component/src/grid.h
 navigation.h
 /home/robocomp/robocomp/components/CordeBot/component/src/navigation.h
 
@@ -5781,4 +5837,10 @@ IceUtil/UndefSysMacros.h
 -
 IceUtil/PopDisableWarnings.h
 -
+
+collisions.h
+innermodel/innermodel.h
+-
+CommonBehavior.h
+CommonBehavior.h
 
