@@ -68,7 +68,8 @@ void SpecificWorker::initialize(int period)
 	//  INICIALIZANDO PLANIFICADOR DE RUTAS (navigation.h)
 	navigation.initialize(innerModel, confParams, omnirobot_proxy);
 
-	navigation.newRandomTarget();
+	QPointF punto = QPointF(10, 10);
+	navigation.newTarget(punto);
 }
 
 void SpecificWorker::compute()
@@ -78,7 +79,12 @@ void SpecificWorker::compute()
 	try{
 
   		RoboCompLaser::TLaserData laserData = updateLaser();
-		navigation.update(laserData, false); // falla aqui por un error desconocido
+
+		if(navigation.checkPathState()){
+			navigation.update(laserData, false); 
+		} else {
+			qDebug() << "[!]   RUTA NO ENCONTRADA   [!]";
+		}
 	}catch(const std::exception &e){
 		qDebug() << "[!] Error en el compute";
 	}

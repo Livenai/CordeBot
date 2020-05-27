@@ -241,11 +241,10 @@ bool checkPathState()
         }
 
         return true;
-    }
-
-    else
+    } else {
+        qDebug()<< "checkPathState - no target set. Set one using newTarget() or newRandomTarget()";
         return false;
-
+    }
 }
 
 
@@ -285,10 +284,10 @@ void newTarget(QPointF newT)
     }
 
     this->current_target.lock();
-        current_target.active.store(true);
-        current_target.blocked.store(true);
-        current_target.humanBlock.store(false);
-        current_target.p = newT;
+	current_target.active.store(true);
+	current_target.blocked.store(true);
+	current_target.humanBlock.store(false);
+	current_target.p = newT;
 
     this->current_target.unlock();
 }
