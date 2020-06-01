@@ -67,19 +67,26 @@ public:
 
 	//localPersonsVec totalPersons;
 
+    //robot data
+    string RobotName;
+    string LaserName; 
 
 void initialize(const std::shared_ptr<InnerModel> &innerModel_, std::shared_ptr< RoboCompCommonBehavior::ParameterList > configparams_, OmniRobotPrx omnirobot_proxy_)
 {
-    qDebug()<<"Navigation - "<< __FUNCTION__;
+    qDebug()<<"Navigation - "<< __FUNCTION__<<"(): Starting initialize";
 
     innerModel = innerModel_;
-
     configparams = configparams_;
+
+    //robot data
+    RobotName = configparams->at("NavigationAgent.RobotName").value;
+    LaserName = "laser" + RobotName.at(0); //hay que conseguir que coja solo el numero del final, pero se esta trabucando con la memoria
+
+    qDebug() << "-=-=-=-=-=-=-=-=-=-=  > " << QString::fromStdString(RobotName) << "  " << QString::fromStdString(LaserName) << endl; 
 
 
     omnirobot_proxy = omnirobot_proxy_;
-    stopRobot();
-     //grid can't be initialized if the robot is moving
+    stopRobot(); //grid can't be initialized if the robot is moving
 
     collisions =  std::make_shared<Collisions>();
 
@@ -102,7 +109,7 @@ void initialize(const std::shared_ptr<InnerModel> &innerModel_, std::shared_ptr<
 
 void updateInnerModel(const std::shared_ptr<InnerModel> &innerModel_)
 {
-    qDebug()<<"Navigation - "<< __FUNCTION__;
+    qDebug()<<"Navigation - "<< __FUNCTION__<<"(): innerModel updated";
 
     innerModel = innerModel_;
     controller.updateInnerModel(innerModel);
@@ -111,7 +118,7 @@ void updateInnerModel(const std::shared_ptr<InnerModel> &innerModel_)
 
 void update(const RoboCompLaser::TLaserData &laserData_, bool needsReplaning)
 {
-//            qDebug()<<"Navigation - "<< __FUNCTION__;
+    qDebug()<<"Navigation - "<< __FUNCTION__<<"(): Updating...";
 
     if (gridChanged)
     {
@@ -121,9 +128,12 @@ void update(const RoboCompLaser::TLaserData &laserData_, bool needsReplaning)
 
     //totalPersons = totalPersons_;
     RoboCompLaser::TLaserData laserData;
-    laserData = computeLaser(laserData_);
-    currentRobotPose = innerModel->transformS6D("world","robot");
-    updateLaserPolygon(laserData);
+
+    laserData = computeLaser(laserData_);  // esta linea necesita dentro el nombre del laser de cada oveja
+
+    currentRobotPose = innerModel->transformS6D("world", "base4"); // esta linea necesita el nombre del robot (esta en configparams)
+/*
+    updateLaserPolygon(laserData); // esta linea necesita dentro el nombre del laser de cada oveja
     currentRobotPolygon = getRobotPolygon();
     currentRobotNose = getRobotNose();
 
@@ -151,7 +161,7 @@ void update(const RoboCompLaser::TLaserData &laserData_, bool needsReplaning)
     if (checkPathState() == false)
         return;
 
-
+    qDebug()<<"Navigation - "<< __FUNCTION__<<"(): Computing forces...";
     computeForces(pathPoints, laserData);
     cleanPoints();
     addPoints();
@@ -189,18 +199,18 @@ void update(const RoboCompLaser::TLaserData &laserData_, bool needsReplaning)
     }
 
 
-
+*/
 };
 
 void stopRobot()
 {
-    qDebug()<<"Navigation - "<< __FUNCTION__;
+    qDebug()<<"Navigation - "<< __FUNCTION__<<"(): Stopping robot";
     omnirobot_proxy->setSpeedBase(0,0,0);
 }
 
 bool checkPathState()
 {
-//            qDebug()<<"Navigation - "<< __FUNCTION__;
+    qDebug()<<"Navigation - "<< __FUNCTION__<<"(): Checking path state...";
 
     if (current_target.active.load())
     {
@@ -250,7 +260,7 @@ bool checkPathState()
 
 void newRandomTarget()
 {
-    qDebug()<<"Navigation - "<< __FUNCTION__;
+    qDebug()<<"Navigation - "<< __FUNCTION__<<"(): New RANDOM target established";
 
     auto hmin = std::min(collisions->outerRegion.left(), collisions->outerRegion.right());
     auto width = std::max(collisions->outerRegion.left(), collisions->outerRegion.right()) - hmin;
@@ -275,8 +285,7 @@ void newRandomTarget()
 void newTarget(QPointF newT)
 {
 
-    qDebug()<<"Navigation - "<< __FUNCTION__
-    <<"New Target arrived "<< newT;
+    qDebug()<<"Navigation -"<< __FUNCTION__ <<"(): New Target established"<< newT;
 
     if(stopMovingRobot){
         stopRobot();
@@ -355,7 +364,7 @@ private:
 ////////// GRID RELATED METHODS //////////
 void updateFreeSpaceMap(bool drawGrid = true)
 {
-    qDebug()<<"Navigation - "<< __FUNCTION__;
+    qDebug()<<"Navigation - "<< __FUNCTION__<<"()";
 
     grid.resetGrid();
 
@@ -381,9 +390,10 @@ void updateFreeSpaceMap(bool drawGrid = true)
 ////////// CONTROLLER RELATED METHODS //////////
 RoboCompLaser::TLaserData computeLaser(RoboCompLaser::TLaserData laserData)
 {
-//        qDebug()<<"Navigation - "<< __FUNCTION__;
+    qDebug()<<"Navigation - "<< __FUNCTION__<<"(): Reading laser";
 
-    auto lasernode = innerModel->getNode<InnerModelLaser>(QString("laser"));
+
+    auto lasernode = innerModel->getNode<InnerModelLaser>("laser4");
 
     RoboCompLaser::TLaserData laserCombined;
     laserCombined = laserData;
@@ -449,7 +459,7 @@ RoboCompLaser::TLaserData computeLaser(RoboCompLaser::TLaserData laserData)
 
 bool findNewPath()
 {
-    qDebug()<<"Navigation - "<< __FUNCTION__;
+    qDebug()<<"Navigation - "<< __FUNCTION__<<"(): Finding a new path to target...";
     pathPoints.clear();
 
 	blockIDs.clear();
@@ -464,6 +474,7 @@ bool findNewPath()
 
     if (path.size() > 0)
     {
+        qDebug() << __FUNCTION__ << "(): Path with coherent size";
         pathPoints.push_back(currentRobotNose);
 
         for (const QPointF &p : path)
@@ -481,14 +492,16 @@ bool findNewPath()
 
             return false;
         }
-
+        */
+        qDebug() << __FUNCTION__ << "(): Path found";
         return true;
     }
 
     else
     {
-        qDebug() << __FUNCTION__ << "Path not found";
+        qDebug() << __FUNCTION__ << "(): Path not found";
 
+	/*
         if(checkHumanBlock())
         {
             this->current_target.lock();
@@ -497,6 +510,7 @@ bool findNewPath()
 
         }
 	*/
+
         return false;
     }
 }
@@ -728,7 +742,7 @@ void cleanPoints()
 
         else if(currentRobotPolygon.containsPoint(p2, Qt::OddEvenFill))
         {
-            qDebug()<<"-------------" << __FUNCTION__ << "------------- Removing point inside robot ";
+            qDebug()<<"-------------" << __FUNCTION__ << "(): ------------- Removing point inside robot ";
             points_to_remove.push_back(p2);
         }
 

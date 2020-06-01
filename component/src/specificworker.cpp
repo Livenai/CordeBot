@@ -68,7 +68,7 @@ void SpecificWorker::initialize(int period)
 	//  INICIALIZANDO PLANIFICADOR DE RUTAS (navigation.h)
 	navigation.initialize(innerModel, confParams, omnirobot_proxy);
 
-	QPointF punto = QPointF(10, 10);
+	QPointF punto = QPointF(1000, 1000);
 	navigation.newTarget(punto);
 }
 
@@ -86,12 +86,9 @@ void SpecificWorker::compute()
 			qDebug() << "[!]   RUTA NO ENCONTRADA   [!]";
 		}
 	}catch(const std::exception &e){
-		qDebug() << "[!] Error en el compute";
+		qDebug() <<"SpecificWorker"<<__FUNCTION__<<"[!] Error en el compute";
 	}
-	/**
-	* El Initialize de collisions.h no encuentra en el parametro config (que es parecido a un dicc) las entradas corespondientes a los limites del mapa.
-	* esto hace que no puede iniciarse correctamente, aun que compile bien. la pregunta esta en: ¿hay que añadir a mano esos valores? 
-	*/
+
 
 
 	/*

@@ -1,3 +1,15 @@
+<!-- ATENCION: EL NOMBRE DE LOS LASERES DE LOS ROBOTS DEBE SER "laser" + EL NUMERO CORRESPONDIENTE DE LA BASE DEL ROBOT (o nada si no tiene)
+
+	Ejemplos:
+
+		id="base4"  -> laser id="laser4"
+		id="base"   -> laser id="laser"
+		
+-->
+
+
+
+
 <innerModel>
 	<transform id="world">
 		<transform id="floor">
