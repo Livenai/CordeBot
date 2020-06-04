@@ -22,6 +22,10 @@ public:
 
         qDebug()<<"Collisions - " <<__FUNCTION__;
         innerModel = innerModel_;
+	//robot data
+        RobotName = params_->at("NavigationAgent.RobotName").value;
+
+	qDebug() << "||||||||||||||||||||||||  > " << QString::fromStdString(RobotName)
 
         /// Processing configuration parameters
         try
@@ -126,6 +130,7 @@ public:
 
 private:
 
+    string RobotName;
     std::shared_ptr<InnerModel> innerModel;
 
 };

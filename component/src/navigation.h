@@ -80,7 +80,14 @@ void initialize(const std::shared_ptr<InnerModel> &innerModel_, std::shared_ptr<
 
     //robot data
     RobotName = configparams->at("NavigationAgent.RobotName").value;
-    LaserName = "laser" + RobotName.at(0); //hay que conseguir que coja solo el numero del final, pero se esta trabucando con la memoria
+
+    if(RobotName.compare("base") == 0){
+        LaserName = "laser";
+    } else {
+        LaserName = RobotName.back();
+        LaserName.insert(0,"laser");
+    }
+
 
     qDebug() << "-=-=-=-=-=-=-=-=-=-=  > " << QString::fromStdString(RobotName) << "  " << QString::fromStdString(LaserName) << endl; 
 
@@ -90,7 +97,7 @@ void initialize(const std::shared_ptr<InnerModel> &innerModel_, std::shared_ptr<
 
     collisions =  std::make_shared<Collisions>();
 
-    collisions->initialize(innerModel, configparams);
+    collisions->initialize(innerModel, configparams); // mirar la funcion "checkRobotValidStateAtTargetFast()" de collision.h (fuera de src)
     grid.initialize(collisions);
 
     controller.initialize(innerModel,configparams);
@@ -131,9 +138,9 @@ void update(const RoboCompLaser::TLaserData &laserData_, bool needsReplaning)
 
     laserData = computeLaser(laserData_);  // esta linea necesita dentro el nombre del laser de cada oveja
 
-    currentRobotPose = innerModel->transformS6D("world", "base4"); // esta linea necesita el nombre del robot (esta en configparams)
-/*
-    updateLaserPolygon(laserData); // esta linea necesita dentro el nombre del laser de cada oveja
+    currentRobotPose = innerModel->transformS6D("world", RobotName); // esta linea necesita el nombre del robot (esta en configparams)
+
+    updateLaserPolygon(laserData); // esta linea necesita dentro el nombre del laser de cada oveja    
     currentRobotPolygon = getRobotPolygon();
     currentRobotNose = getRobotNose();
 
@@ -163,6 +170,7 @@ void update(const RoboCompLaser::TLaserData &laserData_, bool needsReplaning)
 
     qDebug()<<"Navigation - "<< __FUNCTION__<<"(): Computing forces...";
     computeForces(pathPoints, laserData);
+
     cleanPoints();
     addPoints();
 
@@ -199,7 +207,7 @@ void update(const RoboCompLaser::TLaserData &laserData_, bool needsReplaning)
     }
 
 
-*/
+
 };
 
 void stopRobot()
@@ -393,7 +401,7 @@ RoboCompLaser::TLaserData computeLaser(RoboCompLaser::TLaserData laserData)
     qDebug()<<"Navigation - "<< __FUNCTION__<<"(): Reading laser";
 
 
-    auto lasernode = innerModel->getNode<InnerModelLaser>("laser4");
+    auto lasernode = innerModel->getNode<InnerModelLaser>(LaserName);
 
     RoboCompLaser::TLaserData laserCombined;
     laserCombined = laserData;
@@ -407,7 +415,7 @@ RoboCompLaser::TLaserData computeLaser(RoboCompLaser::TLaserData laserData)
         for (const auto &polylinePoint: polyline)
         {
             LocalPointPol lPol;
-            QVec pInLaser = innerModel->transform("laser", QVec::vec3(polylinePoint.x(), 0, polylinePoint.y()), "world");
+            QVec pInLaser = innerModel->transform(QString::fromStdString(LaserName), QVec::vec3(polylinePoint.x(), 0, polylinePoint.y()), "world");
 
             lPol.angle = atan2(pInLaser.x(), pInLaser.z());
             lPol.dist = sqrt(pow(pInLaser.x(),2) + pow(pInLaser.z(),2));
@@ -423,18 +431,18 @@ RoboCompLaser::TLaserData computeLaser(RoboCompLaser::TLaserData laserData)
             //Compruebo que la muestra del laser corta a la polilinea. Es decir si esta comprendida entre el maximo y el minimo de antes
             if (laserSample.angle >= min and laserSample.angle <= max and fabs(max-min) < 3.14 )
             {
-                QVec lasercart = lasernode->laserTo(QString("laser"),laserSample.dist, laserSample.angle);
+                QVec lasercart = lasernode->laserTo(LaserName,laserSample.dist, laserSample.angle);
 
                 //recta que une el 0,0 con el punto del laser
-                QVec robotL = innerModel->transform("robot", "laser");
+                QVec robotL = innerModel->transform(QString::fromStdString(RobotName), QString::fromStdString(LaserName));
                 QLineF laserline(QPointF(robotL.x(), robotL.z()), QPointF(lasercart.x(), lasercart.z()));
 
                 auto previousPoint = polyline[polyline.size()-1];
-                QVec previousPointInLaser = innerModel->transform("laser", (QVec::vec3(previousPoint.x(), 0, previousPoint.y())), "world");
+                QVec previousPointInLaser = innerModel->transform(QString::fromStdString(LaserName), (QVec::vec3(previousPoint.x(), 0, previousPoint.y())), "world");
 
                 for (const auto &polylinePoint: polyline)
                 {
-                    QVec currentPointInLaser = innerModel->transform("laser", (QVec::vec3(polylinePoint.x(), 0, polylinePoint.y())), "world");
+                    QVec currentPointInLaser = innerModel->transform(QString::fromStdString(LaserName), (QVec::vec3(polylinePoint.x(), 0, polylinePoint.y())), "world");
                     QLineF polygonLine(QPointF(previousPointInLaser.x(), previousPointInLaser.z()), QPointF(currentPointInLaser.x(), currentPointInLaser.z()));
 
                     QPointF intersection;
@@ -600,7 +608,7 @@ bool checkHumanSoftBlock()
 
 bool isVisible(QPointF p)
 {
-    QVec pointInLaser = innerModel->transform("laser", QVec::vec3(p.x(),0,p.y()),"world");
+    QVec pointInLaser = innerModel->transform(QString::fromStdString(LaserName), QVec::vec3(p.x(),0,p.y()),"world");
     return laser_poly.containsPoint(QPointF(pointInLaser.x(),pointInLaser.z()), Qt::OddEvenFill);
 }
 
@@ -756,16 +764,21 @@ void cleanPoints()
     }
 }
 
+
+/**
+* Medidas del robot.
+*/
 QPolygonF getRobotPolygon()
 {
 //        qDebug()<<"Navigation - "<< __FUNCTION__;
 
     QPolygonF robotP;
 
-    auto bLWorld = innerModel->transform ("world", robotBottomLeft ,"base_mesh");
-    auto bRWorld = innerModel->transform ("world", robotBottomRight ,"base_mesh");
-    auto tRWorld = innerModel->transform ("world", robotTopRight ,"base_mesh");
-    auto tLWorld = innerModel->transform ("world", robotTopLeft ,"base_mesh");
+try{
+    auto bLWorld = innerModel->transform ("world", robotBottomLeft,  QString::fromStdString(RobotName));
+    auto bRWorld = innerModel->transform ("world", robotBottomRight, QString::fromStdString(RobotName));
+    auto tRWorld = innerModel->transform ("world", robotTopRight,    QString::fromStdString(RobotName));
+    auto tLWorld = innerModel->transform ("world", robotTopLeft,     QString::fromStdString(RobotName));
 
 
     robotP << QPointF(bLWorld.x(),bLWorld.z());
@@ -782,6 +795,11 @@ QPolygonF getRobotPolygon()
     fprintf(fd, "%d %d\n", (int)robotP[0].x(), (int)robotP[0].y());
 
     fclose(fd);
+}catch(const std::exception &e){
+qDebug() <<"getRobotPolygon"<<__FUNCTION__<<"[!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!]";
+qDebug() <<"getRobotPolygon"<<__FUNCTION__<<"[!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!  ERROR  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!]";
+qDebug() <<"getRobotPolygon"<<__FUNCTION__<<"[!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!]";
+}
 
 
     return robotP;
@@ -793,12 +811,12 @@ void updateLaserPolygon(const RoboCompLaser::TLaserData &lData)
 
     laser_poly.clear(); //stores the points of the laser in lasers refrence system
     laser_cart.clear();
-    auto lasernode = innerModel->getNode<InnerModelLaser>(QString("laser"));
+    auto lasernode = innerModel->getNode<InnerModelLaser>(LaserName);
 
     for (const auto &l : lData)
     {
         //convert laser polar coordinates to cartesian
-        QVec laserc = lasernode->laserTo(QString("laser"),l.dist, l.angle);
+        QVec laserc = lasernode->laserTo(LaserName,l.dist, l.angle);
         laser_poly << QPointF(laserc.x(),laserc.z());
         laser_cart.push_back(QPointF(laserc.x(),laserc.z()));
     }
@@ -806,7 +824,7 @@ void updateLaserPolygon(const RoboCompLaser::TLaserData &lData)
     FILE *fd = fopen("laserPoly.txt", "w");
     for (const auto &lp : laser_poly)
     {
-        QVec p = innerModel->transform("world",QVec::vec3(lp.x(),0,lp.y()),"laser");
+        QVec p = innerModel->transform("world",QVec::vec3(lp.x(),0,lp.y()),QString::fromStdString(LaserName));
         fprintf(fd, "%d %d\n", (int)p.x(), (int)p.z());
     }
     fclose(fd);
