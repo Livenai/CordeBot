@@ -57,37 +57,37 @@ include CMakeFiles/MyFirstComp.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/MyFirstComp.dir/flags.make
 
-CommonBehavior.cpp: /opt/robocomp/interfaces/CommonBehavior.ice
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/carlos/robocomp/components/CordeBot/component/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Generating CommonBehavior.cpp and CommonBehavior.h from CommonBehavior.ice"
-	slice2cpp --underscore -I/opt/robocomp///interfaces/ -I/opt/robocomp//interfaces -I/opt/robocomp/interfaces -I. /opt/robocomp//interfaces/CommonBehavior.ice --output-dir .
+CommonBehavior.cpp:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/carlos/robocomp/components/CordeBot/component/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Generating CommonBehavior.h and CommonBehavior.cpp from CommonBehavior.ice"
+	slice2cpp CommonBehavior.ice -I. --output-dir .
 
 CommonBehavior.h: CommonBehavior.cpp
 	@$(CMAKE_COMMAND) -E touch_nocreate CommonBehavior.h
 
-GenericBase.cpp: /opt/robocomp/interfaces/GenericBase.ice
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/carlos/robocomp/components/CordeBot/component/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Generating GenericBase.cpp and GenericBase.h from GenericBase.ice"
-	slice2cpp --underscore -I/opt/robocomp///interfaces/ -I/opt/robocomp//interfaces -I/opt/robocomp/interfaces -I. /opt/robocomp//interfaces/GenericBase.ice --output-dir .
+GenericBase.cpp:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/carlos/robocomp/components/CordeBot/component/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Generating GenericBase.h and GenericBase.cpp from GenericBase.ice"
+	slice2cpp GenericBase.ice -I. --output-dir .
 
 GenericBase.h: GenericBase.cpp
 	@$(CMAKE_COMMAND) -E touch_nocreate GenericBase.h
 
-InnerModelManager.cpp: /opt/robocomp/interfaces/InnerModelManager.ice
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/carlos/robocomp/components/CordeBot/component/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Generating InnerModelManager.cpp and InnerModelManager.h from InnerModelManager.ice"
-	slice2cpp --underscore -I/opt/robocomp///interfaces/ -I/opt/robocomp//interfaces -I/opt/robocomp/interfaces -I. /opt/robocomp//interfaces/InnerModelManager.ice --output-dir .
+InnerModelManager.cpp:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/carlos/robocomp/components/CordeBot/component/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Generating InnerModelManager.h and InnerModelManager.cpp from InnerModelManager.ice"
+	slice2cpp InnerModelManager.ice -I. --output-dir .
 
 InnerModelManager.h: InnerModelManager.cpp
 	@$(CMAKE_COMMAND) -E touch_nocreate InnerModelManager.h
 
-Laser.cpp: /opt/robocomp/interfaces/Laser.ice
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/carlos/robocomp/components/CordeBot/component/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Generating Laser.cpp and Laser.h from Laser.ice"
-	slice2cpp --underscore -I/opt/robocomp///interfaces/ -I/opt/robocomp//interfaces -I/opt/robocomp/interfaces -I. /opt/robocomp//interfaces/Laser.ice --output-dir .
+Laser.cpp:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/carlos/robocomp/components/CordeBot/component/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Generating Laser.h and Laser.cpp from Laser.ice"
+	slice2cpp Laser.ice -I. --output-dir .
 
 Laser.h: Laser.cpp
 	@$(CMAKE_COMMAND) -E touch_nocreate Laser.h
 
-OmniRobot.cpp: /opt/robocomp/interfaces/OmniRobot.ice
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/carlos/robocomp/components/CordeBot/component/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Generating OmniRobot.cpp and OmniRobot.h from OmniRobot.ice"
-	slice2cpp --underscore -I/opt/robocomp///interfaces/ -I/opt/robocomp//interfaces -I/opt/robocomp/interfaces -I. /opt/robocomp//interfaces/OmniRobot.ice --output-dir .
+OmniRobot.cpp:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/carlos/robocomp/components/CordeBot/component/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Generating OmniRobot.h and OmniRobot.cpp from OmniRobot.ice"
+	slice2cpp OmniRobot.ice -I. --output-dir .
 
 OmniRobot.h: OmniRobot.cpp
 	@$(CMAKE_COMMAND) -E touch_nocreate OmniRobot.h

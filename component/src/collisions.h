@@ -25,7 +25,7 @@ public:
 	//robot data
         RobotName = params_->at("NavigationAgent.RobotName").value;
 
-	qDebug() << "||||||||||||||||||||||||  > " << QString::fromStdString(RobotName)
+	qDebug() << "||||||||||||||||||||||||  > " << QString::fromStdString(RobotName);
 
         /// Processing configuration parameters
         try

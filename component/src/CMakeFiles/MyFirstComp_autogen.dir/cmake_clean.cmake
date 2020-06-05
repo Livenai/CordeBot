@@ -1,6 +1,7 @@
 file(REMOVE_RECURSE
+  "MyFirstComp_autogen"
+  "CMakeFiles/MyFirstComp_autogen.dir/AutogenOldSettings.cmake"
   "CMakeFiles/MyFirstComp_autogen"
-  "MyFirstComp_autogen/mocs_compilation.cpp"
 )
 
 # Per-language clean rules from dependency scanning.

@@ -22,10 +22,11 @@
 /**
 * \brief Default constructor
 */
-SpecificWorker::SpecificWorker(MapPrx& mprx) : GenericWorker(mprx)
+SpecificWorker::SpecificWorker(MapPrx& mprx, bool startup_check) : GenericWorker(mprx)
 {
-
+	this->startup_check_flag = startup_check;
 }
+
 
 /**
 * \brief Default destructor
@@ -34,6 +35,14 @@ SpecificWorker::~SpecificWorker()
 {
 	std::cout << "Destroying SpecificWorker" << std::endl;
 }
+
+int SpecificWorker::startup_check()
+{
+	std::cout << "Startup check" << std::endl;
+	QTimer::singleShot(200, qApp, SLOT(quit()));
+	return 0;
+}
+
 
 bool SpecificWorker::setParams(RoboCompCommonBehavior::ParameterList params)
 {

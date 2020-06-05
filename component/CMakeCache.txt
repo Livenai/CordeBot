@@ -130,7 +130,7 @@ CMAKE_OBJCOPY:FILEPATH=/usr/bin/objcopy
 CMAKE_OBJDUMP:FILEPATH=/usr/bin/objdump
 
 //Value Computed by CMake
-CMAKE_PROJECT_NAME:STATIC=Project
+CMAKE_PROJECT_NAME:STATIC=MyFirstComp
 
 //Path to a program.
 CMAKE_RANLIB:FILEPATH=/usr/bin/ranlib
@@ -350,13 +350,7 @@ Ice_TRANSFORMDB_EXECUTABLE:FILEPATH=Ice_TRANSFORMDB_EXECUTABLE-NOTFOUND
 MyFirstComp_BINARY_DIR:STATIC=/home/carlos/robocomp/components/CordeBot/component
 
 //Value Computed by CMake
-MyFirstComp_SOURCE_DIR:STATIC=/home/robocomp/robocomp/components/CordeBot/component/src
-
-//Value Computed by CMake
-Project_BINARY_DIR:STATIC=/home/carlos/robocomp/components/CordeBot/component
-
-//Value Computed by CMake
-Project_SOURCE_DIR:STATIC=/home/robocomp/robocomp/components/CordeBot/component/src
+MyFirstComp_SOURCE_DIR:STATIC=/home/carlos/robocomp/components/CordeBot/component
 
 //The directory containing a CMake configuration file for Qt5Core.
 Qt5Core_DIR:PATH=/usr/lib/x86_64-linux-gnu/cmake/Qt5Core
@@ -384,6 +378,15 @@ Qt5Xml_DIR:PATH=/usr/lib/x86_64-linux-gnu/cmake/Qt5Xml
 
 //The directory containing a CMake configuration file for Qt5.
 Qt5_DIR:PATH=/usr/lib/x86_64-linux-gnu/cmake/Qt5
+
+//component binary path
+RC_COMPONENT_DEVEL_PATH:STRING=/home/carlos/robocomp/components/CordeBot/component
+
+//component install path
+RC_COMPONENT_INSTALL_PATH:STRING=/opt/robocomp
+
+//component base path
+RC_COMPONENT_PATH:STRING=/home/carlos/robocomp/components/CordeBot/component
 
 //RoboComp version
 RoboComp_VERSION:STRING=1.0
@@ -483,7 +486,7 @@ CMAKE_HAVE_PTHREAD_CREATE:INTERNAL=1
 CMAKE_HAVE_PTHREAD_H:INTERNAL=1
 //Source directory with the top level CMakeLists.txt file for this
 // project
-CMAKE_HOME_DIRECTORY:INTERNAL=/home/robocomp/robocomp/components/CordeBot/component/src
+CMAKE_HOME_DIRECTORY:INTERNAL=/home/carlos/robocomp/components/CordeBot/component
 //Install .so files without execute permission.
 CMAKE_INSTALL_SO_NO_EXE:INTERNAL=1
 //ADVANCED property for variable: CMAKE_LINKER
@@ -503,7 +506,7 @@ CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_NM
 CMAKE_NM-ADVANCED:INTERNAL=1
 //number of local generators
-CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=1
+CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=2
 //ADVANCED property for variable: CMAKE_OBJCOPY
 CMAKE_OBJCOPY-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_OBJDUMP

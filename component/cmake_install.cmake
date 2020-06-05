@@ -1,4 +1,4 @@
-# Install script for directory: /home/robocomp/robocomp/components/CordeBot/component/src
+# Install script for directory: /home/carlos/robocomp/components/CordeBot/component
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -39,14 +39,20 @@ endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
   list(APPEND CMAKE_ABSOLUTE_DESTINATION_FILES
-   "/bin/MyFirstComp")
+   "/opt/robocomp/etc-default/MyFirstComp.conf")
   if(CMAKE_WARN_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(WARNING "ABSOLUTE path INSTALL DESTINATION : ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   endif()
   if(CMAKE_ERROR_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(FATAL_ERROR "ABSOLUTE path INSTALL DESTINATION forbidden (by caller): ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   endif()
-file(INSTALL DESTINATION "/bin" TYPE FILE PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE GROUP_READ GROUP_EXECUTE WORLD_READ WORLD_EXECUTE FILES "/bin/MyFirstComp")
+file(INSTALL DESTINATION "/opt/robocomp/etc-default" TYPE FILE RENAME "MyFirstComp.conf" FILES "/home/carlos/robocomp/components/CordeBot/component/etc/config")
+endif()
+
+if(NOT CMAKE_INSTALL_LOCAL_ONLY)
+  # Include the install script for each subdirectory.
+  include("/home/carlos/robocomp/components/CordeBot/component/src/cmake_install.cmake")
+
 endif()
 
 if(CMAKE_INSTALL_COMPONENT)

@@ -71,7 +71,7 @@ public:
     string RobotName;
     string LaserName; 
 
-void initialize(const std::shared_ptr<InnerModel> &innerModel_, std::shared_ptr< RoboCompCommonBehavior::ParameterList > configparams_, OmniRobotPrx omnirobot_proxy_)
+void initialize(const std::shared_ptr<InnerModel> &innerModel_, std::shared_ptr< RoboCompCommonBehavior::ParameterList > configparams_, RoboCompOmniRobot::OmniRobotPrx omnirobot_proxy_)
 {
     qDebug()<<"Navigation - "<< __FUNCTION__<<"(): Starting initialize";
 
@@ -335,7 +335,7 @@ private:
     std::shared_ptr<InnerModel> innerModel;
     std::shared_ptr<RoboCompCommonBehavior::ParameterList> configparams;
 
-    OmniRobotPrx omnirobot_proxy;
+    RoboCompOmniRobot::OmniRobotPrx omnirobot_proxy;
 
     typedef struct { float dist; float angle;} LocalPointPol;
 
@@ -774,7 +774,7 @@ QPolygonF getRobotPolygon()
 
     QPolygonF robotP;
 
-try{
+
     auto bLWorld = innerModel->transform ("world", robotBottomLeft,  QString::fromStdString(RobotName));
     auto bRWorld = innerModel->transform ("world", robotBottomRight, QString::fromStdString(RobotName));
     auto tRWorld = innerModel->transform ("world", robotTopRight,    QString::fromStdString(RobotName));
@@ -795,11 +795,6 @@ try{
     fprintf(fd, "%d %d\n", (int)robotP[0].x(), (int)robotP[0].y());
 
     fclose(fd);
-}catch(const std::exception &e){
-qDebug() <<"getRobotPolygon"<<__FUNCTION__<<"[!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!]";
-qDebug() <<"getRobotPolygon"<<__FUNCTION__<<"[!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!  ERROR  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!]";
-qDebug() <<"getRobotPolygon"<<__FUNCTION__<<"[!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!]";
-}
 
 
     return robotP;

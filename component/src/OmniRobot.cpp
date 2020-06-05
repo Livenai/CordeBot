@@ -73,14 +73,14 @@ const ::std::string iceC_RoboCompOmniRobot_OmniRobot_ops[] =
     "setSpeedBase",
     "stopBase"
 };
-const ::std::string iceC_RoboCompOmniRobot_OmniRobot_getBaseState_name = "getBaseState";
+const ::std::string iceC_RoboCompOmniRobot_OmniRobot_correctOdometer_name = "correctOdometer";
 const ::std::string iceC_RoboCompOmniRobot_OmniRobot_getBasePose_name = "getBasePose";
-const ::std::string iceC_RoboCompOmniRobot_OmniRobot_setSpeedBase_name = "setSpeedBase";
-const ::std::string iceC_RoboCompOmniRobot_OmniRobot_stopBase_name = "stopBase";
+const ::std::string iceC_RoboCompOmniRobot_OmniRobot_getBaseState_name = "getBaseState";
 const ::std::string iceC_RoboCompOmniRobot_OmniRobot_resetOdometer_name = "resetOdometer";
 const ::std::string iceC_RoboCompOmniRobot_OmniRobot_setOdometer_name = "setOdometer";
 const ::std::string iceC_RoboCompOmniRobot_OmniRobot_setOdometerPose_name = "setOdometerPose";
-const ::std::string iceC_RoboCompOmniRobot_OmniRobot_correctOdometer_name = "correctOdometer";
+const ::std::string iceC_RoboCompOmniRobot_OmniRobot_setSpeedBase_name = "setSpeedBase";
+const ::std::string iceC_RoboCompOmniRobot_OmniRobot_stopBase_name = "stopBase";
 
 }
 
@@ -110,15 +110,17 @@ RoboCompOmniRobot::OmniRobot::ice_staticId()
 }
 
 bool
-RoboCompOmniRobot::OmniRobot::_iceD_getBaseState(::IceInternal::Incoming& inS, const ::Ice::Current& current)
+RoboCompOmniRobot::OmniRobot::_iceD_correctOdometer(::IceInternal::Incoming& inS, const ::Ice::Current& current)
 {
     _iceCheckMode(::Ice::OperationMode::Normal, current.mode);
-    inS.readEmptyParams();
-    ::RoboCompGenericBase::TBaseState iceP_state;
-    this->getBaseState(iceP_state, current);
-    auto ostr = inS.startWriteParams();
-    ostr->writeAll(iceP_state);
-    inS.endWriteParams();
+    auto istr = inS.startReadParams();
+    int iceP_x;
+    int iceP_z;
+    float iceP_alpha;
+    istr->readAll(iceP_x, iceP_z, iceP_alpha);
+    inS.endReadParams();
+    this->correctOdometer(iceP_x, iceP_z, iceP_alpha, current);
+    inS.writeEmptyParams();
     return true;
 }
 
@@ -138,27 +140,15 @@ RoboCompOmniRobot::OmniRobot::_iceD_getBasePose(::IceInternal::Incoming& inS, co
 }
 
 bool
-RoboCompOmniRobot::OmniRobot::_iceD_setSpeedBase(::IceInternal::Incoming& inS, const ::Ice::Current& current)
-{
-    _iceCheckMode(::Ice::OperationMode::Normal, current.mode);
-    auto istr = inS.startReadParams();
-    float iceP_advx;
-    float iceP_advz;
-    float iceP_rot;
-    istr->readAll(iceP_advx, iceP_advz, iceP_rot);
-    inS.endReadParams();
-    this->setSpeedBase(iceP_advx, iceP_advz, iceP_rot, current);
-    inS.writeEmptyParams();
-    return true;
-}
-
-bool
-RoboCompOmniRobot::OmniRobot::_iceD_stopBase(::IceInternal::Incoming& inS, const ::Ice::Current& current)
+RoboCompOmniRobot::OmniRobot::_iceD_getBaseState(::IceInternal::Incoming& inS, const ::Ice::Current& current)
 {
     _iceCheckMode(::Ice::OperationMode::Normal, current.mode);
     inS.readEmptyParams();
-    this->stopBase(current);
-    inS.writeEmptyParams();
+    ::RoboCompGenericBase::TBaseState iceP_state;
+    this->getBaseState(iceP_state, current);
+    auto ostr = inS.startWriteParams();
+    ostr->writeAll(iceP_state);
+    inS.endWriteParams();
     return true;
 }
 
@@ -201,16 +191,26 @@ RoboCompOmniRobot::OmniRobot::_iceD_setOdometerPose(::IceInternal::Incoming& inS
 }
 
 bool
-RoboCompOmniRobot::OmniRobot::_iceD_correctOdometer(::IceInternal::Incoming& inS, const ::Ice::Current& current)
+RoboCompOmniRobot::OmniRobot::_iceD_setSpeedBase(::IceInternal::Incoming& inS, const ::Ice::Current& current)
 {
     _iceCheckMode(::Ice::OperationMode::Normal, current.mode);
     auto istr = inS.startReadParams();
-    int iceP_x;
-    int iceP_z;
-    float iceP_alpha;
-    istr->readAll(iceP_x, iceP_z, iceP_alpha);
+    float iceP_advx;
+    float iceP_advz;
+    float iceP_rot;
+    istr->readAll(iceP_advx, iceP_advz, iceP_rot);
     inS.endReadParams();
-    this->correctOdometer(iceP_x, iceP_z, iceP_alpha, current);
+    this->setSpeedBase(iceP_advx, iceP_advz, iceP_rot, current);
+    inS.writeEmptyParams();
+    return true;
+}
+
+bool
+RoboCompOmniRobot::OmniRobot::_iceD_stopBase(::IceInternal::Incoming& inS, const ::Ice::Current& current)
+{
+    _iceCheckMode(::Ice::OperationMode::Normal, current.mode);
+    inS.readEmptyParams();
+    this->stopBase(current);
     inS.writeEmptyParams();
     return true;
 }
@@ -283,11 +283,14 @@ RoboCompOmniRobot::OmniRobot::_iceDispatch(::IceInternal::Incoming& in, const ::
 }
 
 void
-RoboCompOmniRobot::OmniRobotPrx::_iceI_getBaseState(const ::std::shared_ptr<::IceInternal::OutgoingAsyncT<::RoboCompGenericBase::TBaseState>>& outAsync, const ::Ice::Context& context)
+RoboCompOmniRobot::OmniRobotPrx::_iceI_correctOdometer(const ::std::shared_ptr<::IceInternal::OutgoingAsyncT<void>>& outAsync, int iceP_x, int iceP_z, float iceP_alpha, const ::Ice::Context& context)
 {
-    _checkTwowayOnly(iceC_RoboCompOmniRobot_OmniRobot_getBaseState_name);
-    outAsync->invoke(iceC_RoboCompOmniRobot_OmniRobot_getBaseState_name, ::Ice::OperationMode::Normal, ::Ice::FormatType::DefaultFormat, context,
-        nullptr,
+    _checkTwowayOnly(iceC_RoboCompOmniRobot_OmniRobot_correctOdometer_name);
+    outAsync->invoke(iceC_RoboCompOmniRobot_OmniRobot_correctOdometer_name, ::Ice::OperationMode::Normal, ::Ice::FormatType::DefaultFormat, context,
+        [&](::Ice::OutputStream* ostr)
+        {
+            ostr->writeAll(iceP_x, iceP_z, iceP_alpha);
+        },
         [](const ::Ice::UserException& ex)
         {
             try
@@ -333,35 +336,10 @@ RoboCompOmniRobot::OmniRobotPrx::_iceI_getBasePose(const ::std::shared_ptr<::Ice
 }
 
 void
-RoboCompOmniRobot::OmniRobotPrx::_iceI_setSpeedBase(const ::std::shared_ptr<::IceInternal::OutgoingAsyncT<void>>& outAsync, float iceP_advx, float iceP_advz, float iceP_rot, const ::Ice::Context& context)
+RoboCompOmniRobot::OmniRobotPrx::_iceI_getBaseState(const ::std::shared_ptr<::IceInternal::OutgoingAsyncT<::RoboCompGenericBase::TBaseState>>& outAsync, const ::Ice::Context& context)
 {
-    _checkTwowayOnly(iceC_RoboCompOmniRobot_OmniRobot_setSpeedBase_name);
-    outAsync->invoke(iceC_RoboCompOmniRobot_OmniRobot_setSpeedBase_name, ::Ice::OperationMode::Normal, ::Ice::FormatType::DefaultFormat, context,
-        [&](::Ice::OutputStream* ostr)
-        {
-            ostr->writeAll(iceP_advx, iceP_advz, iceP_rot);
-        },
-        [](const ::Ice::UserException& ex)
-        {
-            try
-            {
-                ex.ice_throw();
-            }
-            catch(const ::RoboCompGenericBase::HardwareFailedException&)
-            {
-                throw;
-            }
-            catch(const ::Ice::UserException&)
-            {
-            }
-        });
-}
-
-void
-RoboCompOmniRobot::OmniRobotPrx::_iceI_stopBase(const ::std::shared_ptr<::IceInternal::OutgoingAsyncT<void>>& outAsync, const ::Ice::Context& context)
-{
-    _checkTwowayOnly(iceC_RoboCompOmniRobot_OmniRobot_stopBase_name);
-    outAsync->invoke(iceC_RoboCompOmniRobot_OmniRobot_stopBase_name, ::Ice::OperationMode::Normal, ::Ice::FormatType::DefaultFormat, context,
+    _checkTwowayOnly(iceC_RoboCompOmniRobot_OmniRobot_getBaseState_name);
+    outAsync->invoke(iceC_RoboCompOmniRobot_OmniRobot_getBaseState_name, ::Ice::OperationMode::Normal, ::Ice::FormatType::DefaultFormat, context,
         nullptr,
         [](const ::Ice::UserException& ex)
         {
@@ -452,14 +430,36 @@ RoboCompOmniRobot::OmniRobotPrx::_iceI_setOdometerPose(const ::std::shared_ptr<:
 }
 
 void
-RoboCompOmniRobot::OmniRobotPrx::_iceI_correctOdometer(const ::std::shared_ptr<::IceInternal::OutgoingAsyncT<void>>& outAsync, int iceP_x, int iceP_z, float iceP_alpha, const ::Ice::Context& context)
+RoboCompOmniRobot::OmniRobotPrx::_iceI_setSpeedBase(const ::std::shared_ptr<::IceInternal::OutgoingAsyncT<void>>& outAsync, float iceP_advx, float iceP_advz, float iceP_rot, const ::Ice::Context& context)
 {
-    _checkTwowayOnly(iceC_RoboCompOmniRobot_OmniRobot_correctOdometer_name);
-    outAsync->invoke(iceC_RoboCompOmniRobot_OmniRobot_correctOdometer_name, ::Ice::OperationMode::Normal, ::Ice::FormatType::DefaultFormat, context,
+    _checkTwowayOnly(iceC_RoboCompOmniRobot_OmniRobot_setSpeedBase_name);
+    outAsync->invoke(iceC_RoboCompOmniRobot_OmniRobot_setSpeedBase_name, ::Ice::OperationMode::Normal, ::Ice::FormatType::DefaultFormat, context,
         [&](::Ice::OutputStream* ostr)
         {
-            ostr->writeAll(iceP_x, iceP_z, iceP_alpha);
+            ostr->writeAll(iceP_advx, iceP_advz, iceP_rot);
         },
+        [](const ::Ice::UserException& ex)
+        {
+            try
+            {
+                ex.ice_throw();
+            }
+            catch(const ::RoboCompGenericBase::HardwareFailedException&)
+            {
+                throw;
+            }
+            catch(const ::Ice::UserException&)
+            {
+            }
+        });
+}
+
+void
+RoboCompOmniRobot::OmniRobotPrx::_iceI_stopBase(const ::std::shared_ptr<::IceInternal::OutgoingAsyncT<void>>& outAsync, const ::Ice::Context& context)
+{
+    _checkTwowayOnly(iceC_RoboCompOmniRobot_OmniRobot_stopBase_name);
+    outAsync->invoke(iceC_RoboCompOmniRobot_OmniRobot_stopBase_name, ::Ice::OperationMode::Normal, ::Ice::FormatType::DefaultFormat, context,
+        nullptr,
         [](const ::Ice::UserException& ex)
         {
             try
@@ -497,13 +497,11 @@ namespace Ice
 namespace
 {
 
-const ::std::string iceC_RoboCompOmniRobot_OmniRobot_getBaseState_name = "getBaseState";
+const ::std::string iceC_RoboCompOmniRobot_OmniRobot_correctOdometer_name = "correctOdometer";
 
 const ::std::string iceC_RoboCompOmniRobot_OmniRobot_getBasePose_name = "getBasePose";
 
-const ::std::string iceC_RoboCompOmniRobot_OmniRobot_setSpeedBase_name = "setSpeedBase";
-
-const ::std::string iceC_RoboCompOmniRobot_OmniRobot_stopBase_name = "stopBase";
+const ::std::string iceC_RoboCompOmniRobot_OmniRobot_getBaseState_name = "getBaseState";
 
 const ::std::string iceC_RoboCompOmniRobot_OmniRobot_resetOdometer_name = "resetOdometer";
 
@@ -511,7 +509,9 @@ const ::std::string iceC_RoboCompOmniRobot_OmniRobot_setOdometer_name = "setOdom
 
 const ::std::string iceC_RoboCompOmniRobot_OmniRobot_setOdometerPose_name = "setOdometerPose";
 
-const ::std::string iceC_RoboCompOmniRobot_OmniRobot_correctOdometer_name = "correctOdometer";
+const ::std::string iceC_RoboCompOmniRobot_OmniRobot_setSpeedBase_name = "setSpeedBase";
+
+const ::std::string iceC_RoboCompOmniRobot_OmniRobot_stopBase_name = "stopBase";
 
 }
 ::IceProxy::Ice::Object* ::IceProxy::RoboCompOmniRobot::upCast(::IceProxy::RoboCompOmniRobot::OmniRobot* p) { return p; }
@@ -533,15 +533,19 @@ void
 }
 
 ::Ice::AsyncResultPtr
-IceProxy::RoboCompOmniRobot::OmniRobot::_iceI_begin_getBaseState(const ::Ice::Context& context, const ::IceInternal::CallbackBasePtr& del, const ::Ice::LocalObjectPtr& cookie, bool sync)
+IceProxy::RoboCompOmniRobot::OmniRobot::_iceI_begin_correctOdometer(::Ice::Int iceP_x, ::Ice::Int iceP_z, ::Ice::Float iceP_alpha, const ::Ice::Context& context, const ::IceInternal::CallbackBasePtr& del, const ::Ice::LocalObjectPtr& cookie, bool sync)
 {
-    _checkTwowayOnly(iceC_RoboCompOmniRobot_OmniRobot_getBaseState_name, sync);
-    ::IceInternal::OutgoingAsyncPtr result = new ::IceInternal::CallbackOutgoing(this, iceC_RoboCompOmniRobot_OmniRobot_getBaseState_name, del, cookie, sync);
+    _checkTwowayOnly(iceC_RoboCompOmniRobot_OmniRobot_correctOdometer_name, sync);
+    ::IceInternal::OutgoingAsyncPtr result = new ::IceInternal::CallbackOutgoing(this, iceC_RoboCompOmniRobot_OmniRobot_correctOdometer_name, del, cookie, sync);
     try
     {
-        result->prepare(iceC_RoboCompOmniRobot_OmniRobot_getBaseState_name, ::Ice::Normal, context);
-        result->writeEmptyParams();
-        result->invoke(iceC_RoboCompOmniRobot_OmniRobot_getBaseState_name);
+        result->prepare(iceC_RoboCompOmniRobot_OmniRobot_correctOdometer_name, ::Ice::Normal, context);
+        ::Ice::OutputStream* ostr = result->startWriteParams(::Ice::DefaultFormat);
+        ostr->write(iceP_x);
+        ostr->write(iceP_z);
+        ostr->write(iceP_alpha);
+        result->endWriteParams();
+        result->invoke(iceC_RoboCompOmniRobot_OmniRobot_correctOdometer_name);
     }
     catch(const ::Ice::Exception& ex)
     {
@@ -551,9 +555,9 @@ IceProxy::RoboCompOmniRobot::OmniRobot::_iceI_begin_getBaseState(const ::Ice::Co
 }
 
 void
-IceProxy::RoboCompOmniRobot::OmniRobot::end_getBaseState(::RoboCompGenericBase::TBaseState& iceP_state, const ::Ice::AsyncResultPtr& result)
+IceProxy::RoboCompOmniRobot::OmniRobot::end_correctOdometer(const ::Ice::AsyncResultPtr& result)
 {
-    ::Ice::AsyncResult::_check(result, this, iceC_RoboCompOmniRobot_OmniRobot_getBaseState_name);
+    ::Ice::AsyncResult::_check(result, this, iceC_RoboCompOmniRobot_OmniRobot_correctOdometer_name);
     if(!result->_waitForResponse())
     {
         try
@@ -569,9 +573,7 @@ IceProxy::RoboCompOmniRobot::OmniRobot::end_getBaseState(::RoboCompGenericBase::
             throw ::Ice::UnknownUserException(__FILE__, __LINE__, ex.ice_id());
         }
     }
-    ::Ice::InputStream* istr = result->_startReadParams();
-    istr->read(iceP_state);
-    result->_endReadParams();
+    result->_readEmptyParams();
 }
 
 ::Ice::AsyncResultPtr
@@ -619,59 +621,15 @@ IceProxy::RoboCompOmniRobot::OmniRobot::end_getBasePose(::Ice::Int& iceP_x, ::Ic
 }
 
 ::Ice::AsyncResultPtr
-IceProxy::RoboCompOmniRobot::OmniRobot::_iceI_begin_setSpeedBase(::Ice::Float iceP_advx, ::Ice::Float iceP_advz, ::Ice::Float iceP_rot, const ::Ice::Context& context, const ::IceInternal::CallbackBasePtr& del, const ::Ice::LocalObjectPtr& cookie, bool sync)
+IceProxy::RoboCompOmniRobot::OmniRobot::_iceI_begin_getBaseState(const ::Ice::Context& context, const ::IceInternal::CallbackBasePtr& del, const ::Ice::LocalObjectPtr& cookie, bool sync)
 {
-    _checkTwowayOnly(iceC_RoboCompOmniRobot_OmniRobot_setSpeedBase_name, sync);
-    ::IceInternal::OutgoingAsyncPtr result = new ::IceInternal::CallbackOutgoing(this, iceC_RoboCompOmniRobot_OmniRobot_setSpeedBase_name, del, cookie, sync);
+    _checkTwowayOnly(iceC_RoboCompOmniRobot_OmniRobot_getBaseState_name, sync);
+    ::IceInternal::OutgoingAsyncPtr result = new ::IceInternal::CallbackOutgoing(this, iceC_RoboCompOmniRobot_OmniRobot_getBaseState_name, del, cookie, sync);
     try
     {
-        result->prepare(iceC_RoboCompOmniRobot_OmniRobot_setSpeedBase_name, ::Ice::Normal, context);
-        ::Ice::OutputStream* ostr = result->startWriteParams(::Ice::DefaultFormat);
-        ostr->write(iceP_advx);
-        ostr->write(iceP_advz);
-        ostr->write(iceP_rot);
-        result->endWriteParams();
-        result->invoke(iceC_RoboCompOmniRobot_OmniRobot_setSpeedBase_name);
-    }
-    catch(const ::Ice::Exception& ex)
-    {
-        result->abort(ex);
-    }
-    return result;
-}
-
-void
-IceProxy::RoboCompOmniRobot::OmniRobot::end_setSpeedBase(const ::Ice::AsyncResultPtr& result)
-{
-    ::Ice::AsyncResult::_check(result, this, iceC_RoboCompOmniRobot_OmniRobot_setSpeedBase_name);
-    if(!result->_waitForResponse())
-    {
-        try
-        {
-            result->_throwUserException();
-        }
-        catch(const ::RoboCompGenericBase::HardwareFailedException&)
-        {
-            throw;
-        }
-        catch(const ::Ice::UserException& ex)
-        {
-            throw ::Ice::UnknownUserException(__FILE__, __LINE__, ex.ice_id());
-        }
-    }
-    result->_readEmptyParams();
-}
-
-::Ice::AsyncResultPtr
-IceProxy::RoboCompOmniRobot::OmniRobot::_iceI_begin_stopBase(const ::Ice::Context& context, const ::IceInternal::CallbackBasePtr& del, const ::Ice::LocalObjectPtr& cookie, bool sync)
-{
-    _checkTwowayOnly(iceC_RoboCompOmniRobot_OmniRobot_stopBase_name, sync);
-    ::IceInternal::OutgoingAsyncPtr result = new ::IceInternal::CallbackOutgoing(this, iceC_RoboCompOmniRobot_OmniRobot_stopBase_name, del, cookie, sync);
-    try
-    {
-        result->prepare(iceC_RoboCompOmniRobot_OmniRobot_stopBase_name, ::Ice::Normal, context);
+        result->prepare(iceC_RoboCompOmniRobot_OmniRobot_getBaseState_name, ::Ice::Normal, context);
         result->writeEmptyParams();
-        result->invoke(iceC_RoboCompOmniRobot_OmniRobot_stopBase_name);
+        result->invoke(iceC_RoboCompOmniRobot_OmniRobot_getBaseState_name);
     }
     catch(const ::Ice::Exception& ex)
     {
@@ -681,9 +639,9 @@ IceProxy::RoboCompOmniRobot::OmniRobot::_iceI_begin_stopBase(const ::Ice::Contex
 }
 
 void
-IceProxy::RoboCompOmniRobot::OmniRobot::end_stopBase(const ::Ice::AsyncResultPtr& result)
+IceProxy::RoboCompOmniRobot::OmniRobot::end_getBaseState(::RoboCompGenericBase::TBaseState& iceP_state, const ::Ice::AsyncResultPtr& result)
 {
-    ::Ice::AsyncResult::_check(result, this, iceC_RoboCompOmniRobot_OmniRobot_stopBase_name);
+    ::Ice::AsyncResult::_check(result, this, iceC_RoboCompOmniRobot_OmniRobot_getBaseState_name);
     if(!result->_waitForResponse())
     {
         try
@@ -699,7 +657,9 @@ IceProxy::RoboCompOmniRobot::OmniRobot::end_stopBase(const ::Ice::AsyncResultPtr
             throw ::Ice::UnknownUserException(__FILE__, __LINE__, ex.ice_id());
         }
     }
-    result->_readEmptyParams();
+    ::Ice::InputStream* istr = result->_startReadParams();
+    istr->read(iceP_state);
+    result->_endReadParams();
 }
 
 ::Ice::AsyncResultPtr
@@ -829,19 +789,19 @@ IceProxy::RoboCompOmniRobot::OmniRobot::end_setOdometerPose(const ::Ice::AsyncRe
 }
 
 ::Ice::AsyncResultPtr
-IceProxy::RoboCompOmniRobot::OmniRobot::_iceI_begin_correctOdometer(::Ice::Int iceP_x, ::Ice::Int iceP_z, ::Ice::Float iceP_alpha, const ::Ice::Context& context, const ::IceInternal::CallbackBasePtr& del, const ::Ice::LocalObjectPtr& cookie, bool sync)
+IceProxy::RoboCompOmniRobot::OmniRobot::_iceI_begin_setSpeedBase(::Ice::Float iceP_advx, ::Ice::Float iceP_advz, ::Ice::Float iceP_rot, const ::Ice::Context& context, const ::IceInternal::CallbackBasePtr& del, const ::Ice::LocalObjectPtr& cookie, bool sync)
 {
-    _checkTwowayOnly(iceC_RoboCompOmniRobot_OmniRobot_correctOdometer_name, sync);
-    ::IceInternal::OutgoingAsyncPtr result = new ::IceInternal::CallbackOutgoing(this, iceC_RoboCompOmniRobot_OmniRobot_correctOdometer_name, del, cookie, sync);
+    _checkTwowayOnly(iceC_RoboCompOmniRobot_OmniRobot_setSpeedBase_name, sync);
+    ::IceInternal::OutgoingAsyncPtr result = new ::IceInternal::CallbackOutgoing(this, iceC_RoboCompOmniRobot_OmniRobot_setSpeedBase_name, del, cookie, sync);
     try
     {
-        result->prepare(iceC_RoboCompOmniRobot_OmniRobot_correctOdometer_name, ::Ice::Normal, context);
+        result->prepare(iceC_RoboCompOmniRobot_OmniRobot_setSpeedBase_name, ::Ice::Normal, context);
         ::Ice::OutputStream* ostr = result->startWriteParams(::Ice::DefaultFormat);
-        ostr->write(iceP_x);
-        ostr->write(iceP_z);
-        ostr->write(iceP_alpha);
+        ostr->write(iceP_advx);
+        ostr->write(iceP_advz);
+        ostr->write(iceP_rot);
         result->endWriteParams();
-        result->invoke(iceC_RoboCompOmniRobot_OmniRobot_correctOdometer_name);
+        result->invoke(iceC_RoboCompOmniRobot_OmniRobot_setSpeedBase_name);
     }
     catch(const ::Ice::Exception& ex)
     {
@@ -851,9 +811,49 @@ IceProxy::RoboCompOmniRobot::OmniRobot::_iceI_begin_correctOdometer(::Ice::Int i
 }
 
 void
-IceProxy::RoboCompOmniRobot::OmniRobot::end_correctOdometer(const ::Ice::AsyncResultPtr& result)
+IceProxy::RoboCompOmniRobot::OmniRobot::end_setSpeedBase(const ::Ice::AsyncResultPtr& result)
 {
-    ::Ice::AsyncResult::_check(result, this, iceC_RoboCompOmniRobot_OmniRobot_correctOdometer_name);
+    ::Ice::AsyncResult::_check(result, this, iceC_RoboCompOmniRobot_OmniRobot_setSpeedBase_name);
+    if(!result->_waitForResponse())
+    {
+        try
+        {
+            result->_throwUserException();
+        }
+        catch(const ::RoboCompGenericBase::HardwareFailedException&)
+        {
+            throw;
+        }
+        catch(const ::Ice::UserException& ex)
+        {
+            throw ::Ice::UnknownUserException(__FILE__, __LINE__, ex.ice_id());
+        }
+    }
+    result->_readEmptyParams();
+}
+
+::Ice::AsyncResultPtr
+IceProxy::RoboCompOmniRobot::OmniRobot::_iceI_begin_stopBase(const ::Ice::Context& context, const ::IceInternal::CallbackBasePtr& del, const ::Ice::LocalObjectPtr& cookie, bool sync)
+{
+    _checkTwowayOnly(iceC_RoboCompOmniRobot_OmniRobot_stopBase_name, sync);
+    ::IceInternal::OutgoingAsyncPtr result = new ::IceInternal::CallbackOutgoing(this, iceC_RoboCompOmniRobot_OmniRobot_stopBase_name, del, cookie, sync);
+    try
+    {
+        result->prepare(iceC_RoboCompOmniRobot_OmniRobot_stopBase_name, ::Ice::Normal, context);
+        result->writeEmptyParams();
+        result->invoke(iceC_RoboCompOmniRobot_OmniRobot_stopBase_name);
+    }
+    catch(const ::Ice::Exception& ex)
+    {
+        result->abort(ex);
+    }
+    return result;
+}
+
+void
+IceProxy::RoboCompOmniRobot::OmniRobot::end_stopBase(const ::Ice::AsyncResultPtr& result)
+{
+    ::Ice::AsyncResult::_check(result, this, iceC_RoboCompOmniRobot_OmniRobot_stopBase_name);
     if(!result->_waitForResponse())
     {
         try
@@ -931,15 +931,19 @@ RoboCompOmniRobot::OmniRobot::ice_staticId()
 }
 
 bool
-RoboCompOmniRobot::OmniRobot::_iceD_getBaseState(::IceInternal::Incoming& inS, const ::Ice::Current& current)
+RoboCompOmniRobot::OmniRobot::_iceD_correctOdometer(::IceInternal::Incoming& inS, const ::Ice::Current& current)
 {
     _iceCheckMode(::Ice::Normal, current.mode);
-    inS.readEmptyParams();
-    ::RoboCompGenericBase::TBaseState iceP_state;
-    this->getBaseState(iceP_state, current);
-    ::Ice::OutputStream* ostr = inS.startWriteParams();
-    ostr->write(iceP_state);
-    inS.endWriteParams();
+    ::Ice::InputStream* istr = inS.startReadParams();
+    ::Ice::Int iceP_x;
+    ::Ice::Int iceP_z;
+    ::Ice::Float iceP_alpha;
+    istr->read(iceP_x);
+    istr->read(iceP_z);
+    istr->read(iceP_alpha);
+    inS.endReadParams();
+    this->correctOdometer(iceP_x, iceP_z, iceP_alpha, current);
+    inS.writeEmptyParams();
     return true;
 }
 
@@ -961,29 +965,15 @@ RoboCompOmniRobot::OmniRobot::_iceD_getBasePose(::IceInternal::Incoming& inS, co
 }
 
 bool
-RoboCompOmniRobot::OmniRobot::_iceD_setSpeedBase(::IceInternal::Incoming& inS, const ::Ice::Current& current)
-{
-    _iceCheckMode(::Ice::Normal, current.mode);
-    ::Ice::InputStream* istr = inS.startReadParams();
-    ::Ice::Float iceP_advx;
-    ::Ice::Float iceP_advz;
-    ::Ice::Float iceP_rot;
-    istr->read(iceP_advx);
-    istr->read(iceP_advz);
-    istr->read(iceP_rot);
-    inS.endReadParams();
-    this->setSpeedBase(iceP_advx, iceP_advz, iceP_rot, current);
-    inS.writeEmptyParams();
-    return true;
-}
-
-bool
-RoboCompOmniRobot::OmniRobot::_iceD_stopBase(::IceInternal::Incoming& inS, const ::Ice::Current& current)
+RoboCompOmniRobot::OmniRobot::_iceD_getBaseState(::IceInternal::Incoming& inS, const ::Ice::Current& current)
 {
     _iceCheckMode(::Ice::Normal, current.mode);
     inS.readEmptyParams();
-    this->stopBase(current);
-    inS.writeEmptyParams();
+    ::RoboCompGenericBase::TBaseState iceP_state;
+    this->getBaseState(iceP_state, current);
+    ::Ice::OutputStream* ostr = inS.startWriteParams();
+    ostr->write(iceP_state);
+    inS.endWriteParams();
     return true;
 }
 
@@ -1028,18 +1018,28 @@ RoboCompOmniRobot::OmniRobot::_iceD_setOdometerPose(::IceInternal::Incoming& inS
 }
 
 bool
-RoboCompOmniRobot::OmniRobot::_iceD_correctOdometer(::IceInternal::Incoming& inS, const ::Ice::Current& current)
+RoboCompOmniRobot::OmniRobot::_iceD_setSpeedBase(::IceInternal::Incoming& inS, const ::Ice::Current& current)
 {
     _iceCheckMode(::Ice::Normal, current.mode);
     ::Ice::InputStream* istr = inS.startReadParams();
-    ::Ice::Int iceP_x;
-    ::Ice::Int iceP_z;
-    ::Ice::Float iceP_alpha;
-    istr->read(iceP_x);
-    istr->read(iceP_z);
-    istr->read(iceP_alpha);
+    ::Ice::Float iceP_advx;
+    ::Ice::Float iceP_advz;
+    ::Ice::Float iceP_rot;
+    istr->read(iceP_advx);
+    istr->read(iceP_advz);
+    istr->read(iceP_rot);
     inS.endReadParams();
-    this->correctOdometer(iceP_x, iceP_z, iceP_alpha, current);
+    this->setSpeedBase(iceP_advx, iceP_advz, iceP_rot, current);
+    inS.writeEmptyParams();
+    return true;
+}
+
+bool
+RoboCompOmniRobot::OmniRobot::_iceD_stopBase(::IceInternal::Incoming& inS, const ::Ice::Current& current)
+{
+    _iceCheckMode(::Ice::Normal, current.mode);
+    inS.readEmptyParams();
+    this->stopBase(current);
     inS.writeEmptyParams();
     return true;
 }

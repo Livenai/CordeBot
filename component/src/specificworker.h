@@ -48,9 +48,10 @@ class SpecificWorker : public GenericWorker
 {
 Q_OBJECT
 public:
-	SpecificWorker(MapPrx& mprx);
+	SpecificWorker(MapPrx& mprx, bool startup_check);
 	~SpecificWorker();
 	bool setParams(RoboCompCommonBehavior::ParameterList params);
+    int startup_check();
     void initialize(int period);
 
     void compute();
@@ -90,6 +91,7 @@ public:
 
 private:  
     RoboCompLaser::TLaserData updateLaser();
+    bool startup_check_flag;
 };
 
 class ActionInitSleep : public BrainTree::Node

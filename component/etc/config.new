@@ -1,6 +1,5 @@
 CommonBehavior.Endpoints=tcp -p 10000
 
-
 # Proxies for required interfaces
 InnerModelManagerProxy = innermodelmanager:tcp -h localhost -p 0
 LaserProxy = laser:tcp -h localhost -p 10003
