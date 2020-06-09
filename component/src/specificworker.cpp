@@ -79,6 +79,9 @@ void SpecificWorker::initialize(int period)
 
 	QPointF punto = QPointF(1000, 1000);
 	navigation.newTarget(punto);
+
+	// ACTIVAMOS EL MOVIMIENTO DEL ROBOT
+	navigation.enableRobotMovement();
 }
 
 void SpecificWorker::compute()
@@ -90,6 +93,9 @@ void SpecificWorker::compute()
   		RoboCompLaser::TLaserData laserData = updateLaser();
 
 		if(navigation.checkPathState()){
+			if(navigation.isRobotMovementEnabled()==false){
+				navigation.enableRobotMovement();
+			}
 			navigation.update(laserData, false); 
 		} else {
 			qDebug() << "[!]   RUTA NO ENCONTRADA   [!]";

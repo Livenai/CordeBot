@@ -263,6 +263,7 @@ int ::MyFirstComp::run(int argc, char* argv[])
 
 int main(int argc, char* argv[])
 {
+	cout<<"||||||||||||||||||||||||||||||||||||||||  MAIN  |||||||||||||||||||||||||||||||||||||"<<endl;
 	string arg;
 
 	// Set config file

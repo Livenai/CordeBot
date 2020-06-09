@@ -94,20 +94,20 @@ static HardwareFailedException _iceS_HardwareFailedException_init;
 
 struct TBaseState
 {
-    bool isMoving;
     float x;
-    float z;
-    float alpha;
     float correctedX;
+    float z;
     float correctedZ;
+    float alpha;
     float correctedAlpha;
     float advVx;
     float advVz;
     float rotV;
+    bool isMoving;
 
-    std::tuple<const bool&, const float&, const float&, const float&, const float&, const float&, const float&, const float&, const float&, const float&> ice_tuple() const
+    std::tuple<const float&, const float&, const float&, const float&, const float&, const float&, const float&, const float&, const float&, const bool&> ice_tuple() const
     {
-        return std::tie(isMoving, x, z, alpha, correctedX, correctedZ, correctedAlpha, advVx, advVz, rotV);
+        return std::tie(x, correctedX, z, correctedZ, alpha, correctedAlpha, advVx, advVz, rotV, isMoving);
     }
 };
 
@@ -135,9 +135,6 @@ public:
 
     static const ::std::string& ice_staticId();
 
-    virtual void getBaseState(::RoboCompGenericBase::TBaseState&, const ::Ice::Current&) = 0;
-    bool _iceD_getBaseState(::IceInternal::Incoming&, const ::Ice::Current&);
-
     struct GetBasePoseResult
     {
         int x;
@@ -147,6 +144,9 @@ public:
 
     virtual void getBasePose(int&, int&, float&, const ::Ice::Current&) = 0;
     bool _iceD_getBasePose(::IceInternal::Incoming&, const ::Ice::Current&);
+
+    virtual void getBaseState(::RoboCompGenericBase::TBaseState&, const ::Ice::Current&) = 0;
+    bool _iceD_getBaseState(::IceInternal::Incoming&, const ::Ice::Current&);
 
     virtual bool _iceDispatch(::IceInternal::Incoming&, const ::Ice::Current&) override;
 };
@@ -159,29 +159,6 @@ namespace RoboCompGenericBase
 class GenericBasePrx : public virtual ::Ice::Proxy<GenericBasePrx, ::Ice::ObjectPrx>
 {
 public:
-
-    void getBaseState(::RoboCompGenericBase::TBaseState& iceP_state, const ::Ice::Context& context = Ice::noExplicitContext)
-    {
-        iceP_state = _makePromiseOutgoing<::RoboCompGenericBase::TBaseState>(true, this, &RoboCompGenericBase::GenericBasePrx::_iceI_getBaseState, context).get();
-    }
-
-    template<template<typename> class P = ::std::promise>
-    auto getBaseStateAsync(const ::Ice::Context& context = Ice::noExplicitContext)
-        -> decltype(::std::declval<P<::RoboCompGenericBase::TBaseState>>().get_future())
-    {
-        return _makePromiseOutgoing<::RoboCompGenericBase::TBaseState, P>(false, this, &RoboCompGenericBase::GenericBasePrx::_iceI_getBaseState, context);
-    }
-
-    ::std::function<void()>
-    getBaseStateAsync(::std::function<void(::RoboCompGenericBase::TBaseState)> response,
-                      ::std::function<void(::std::exception_ptr)> ex = nullptr,
-                      ::std::function<void(bool)> sent = nullptr,
-                      const ::Ice::Context& context = Ice::noExplicitContext)
-    {
-        return _makeLamdaOutgoing<::RoboCompGenericBase::TBaseState>(response, ex, sent, this, &RoboCompGenericBase::GenericBasePrx::_iceI_getBaseState, context);
-    }
-
-    void _iceI_getBaseState(const ::std::shared_ptr<::IceInternal::OutgoingAsyncT<::RoboCompGenericBase::TBaseState>>&, const ::Ice::Context&);
 
     void getBasePose(int& iceP_x, int& iceP_z, float& iceP_alpha, const ::Ice::Context& context = Ice::noExplicitContext)
     {
@@ -212,6 +189,29 @@ public:
     }
 
     void _iceI_getBasePose(const ::std::shared_ptr<::IceInternal::OutgoingAsyncT<::RoboCompGenericBase::GenericBase::GetBasePoseResult>>&, const ::Ice::Context&);
+
+    void getBaseState(::RoboCompGenericBase::TBaseState& iceP_state, const ::Ice::Context& context = Ice::noExplicitContext)
+    {
+        iceP_state = _makePromiseOutgoing<::RoboCompGenericBase::TBaseState>(true, this, &RoboCompGenericBase::GenericBasePrx::_iceI_getBaseState, context).get();
+    }
+
+    template<template<typename> class P = ::std::promise>
+    auto getBaseStateAsync(const ::Ice::Context& context = Ice::noExplicitContext)
+        -> decltype(::std::declval<P<::RoboCompGenericBase::TBaseState>>().get_future())
+    {
+        return _makePromiseOutgoing<::RoboCompGenericBase::TBaseState, P>(false, this, &RoboCompGenericBase::GenericBasePrx::_iceI_getBaseState, context);
+    }
+
+    ::std::function<void()>
+    getBaseStateAsync(::std::function<void(::RoboCompGenericBase::TBaseState)> response,
+                      ::std::function<void(::std::exception_ptr)> ex = nullptr,
+                      ::std::function<void(bool)> sent = nullptr,
+                      const ::Ice::Context& context = Ice::noExplicitContext)
+    {
+        return _makeLamdaOutgoing<::RoboCompGenericBase::TBaseState>(response, ex, sent, this, &RoboCompGenericBase::GenericBasePrx::_iceI_getBaseState, context);
+    }
+
+    void _iceI_getBaseState(const ::std::shared_ptr<::IceInternal::OutgoingAsyncT<::RoboCompGenericBase::TBaseState>>&, const ::Ice::Context&);
 
     static const ::std::string& ice_staticId();
 
@@ -250,7 +250,7 @@ struct StreamReader<::RoboCompGenericBase::TBaseState, S>
 {
     static void read(S* istr, ::RoboCompGenericBase::TBaseState& v)
     {
-        istr->readAll(v.isMoving, v.x, v.z, v.alpha, v.correctedX, v.correctedZ, v.correctedAlpha, v.advVx, v.advVz, v.rotV);
+        istr->readAll(v.x, v.correctedX, v.z, v.correctedZ, v.alpha, v.correctedAlpha, v.advVx, v.advVz, v.rotV, v.isMoving);
     }
 };
 
@@ -319,171 +319,16 @@ static HardwareFailedException _iceS_HardwareFailedException_init;
 
 struct TBaseState
 {
-    bool isMoving;
     ::Ice::Float x;
-    ::Ice::Float z;
-    ::Ice::Float alpha;
     ::Ice::Float correctedX;
+    ::Ice::Float z;
     ::Ice::Float correctedZ;
+    ::Ice::Float alpha;
     ::Ice::Float correctedAlpha;
     ::Ice::Float advVx;
     ::Ice::Float advVz;
     ::Ice::Float rotV;
-
-    bool operator==(const TBaseState& rhs_) const
-    {
-        if(this == &rhs_)
-        {
-            return true;
-        }
-        if(isMoving != rhs_.isMoving)
-        {
-            return false;
-        }
-        if(x != rhs_.x)
-        {
-            return false;
-        }
-        if(z != rhs_.z)
-        {
-            return false;
-        }
-        if(alpha != rhs_.alpha)
-        {
-            return false;
-        }
-        if(correctedX != rhs_.correctedX)
-        {
-            return false;
-        }
-        if(correctedZ != rhs_.correctedZ)
-        {
-            return false;
-        }
-        if(correctedAlpha != rhs_.correctedAlpha)
-        {
-            return false;
-        }
-        if(advVx != rhs_.advVx)
-        {
-            return false;
-        }
-        if(advVz != rhs_.advVz)
-        {
-            return false;
-        }
-        if(rotV != rhs_.rotV)
-        {
-            return false;
-        }
-        return true;
-    }
-
-    bool operator<(const TBaseState& rhs_) const
-    {
-        if(this == &rhs_)
-        {
-            return false;
-        }
-        if(isMoving < rhs_.isMoving)
-        {
-            return true;
-        }
-        else if(rhs_.isMoving < isMoving)
-        {
-            return false;
-        }
-        if(x < rhs_.x)
-        {
-            return true;
-        }
-        else if(rhs_.x < x)
-        {
-            return false;
-        }
-        if(z < rhs_.z)
-        {
-            return true;
-        }
-        else if(rhs_.z < z)
-        {
-            return false;
-        }
-        if(alpha < rhs_.alpha)
-        {
-            return true;
-        }
-        else if(rhs_.alpha < alpha)
-        {
-            return false;
-        }
-        if(correctedX < rhs_.correctedX)
-        {
-            return true;
-        }
-        else if(rhs_.correctedX < correctedX)
-        {
-            return false;
-        }
-        if(correctedZ < rhs_.correctedZ)
-        {
-            return true;
-        }
-        else if(rhs_.correctedZ < correctedZ)
-        {
-            return false;
-        }
-        if(correctedAlpha < rhs_.correctedAlpha)
-        {
-            return true;
-        }
-        else if(rhs_.correctedAlpha < correctedAlpha)
-        {
-            return false;
-        }
-        if(advVx < rhs_.advVx)
-        {
-            return true;
-        }
-        else if(rhs_.advVx < advVx)
-        {
-            return false;
-        }
-        if(advVz < rhs_.advVz)
-        {
-            return true;
-        }
-        else if(rhs_.advVz < advVz)
-        {
-            return false;
-        }
-        if(rotV < rhs_.rotV)
-        {
-            return true;
-        }
-        else if(rhs_.rotV < rotV)
-        {
-            return false;
-        }
-        return false;
-    }
-
-    bool operator!=(const TBaseState& rhs_) const
-    {
-        return !operator==(rhs_);
-    }
-    bool operator<=(const TBaseState& rhs_) const
-    {
-        return operator<(rhs_) || operator==(rhs_);
-    }
-    bool operator>(const TBaseState& rhs_) const
-    {
-        return !operator<(rhs_) && !operator==(rhs_);
-    }
-    bool operator>=(const TBaseState& rhs_) const
-    {
-        return !operator<(rhs_);
-    }
+    bool isMoving;
 };
 
 }
@@ -491,11 +336,11 @@ struct TBaseState
 namespace RoboCompGenericBase
 {
 
-class Callback_GenericBase_getBaseState_Base : public virtual ::IceInternal::CallbackBase { };
-typedef ::IceUtil::Handle< Callback_GenericBase_getBaseState_Base> Callback_GenericBase_getBaseStatePtr;
-
 class Callback_GenericBase_getBasePose_Base : public virtual ::IceInternal::CallbackBase { };
 typedef ::IceUtil::Handle< Callback_GenericBase_getBasePose_Base> Callback_GenericBase_getBasePosePtr;
+
+class Callback_GenericBase_getBaseState_Base : public virtual ::IceInternal::CallbackBase { };
+typedef ::IceUtil::Handle< Callback_GenericBase_getBaseState_Base> Callback_GenericBase_getBaseStatePtr;
 
 }
 
@@ -507,44 +352,6 @@ namespace RoboCompGenericBase
 
 class GenericBase : public virtual ::Ice::Proxy<GenericBase, ::IceProxy::Ice::Object>
 {
-public:
-
-    void getBaseState(::RoboCompGenericBase::TBaseState& iceP_state, const ::Ice::Context& context = ::Ice::noExplicitContext)
-    {
-        end_getBaseState(iceP_state, _iceI_begin_getBaseState(context, ::IceInternal::dummyCallback, 0, true));
-    }
-
-    ::Ice::AsyncResultPtr begin_getBaseState(const ::Ice::Context& context = ::Ice::noExplicitContext)
-    {
-        return _iceI_begin_getBaseState(context, ::IceInternal::dummyCallback, 0);
-    }
-
-    ::Ice::AsyncResultPtr begin_getBaseState(const ::Ice::CallbackPtr& del, const ::Ice::LocalObjectPtr& cookie = 0)
-    {
-        return _iceI_begin_getBaseState(::Ice::noExplicitContext, del, cookie);
-    }
-
-    ::Ice::AsyncResultPtr begin_getBaseState(const ::Ice::Context& context, const ::Ice::CallbackPtr& del, const ::Ice::LocalObjectPtr& cookie = 0)
-    {
-        return _iceI_begin_getBaseState(context, del, cookie);
-    }
-
-    ::Ice::AsyncResultPtr begin_getBaseState(const ::RoboCompGenericBase::Callback_GenericBase_getBaseStatePtr& del, const ::Ice::LocalObjectPtr& cookie = 0)
-    {
-        return _iceI_begin_getBaseState(::Ice::noExplicitContext, del, cookie);
-    }
-
-    ::Ice::AsyncResultPtr begin_getBaseState(const ::Ice::Context& context, const ::RoboCompGenericBase::Callback_GenericBase_getBaseStatePtr& del, const ::Ice::LocalObjectPtr& cookie = 0)
-    {
-        return _iceI_begin_getBaseState(context, del, cookie);
-    }
-
-    void end_getBaseState(::RoboCompGenericBase::TBaseState& iceP_state, const ::Ice::AsyncResultPtr&);
-
-private:
-
-    ::Ice::AsyncResultPtr _iceI_begin_getBaseState(const ::Ice::Context&, const ::IceInternal::CallbackBasePtr&, const ::Ice::LocalObjectPtr& cookie = 0, bool sync = false);
-
 public:
 
     void getBasePose(::Ice::Int& iceP_x, ::Ice::Int& iceP_z, ::Ice::Float& iceP_alpha, const ::Ice::Context& context = ::Ice::noExplicitContext)
@@ -585,6 +392,44 @@ private:
 
 public:
 
+    void getBaseState(::RoboCompGenericBase::TBaseState& iceP_state, const ::Ice::Context& context = ::Ice::noExplicitContext)
+    {
+        end_getBaseState(iceP_state, _iceI_begin_getBaseState(context, ::IceInternal::dummyCallback, 0, true));
+    }
+
+    ::Ice::AsyncResultPtr begin_getBaseState(const ::Ice::Context& context = ::Ice::noExplicitContext)
+    {
+        return _iceI_begin_getBaseState(context, ::IceInternal::dummyCallback, 0);
+    }
+
+    ::Ice::AsyncResultPtr begin_getBaseState(const ::Ice::CallbackPtr& del, const ::Ice::LocalObjectPtr& cookie = 0)
+    {
+        return _iceI_begin_getBaseState(::Ice::noExplicitContext, del, cookie);
+    }
+
+    ::Ice::AsyncResultPtr begin_getBaseState(const ::Ice::Context& context, const ::Ice::CallbackPtr& del, const ::Ice::LocalObjectPtr& cookie = 0)
+    {
+        return _iceI_begin_getBaseState(context, del, cookie);
+    }
+
+    ::Ice::AsyncResultPtr begin_getBaseState(const ::RoboCompGenericBase::Callback_GenericBase_getBaseStatePtr& del, const ::Ice::LocalObjectPtr& cookie = 0)
+    {
+        return _iceI_begin_getBaseState(::Ice::noExplicitContext, del, cookie);
+    }
+
+    ::Ice::AsyncResultPtr begin_getBaseState(const ::Ice::Context& context, const ::RoboCompGenericBase::Callback_GenericBase_getBaseStatePtr& del, const ::Ice::LocalObjectPtr& cookie = 0)
+    {
+        return _iceI_begin_getBaseState(context, del, cookie);
+    }
+
+    void end_getBaseState(::RoboCompGenericBase::TBaseState& iceP_state, const ::Ice::AsyncResultPtr&);
+
+private:
+
+    ::Ice::AsyncResultPtr _iceI_begin_getBaseState(const ::Ice::Context&, const ::IceInternal::CallbackBasePtr&, const ::Ice::LocalObjectPtr& cookie = 0, bool sync = false);
+
+public:
+
     static const ::std::string& ice_staticId();
 
 protected:
@@ -614,11 +459,11 @@ public:
 
     static const ::std::string& ice_staticId();
 
-    virtual void getBaseState(::RoboCompGenericBase::TBaseState&, const ::Ice::Current& = ::Ice::emptyCurrent) = 0;
-    bool _iceD_getBaseState(::IceInternal::Incoming&, const ::Ice::Current&);
-
     virtual void getBasePose(::Ice::Int&, ::Ice::Int&, ::Ice::Float&, const ::Ice::Current& = ::Ice::emptyCurrent) = 0;
     bool _iceD_getBasePose(::IceInternal::Incoming&, const ::Ice::Current&);
+
+    virtual void getBaseState(::RoboCompGenericBase::TBaseState&, const ::Ice::Current& = ::Ice::emptyCurrent) = 0;
+    bool _iceD_getBaseState(::IceInternal::Incoming&, const ::Ice::Current&);
 
     virtual bool _iceDispatch(::IceInternal::Incoming&, const ::Ice::Current&);
 
@@ -680,16 +525,16 @@ struct StreamWriter< ::RoboCompGenericBase::TBaseState, S>
 {
     static void write(S* ostr, const ::RoboCompGenericBase::TBaseState& v)
     {
-        ostr->write(v.isMoving);
         ostr->write(v.x);
-        ostr->write(v.z);
-        ostr->write(v.alpha);
         ostr->write(v.correctedX);
+        ostr->write(v.z);
         ostr->write(v.correctedZ);
+        ostr->write(v.alpha);
         ostr->write(v.correctedAlpha);
         ostr->write(v.advVx);
         ostr->write(v.advVz);
         ostr->write(v.rotV);
+        ostr->write(v.isMoving);
     }
 };
 
@@ -698,16 +543,16 @@ struct StreamReader< ::RoboCompGenericBase::TBaseState, S>
 {
     static void read(S* istr, ::RoboCompGenericBase::TBaseState& v)
     {
-        istr->read(v.isMoving);
         istr->read(v.x);
-        istr->read(v.z);
-        istr->read(v.alpha);
         istr->read(v.correctedX);
+        istr->read(v.z);
         istr->read(v.correctedZ);
+        istr->read(v.alpha);
         istr->read(v.correctedAlpha);
         istr->read(v.advVx);
         istr->read(v.advVz);
         istr->read(v.rotV);
+        istr->read(v.isMoving);
     }
 };
 
@@ -715,110 +560,6 @@ struct StreamReader< ::RoboCompGenericBase::TBaseState, S>
 
 namespace RoboCompGenericBase
 {
-
-template<class T>
-class CallbackNC_GenericBase_getBaseState : public Callback_GenericBase_getBaseState_Base, public ::IceInternal::TwowayCallbackNC<T>
-{
-public:
-
-    typedef IceUtil::Handle<T> TPtr;
-
-    typedef void (T::*Exception)(const ::Ice::Exception&);
-    typedef void (T::*Sent)(bool);
-    typedef void (T::*Response)(const ::RoboCompGenericBase::TBaseState&);
-
-    CallbackNC_GenericBase_getBaseState(const TPtr& obj, Response cb, Exception excb, Sent sentcb)
-        : ::IceInternal::TwowayCallbackNC<T>(obj, cb != 0, excb, sentcb), _response(cb)
-    {
-    }
-
-    virtual void completed(const ::Ice::AsyncResultPtr& result) const
-    {
-        ::RoboCompGenericBase::GenericBasePrx proxy = ::RoboCompGenericBase::GenericBasePrx::uncheckedCast(result->getProxy());
-        ::RoboCompGenericBase::TBaseState iceP_state;
-        try
-        {
-            proxy->end_getBaseState(iceP_state, result);
-        }
-        catch(const ::Ice::Exception& ex)
-        {
-            ::IceInternal::CallbackNC<T>::exception(result, ex);
-            return;
-        }
-        if(_response)
-        {
-            (::IceInternal::CallbackNC<T>::_callback.get()->*_response)(iceP_state);
-        }
-    }
-
-private:
-
-    Response _response;
-};
-
-template<class T> Callback_GenericBase_getBaseStatePtr
-newCallback_GenericBase_getBaseState(const IceUtil::Handle<T>& instance, void (T::*cb)(const ::RoboCompGenericBase::TBaseState&), void (T::*excb)(const ::Ice::Exception&), void (T::*sentcb)(bool) = 0)
-{
-    return new CallbackNC_GenericBase_getBaseState<T>(instance, cb, excb, sentcb);
-}
-
-template<class T> Callback_GenericBase_getBaseStatePtr
-newCallback_GenericBase_getBaseState(T* instance, void (T::*cb)(const ::RoboCompGenericBase::TBaseState&), void (T::*excb)(const ::Ice::Exception&), void (T::*sentcb)(bool) = 0)
-{
-    return new CallbackNC_GenericBase_getBaseState<T>(instance, cb, excb, sentcb);
-}
-
-template<class T, typename CT>
-class Callback_GenericBase_getBaseState : public Callback_GenericBase_getBaseState_Base, public ::IceInternal::TwowayCallback<T, CT>
-{
-public:
-
-    typedef IceUtil::Handle<T> TPtr;
-
-    typedef void (T::*Exception)(const ::Ice::Exception& , const CT&);
-    typedef void (T::*Sent)(bool , const CT&);
-    typedef void (T::*Response)(const ::RoboCompGenericBase::TBaseState&, const CT&);
-
-    Callback_GenericBase_getBaseState(const TPtr& obj, Response cb, Exception excb, Sent sentcb)
-        : ::IceInternal::TwowayCallback<T, CT>(obj, cb != 0, excb, sentcb), _response(cb)
-    {
-    }
-
-    virtual void completed(const ::Ice::AsyncResultPtr& result) const
-    {
-        ::RoboCompGenericBase::GenericBasePrx proxy = ::RoboCompGenericBase::GenericBasePrx::uncheckedCast(result->getProxy());
-        ::RoboCompGenericBase::TBaseState iceP_state;
-        try
-        {
-            proxy->end_getBaseState(iceP_state, result);
-        }
-        catch(const ::Ice::Exception& ex)
-        {
-            ::IceInternal::Callback<T, CT>::exception(result, ex);
-            return;
-        }
-        if(_response)
-        {
-            (::IceInternal::Callback<T, CT>::_callback.get()->*_response)(iceP_state, CT::dynamicCast(result->getCookie()));
-        }
-    }
-
-private:
-
-    Response _response;
-};
-
-template<class T, typename CT> Callback_GenericBase_getBaseStatePtr
-newCallback_GenericBase_getBaseState(const IceUtil::Handle<T>& instance, void (T::*cb)(const ::RoboCompGenericBase::TBaseState&, const CT&), void (T::*excb)(const ::Ice::Exception&, const CT&), void (T::*sentcb)(bool, const CT&) = 0)
-{
-    return new Callback_GenericBase_getBaseState<T, CT>(instance, cb, excb, sentcb);
-}
-
-template<class T, typename CT> Callback_GenericBase_getBaseStatePtr
-newCallback_GenericBase_getBaseState(T* instance, void (T::*cb)(const ::RoboCompGenericBase::TBaseState&, const CT&), void (T::*excb)(const ::Ice::Exception&, const CT&), void (T::*sentcb)(bool, const CT&) = 0)
-{
-    return new Callback_GenericBase_getBaseState<T, CT>(instance, cb, excb, sentcb);
-}
 
 template<class T>
 class CallbackNC_GenericBase_getBasePose : public Callback_GenericBase_getBasePose_Base, public ::IceInternal::TwowayCallbackNC<T>
@@ -926,6 +667,110 @@ template<class T, typename CT> Callback_GenericBase_getBasePosePtr
 newCallback_GenericBase_getBasePose(T* instance, void (T::*cb)(::Ice::Int, ::Ice::Int, ::Ice::Float, const CT&), void (T::*excb)(const ::Ice::Exception&, const CT&), void (T::*sentcb)(bool, const CT&) = 0)
 {
     return new Callback_GenericBase_getBasePose<T, CT>(instance, cb, excb, sentcb);
+}
+
+template<class T>
+class CallbackNC_GenericBase_getBaseState : public Callback_GenericBase_getBaseState_Base, public ::IceInternal::TwowayCallbackNC<T>
+{
+public:
+
+    typedef IceUtil::Handle<T> TPtr;
+
+    typedef void (T::*Exception)(const ::Ice::Exception&);
+    typedef void (T::*Sent)(bool);
+    typedef void (T::*Response)(const ::RoboCompGenericBase::TBaseState&);
+
+    CallbackNC_GenericBase_getBaseState(const TPtr& obj, Response cb, Exception excb, Sent sentcb)
+        : ::IceInternal::TwowayCallbackNC<T>(obj, cb != 0, excb, sentcb), _response(cb)
+    {
+    }
+
+    virtual void completed(const ::Ice::AsyncResultPtr& result) const
+    {
+        ::RoboCompGenericBase::GenericBasePrx proxy = ::RoboCompGenericBase::GenericBasePrx::uncheckedCast(result->getProxy());
+        ::RoboCompGenericBase::TBaseState iceP_state;
+        try
+        {
+            proxy->end_getBaseState(iceP_state, result);
+        }
+        catch(const ::Ice::Exception& ex)
+        {
+            ::IceInternal::CallbackNC<T>::exception(result, ex);
+            return;
+        }
+        if(_response)
+        {
+            (::IceInternal::CallbackNC<T>::_callback.get()->*_response)(iceP_state);
+        }
+    }
+
+private:
+
+    Response _response;
+};
+
+template<class T> Callback_GenericBase_getBaseStatePtr
+newCallback_GenericBase_getBaseState(const IceUtil::Handle<T>& instance, void (T::*cb)(const ::RoboCompGenericBase::TBaseState&), void (T::*excb)(const ::Ice::Exception&), void (T::*sentcb)(bool) = 0)
+{
+    return new CallbackNC_GenericBase_getBaseState<T>(instance, cb, excb, sentcb);
+}
+
+template<class T> Callback_GenericBase_getBaseStatePtr
+newCallback_GenericBase_getBaseState(T* instance, void (T::*cb)(const ::RoboCompGenericBase::TBaseState&), void (T::*excb)(const ::Ice::Exception&), void (T::*sentcb)(bool) = 0)
+{
+    return new CallbackNC_GenericBase_getBaseState<T>(instance, cb, excb, sentcb);
+}
+
+template<class T, typename CT>
+class Callback_GenericBase_getBaseState : public Callback_GenericBase_getBaseState_Base, public ::IceInternal::TwowayCallback<T, CT>
+{
+public:
+
+    typedef IceUtil::Handle<T> TPtr;
+
+    typedef void (T::*Exception)(const ::Ice::Exception& , const CT&);
+    typedef void (T::*Sent)(bool , const CT&);
+    typedef void (T::*Response)(const ::RoboCompGenericBase::TBaseState&, const CT&);
+
+    Callback_GenericBase_getBaseState(const TPtr& obj, Response cb, Exception excb, Sent sentcb)
+        : ::IceInternal::TwowayCallback<T, CT>(obj, cb != 0, excb, sentcb), _response(cb)
+    {
+    }
+
+    virtual void completed(const ::Ice::AsyncResultPtr& result) const
+    {
+        ::RoboCompGenericBase::GenericBasePrx proxy = ::RoboCompGenericBase::GenericBasePrx::uncheckedCast(result->getProxy());
+        ::RoboCompGenericBase::TBaseState iceP_state;
+        try
+        {
+            proxy->end_getBaseState(iceP_state, result);
+        }
+        catch(const ::Ice::Exception& ex)
+        {
+            ::IceInternal::Callback<T, CT>::exception(result, ex);
+            return;
+        }
+        if(_response)
+        {
+            (::IceInternal::Callback<T, CT>::_callback.get()->*_response)(iceP_state, CT::dynamicCast(result->getCookie()));
+        }
+    }
+
+private:
+
+    Response _response;
+};
+
+template<class T, typename CT> Callback_GenericBase_getBaseStatePtr
+newCallback_GenericBase_getBaseState(const IceUtil::Handle<T>& instance, void (T::*cb)(const ::RoboCompGenericBase::TBaseState&, const CT&), void (T::*excb)(const ::Ice::Exception&, const CT&), void (T::*sentcb)(bool, const CT&) = 0)
+{
+    return new Callback_GenericBase_getBaseState<T, CT>(instance, cb, excb, sentcb);
+}
+
+template<class T, typename CT> Callback_GenericBase_getBaseStatePtr
+newCallback_GenericBase_getBaseState(T* instance, void (T::*cb)(const ::RoboCompGenericBase::TBaseState&, const CT&), void (T::*excb)(const ::Ice::Exception&, const CT&), void (T::*sentcb)(bool, const CT&) = 0)
+{
+    return new Callback_GenericBase_getBaseState<T, CT>(instance, cb, excb, sentcb);
 }
 
 }

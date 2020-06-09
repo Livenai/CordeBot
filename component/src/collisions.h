@@ -55,7 +55,7 @@ public:
 
         // Compute the list of meshes that correspond to robot, world and possibly some additionally excluded ones
         robotNodes.clear(); restNodes.clear();
-        recursiveIncludeMeshes(innerModel->getRoot(), "robot", false, robotNodes, restNodes, excludedNodes);
+        recursiveIncludeMeshes(innerModel->getRoot(), QString::fromStdString(RobotName), false, robotNodes, restNodes, excludedNodes);
         qsrand( QTime::currentTime().msec() );
 
     }
@@ -63,7 +63,7 @@ public:
     bool checkRobotValidStateAtTargetFast(const QVec &targetPos, const QVec &targetRot) const   {
         //First we move the robot in our copy of innermodel to its current coordinates
 
-            innerModel->updateTransformValues("robot", targetPos.x(), targetPos.y(), targetPos.z(), targetRot.x(), targetRot.y(), targetRot.z());
+            innerModel->updateTransformValues(QString::fromStdString(RobotName), targetPos.x(), targetPos.y(), targetPos.z(), targetRot.x(), targetRot.y(), targetRot.z());
 
             ///////////////////////
             //// Check if the robot at the target collides with any know object
@@ -76,7 +76,7 @@ public:
                 for ( auto &out : restNodes )
                 {
                     try {
-                        collision = innerModel->collide(in, out);
+                        collision = innerModel->collide(in, out); // ERROR AQUI: "InnerModel was not compiled with collision support" (hay que compilar robocomp con el flag fcl con cmake_gui)
                     }
 
                     catch(QString s) {qDebug()<< __FUNCTION__ << s;}

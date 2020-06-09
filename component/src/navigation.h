@@ -174,11 +174,17 @@ void update(const RoboCompLaser::TLaserData &laserData_, bool needsReplaning)
     cleanPoints();
     addPoints();
 
+
+
+    qDebug()<<"Navigation - "<< __FUNCTION__<<"(): Updating Controller...";
     auto [blocked, active, xVel,zVel,rotVel] = controller.update(pathPoints, laserData, current_target.p, currentRobotPose);
-//    qDebug()<< "xVel "<<xVel << "zVel "<<zVel << "rotVel" << rotVel;
+    qDebug()<< "xVel "<<xVel << "zVel "<<zVel << "rotVel" << rotVel << "Blocked:" << blocked << "  Active:" << active << "   moveRobot:" << moveRobot;
+
+
 
     if (blocked)
     {
+    	qDebug()<<"Navigation - "<< __FUNCTION__<<"(): [!] Robot Blocked [!]";
         stopRobot();
 
         this->current_target.lock();
@@ -188,6 +194,7 @@ void update(const RoboCompLaser::TLaserData &laserData_, bool needsReplaning)
 
     if (!active)
     {
+    	qDebug()<<"Navigation - "<< __FUNCTION__<<"(): [!] Robot Inactive [!]";
         stopRobot();
 
         this->current_target.lock();
@@ -203,12 +210,29 @@ void update(const RoboCompLaser::TLaserData &laserData_, bool needsReplaning)
 
     if (!blocked and active)
     {
-        if(moveRobot) omnirobot_proxy->setSpeedBase(xVel,zVel,rotVel);
+        if(moveRobot){
+		omnirobot_proxy->setSpeedBase(xVel,zVel,rotVel);
+	} else {
+		qDebug()<<"Navigation - "<< __FUNCTION__<<"(): [!] Motionless Robot (use enableRobotMovement() to active robot movement ability) [!]";
+	}
     }
 
 
 
 };
+
+void enableRobotMovement(){
+	moveRobot = true;
+}
+
+void disableRobotMovement(){
+	moveRobot = false;
+}
+
+bool isRobotMovementEnabled(){
+	return moveRobot;
+}
+
 
 void stopRobot()
 {
@@ -615,7 +639,10 @@ bool isVisible(QPointF p)
 
 void computeForces(const std::vector<QPointF> &path, const RoboCompLaser::TLaserData &lData)
 {
+    qDebug()<<"Navigation - "<< __FUNCTION__<<"(): Path size = "<< path.size();
+
     if (path.size() < 3) {
+  	qDebug()<<"Navigation - "<< __FUNCTION__<<"(): [!] Path size ("<< path.size() <<") less than 3. Too short! [!]";
         return;
     }
 
@@ -691,7 +718,7 @@ void computeForces(const std::vector<QPointF> &path, const RoboCompLaser::TLaser
 
 void addPoints()
 {
-//        qDebug()<<"Navigation - "<< __FUNCTION__;
+        qDebug()<<"Navigation - "<< __FUNCTION__;
 
     std::vector<std::tuple<int, QPointF>> points_to_insert;
     for (auto &&[k, group] : iter::enumerate(iter::sliding_window(pathPoints, 2)))
@@ -727,7 +754,7 @@ void addPoints()
 
 void cleanPoints()
 {
-//        qDebug()<<"Navigation - "<< __FUNCTION__;
+        qDebug()<<"Navigation - "<< __FUNCTION__;
 
     std::vector<QPointF> points_to_remove;
     for (const auto &group : iter::sliding_window(pathPoints, 2))

@@ -68,9 +68,9 @@ const ::std::string iceC_RoboCompLaser_Laser_ops[] =
     "ice_isA",
     "ice_ping"
 };
-const ::std::string iceC_RoboCompLaser_Laser_getLaserData_name = "getLaserData";
 const ::std::string iceC_RoboCompLaser_Laser_getLaserAndBStateData_name = "getLaserAndBStateData";
 const ::std::string iceC_RoboCompLaser_Laser_getLaserConfData_name = "getLaserConfData";
+const ::std::string iceC_RoboCompLaser_Laser_getLaserData_name = "getLaserData";
 
 }
 
@@ -100,18 +100,6 @@ RoboCompLaser::Laser::ice_staticId()
 }
 
 bool
-RoboCompLaser::Laser::_iceD_getLaserData(::IceInternal::Incoming& inS, const ::Ice::Current& current)
-{
-    _iceCheckMode(::Ice::OperationMode::Normal, current.mode);
-    inS.readEmptyParams();
-    ::RoboCompLaser::TLaserData ret = this->getLaserData(current);
-    auto ostr = inS.startWriteParams();
-    ostr->writeAll(ret);
-    inS.endWriteParams();
-    return true;
-}
-
-bool
 RoboCompLaser::Laser::_iceD_getLaserAndBStateData(::IceInternal::Incoming& inS, const ::Ice::Current& current)
 {
     _iceCheckMode(::Ice::OperationMode::Normal, current.mode);
@@ -130,6 +118,18 @@ RoboCompLaser::Laser::_iceD_getLaserConfData(::IceInternal::Incoming& inS, const
     _iceCheckMode(::Ice::OperationMode::Normal, current.mode);
     inS.readEmptyParams();
     ::RoboCompLaser::LaserConfData ret = this->getLaserConfData(current);
+    auto ostr = inS.startWriteParams();
+    ostr->writeAll(ret);
+    inS.endWriteParams();
+    return true;
+}
+
+bool
+RoboCompLaser::Laser::_iceD_getLaserData(::IceInternal::Incoming& inS, const ::Ice::Current& current)
+{
+    _iceCheckMode(::Ice::OperationMode::Normal, current.mode);
+    inS.readEmptyParams();
+    ::RoboCompLaser::TLaserData ret = this->getLaserData(current);
     auto ostr = inS.startWriteParams();
     ostr->writeAll(ret);
     inS.endWriteParams();
@@ -184,15 +184,6 @@ RoboCompLaser::Laser::_iceDispatch(::IceInternal::Incoming& in, const ::Ice::Cur
 }
 
 void
-RoboCompLaser::LaserPrx::_iceI_getLaserData(const ::std::shared_ptr<::IceInternal::OutgoingAsyncT<::RoboCompLaser::TLaserData>>& outAsync, const ::Ice::Context& context)
-{
-    _checkTwowayOnly(iceC_RoboCompLaser_Laser_getLaserData_name);
-    outAsync->invoke(iceC_RoboCompLaser_Laser_getLaserData_name, ::Ice::OperationMode::Normal, ::Ice::FormatType::DefaultFormat, context,
-        nullptr,
-        nullptr);
-}
-
-void
 RoboCompLaser::LaserPrx::_iceI_getLaserAndBStateData(const ::std::shared_ptr<::IceInternal::OutgoingAsyncT<::RoboCompLaser::Laser::GetLaserAndBStateDataResult>>& outAsync, const ::Ice::Context& context)
 {
     _checkTwowayOnly(iceC_RoboCompLaser_Laser_getLaserAndBStateData_name);
@@ -212,6 +203,15 @@ RoboCompLaser::LaserPrx::_iceI_getLaserConfData(const ::std::shared_ptr<::IceInt
 {
     _checkTwowayOnly(iceC_RoboCompLaser_Laser_getLaserConfData_name);
     outAsync->invoke(iceC_RoboCompLaser_Laser_getLaserConfData_name, ::Ice::OperationMode::Normal, ::Ice::FormatType::DefaultFormat, context,
+        nullptr,
+        nullptr);
+}
+
+void
+RoboCompLaser::LaserPrx::_iceI_getLaserData(const ::std::shared_ptr<::IceInternal::OutgoingAsyncT<::RoboCompLaser::TLaserData>>& outAsync, const ::Ice::Context& context)
+{
+    _checkTwowayOnly(iceC_RoboCompLaser_Laser_getLaserData_name);
+    outAsync->invoke(iceC_RoboCompLaser_Laser_getLaserData_name, ::Ice::OperationMode::Normal, ::Ice::FormatType::DefaultFormat, context,
         nullptr,
         nullptr);
 }
@@ -237,11 +237,11 @@ namespace Ice
 namespace
 {
 
-const ::std::string iceC_RoboCompLaser_Laser_getLaserData_name = "getLaserData";
-
 const ::std::string iceC_RoboCompLaser_Laser_getLaserAndBStateData_name = "getLaserAndBStateData";
 
 const ::std::string iceC_RoboCompLaser_Laser_getLaserConfData_name = "getLaserConfData";
+
+const ::std::string iceC_RoboCompLaser_Laser_getLaserData_name = "getLaserData";
 
 }
 ::IceProxy::Ice::Object* ::IceProxy::RoboCompLaser::upCast(::IceProxy::RoboCompLaser::Laser* p) { return p; }
@@ -260,46 +260,6 @@ void
         v = new ::IceProxy::RoboCompLaser::Laser;
         v->_copyFrom(proxy);
     }
-}
-
-::Ice::AsyncResultPtr
-IceProxy::RoboCompLaser::Laser::_iceI_begin_getLaserData(const ::Ice::Context& context, const ::IceInternal::CallbackBasePtr& del, const ::Ice::LocalObjectPtr& cookie, bool sync)
-{
-    _checkTwowayOnly(iceC_RoboCompLaser_Laser_getLaserData_name, sync);
-    ::IceInternal::OutgoingAsyncPtr result = new ::IceInternal::CallbackOutgoing(this, iceC_RoboCompLaser_Laser_getLaserData_name, del, cookie, sync);
-    try
-    {
-        result->prepare(iceC_RoboCompLaser_Laser_getLaserData_name, ::Ice::Normal, context);
-        result->writeEmptyParams();
-        result->invoke(iceC_RoboCompLaser_Laser_getLaserData_name);
-    }
-    catch(const ::Ice::Exception& ex)
-    {
-        result->abort(ex);
-    }
-    return result;
-}
-
-::RoboCompLaser::TLaserData
-IceProxy::RoboCompLaser::Laser::end_getLaserData(const ::Ice::AsyncResultPtr& result)
-{
-    ::Ice::AsyncResult::_check(result, this, iceC_RoboCompLaser_Laser_getLaserData_name);
-    ::RoboCompLaser::TLaserData ret;
-    if(!result->_waitForResponse())
-    {
-        try
-        {
-            result->_throwUserException();
-        }
-        catch(const ::Ice::UserException& ex)
-        {
-            throw ::Ice::UnknownUserException(__FILE__, __LINE__, ex.ice_id());
-        }
-    }
-    ::Ice::InputStream* istr = result->_startReadParams();
-    istr->read(ret);
-    result->_endReadParams();
-    return ret;
 }
 
 ::Ice::AsyncResultPtr
@@ -383,6 +343,46 @@ IceProxy::RoboCompLaser::Laser::end_getLaserConfData(const ::Ice::AsyncResultPtr
     return ret;
 }
 
+::Ice::AsyncResultPtr
+IceProxy::RoboCompLaser::Laser::_iceI_begin_getLaserData(const ::Ice::Context& context, const ::IceInternal::CallbackBasePtr& del, const ::Ice::LocalObjectPtr& cookie, bool sync)
+{
+    _checkTwowayOnly(iceC_RoboCompLaser_Laser_getLaserData_name, sync);
+    ::IceInternal::OutgoingAsyncPtr result = new ::IceInternal::CallbackOutgoing(this, iceC_RoboCompLaser_Laser_getLaserData_name, del, cookie, sync);
+    try
+    {
+        result->prepare(iceC_RoboCompLaser_Laser_getLaserData_name, ::Ice::Normal, context);
+        result->writeEmptyParams();
+        result->invoke(iceC_RoboCompLaser_Laser_getLaserData_name);
+    }
+    catch(const ::Ice::Exception& ex)
+    {
+        result->abort(ex);
+    }
+    return result;
+}
+
+::RoboCompLaser::TLaserData
+IceProxy::RoboCompLaser::Laser::end_getLaserData(const ::Ice::AsyncResultPtr& result)
+{
+    ::Ice::AsyncResult::_check(result, this, iceC_RoboCompLaser_Laser_getLaserData_name);
+    ::RoboCompLaser::TLaserData ret;
+    if(!result->_waitForResponse())
+    {
+        try
+        {
+            result->_throwUserException();
+        }
+        catch(const ::Ice::UserException& ex)
+        {
+            throw ::Ice::UnknownUserException(__FILE__, __LINE__, ex.ice_id());
+        }
+    }
+    ::Ice::InputStream* istr = result->_startReadParams();
+    istr->read(ret);
+    result->_endReadParams();
+    return ret;
+}
+
 ::IceProxy::Ice::Object*
 IceProxy::RoboCompLaser::Laser::_newInstance() const
 {
@@ -442,18 +442,6 @@ RoboCompLaser::Laser::ice_staticId()
 }
 
 bool
-RoboCompLaser::Laser::_iceD_getLaserData(::IceInternal::Incoming& inS, const ::Ice::Current& current)
-{
-    _iceCheckMode(::Ice::Normal, current.mode);
-    inS.readEmptyParams();
-    ::RoboCompLaser::TLaserData ret = this->getLaserData(current);
-    ::Ice::OutputStream* ostr = inS.startWriteParams();
-    ostr->write(ret);
-    inS.endWriteParams();
-    return true;
-}
-
-bool
 RoboCompLaser::Laser::_iceD_getLaserAndBStateData(::IceInternal::Incoming& inS, const ::Ice::Current& current)
 {
     _iceCheckMode(::Ice::Normal, current.mode);
@@ -473,6 +461,18 @@ RoboCompLaser::Laser::_iceD_getLaserConfData(::IceInternal::Incoming& inS, const
     _iceCheckMode(::Ice::Normal, current.mode);
     inS.readEmptyParams();
     ::RoboCompLaser::LaserConfData ret = this->getLaserConfData(current);
+    ::Ice::OutputStream* ostr = inS.startWriteParams();
+    ostr->write(ret);
+    inS.endWriteParams();
+    return true;
+}
+
+bool
+RoboCompLaser::Laser::_iceD_getLaserData(::IceInternal::Incoming& inS, const ::Ice::Current& current)
+{
+    _iceCheckMode(::Ice::Normal, current.mode);
+    inS.readEmptyParams();
+    ::RoboCompLaser::TLaserData ret = this->getLaserData(current);
     ::Ice::OutputStream* ostr = inS.startWriteParams();
     ostr->write(ret);
     inS.endWriteParams();

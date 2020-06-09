@@ -12,13 +12,13 @@ if [ $# -gt 1 ]
 fi
 if [ $# -eq 1 ]
   then
-    /bin/MyFirstComp /home/robocomp/robocomp/components/CordeBot/component/etc/config &
+    /home/robocomp/robocomp/components/CordeBot/component/bin/MyFirstComp --Ice.Config=/home/robocomp/robocomp/components/CordeBot/component/etc/config &
     sleep $1s
-    /bin/MyFirstComp /home/robocomp/robocomp/components/CordeBot/component/etc/config1 &
+    /home/robocomp/robocomp/components/CordeBot/component/bin/MyFirstComp --Ice.Config=/home/robocomp/robocomp/components/CordeBot/component/etc/config1 &
     sleep $1s
-    /bin/MyFirstComp /home/robocomp/robocomp/components/CordeBot/component/etc/config2 &
+    /home/robocomp/robocomp/components/CordeBot/component/bin/MyFirstComp --Ice.Config=/home/robocomp/robocomp/components/CordeBot/component/etc/config2 &
     sleep $1s
-    /bin/MyFirstComp /home/robocomp/robocomp/components/CordeBot/component/etc/config3 &
+    /home/robocomp/robocomp/components/CordeBot/component/bin/MyFirstComp --Ice.Config=/home/robocomp/robocomp/components/CordeBot/component/etc/config3 &
     sleep $1s
-    /bin/MyFirstComp /home/robocomp/robocomp/components/CordeBot/component/etc/config4 &
+    /home/robocomp/robocomp/components/CordeBot/component/bin/MyFirstComp --Ice.Config=/home/robocomp/robocomp/components/CordeBot/component/etc/config4 &
 fi

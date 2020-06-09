@@ -70,6 +70,8 @@ using shortVector = ::std::vector<int>;
 
 struct LaserConfData
 {
+    ::std::string driver;
+    ::std::string device;
     int staticConf;
     int maxMeasures;
     int maxDegrees;
@@ -81,12 +83,10 @@ struct LaserConfData
     int sampleRate;
     float angleRes;
     float angleIni;
-    ::std::string driver;
-    ::std::string device;
 
-    std::tuple<const int&, const int&, const int&, const int&, const int&, const int&, const int&, const int&, const int&, const float&, const float&, const ::std::string&, const ::std::string&> ice_tuple() const
+    std::tuple<const ::std::string&, const ::std::string&, const int&, const int&, const int&, const int&, const int&, const int&, const int&, const int&, const int&, const float&, const float&> ice_tuple() const
     {
-        return std::tie(staticConf, maxMeasures, maxDegrees, maxRange, minRange, iniRange, endRange, cluster, sampleRate, angleRes, angleIni, driver, device);
+        return std::tie(driver, device, staticConf, maxMeasures, maxDegrees, maxRange, minRange, iniRange, endRange, cluster, sampleRate, angleRes, angleIni);
     }
 };
 
@@ -127,9 +127,6 @@ public:
 
     static const ::std::string& ice_staticId();
 
-    virtual ::RoboCompLaser::TLaserData getLaserData(const ::Ice::Current&) = 0;
-    bool _iceD_getLaserData(::IceInternal::Incoming&, const ::Ice::Current&);
-
     struct GetLaserAndBStateDataResult
     {
         ::RoboCompLaser::TLaserData returnValue;
@@ -142,6 +139,9 @@ public:
     virtual ::RoboCompLaser::LaserConfData getLaserConfData(const ::Ice::Current&) = 0;
     bool _iceD_getLaserConfData(::IceInternal::Incoming&, const ::Ice::Current&);
 
+    virtual ::RoboCompLaser::TLaserData getLaserData(const ::Ice::Current&) = 0;
+    bool _iceD_getLaserData(::IceInternal::Incoming&, const ::Ice::Current&);
+
     virtual bool _iceDispatch(::IceInternal::Incoming&, const ::Ice::Current&) override;
 };
 
@@ -153,29 +153,6 @@ namespace RoboCompLaser
 class LaserPrx : public virtual ::Ice::Proxy<LaserPrx, ::Ice::ObjectPrx>
 {
 public:
-
-    ::RoboCompLaser::TLaserData getLaserData(const ::Ice::Context& context = Ice::noExplicitContext)
-    {
-        return _makePromiseOutgoing<::RoboCompLaser::TLaserData>(true, this, &RoboCompLaser::LaserPrx::_iceI_getLaserData, context).get();
-    }
-
-    template<template<typename> class P = ::std::promise>
-    auto getLaserDataAsync(const ::Ice::Context& context = Ice::noExplicitContext)
-        -> decltype(::std::declval<P<::RoboCompLaser::TLaserData>>().get_future())
-    {
-        return _makePromiseOutgoing<::RoboCompLaser::TLaserData, P>(false, this, &RoboCompLaser::LaserPrx::_iceI_getLaserData, context);
-    }
-
-    ::std::function<void()>
-    getLaserDataAsync(::std::function<void(::RoboCompLaser::TLaserData)> response,
-                      ::std::function<void(::std::exception_ptr)> ex = nullptr,
-                      ::std::function<void(bool)> sent = nullptr,
-                      const ::Ice::Context& context = Ice::noExplicitContext)
-    {
-        return _makeLamdaOutgoing<::RoboCompLaser::TLaserData>(response, ex, sent, this, &RoboCompLaser::LaserPrx::_iceI_getLaserData, context);
-    }
-
-    void _iceI_getLaserData(const ::std::shared_ptr<::IceInternal::OutgoingAsyncT<::RoboCompLaser::TLaserData>>&, const ::Ice::Context&);
 
     ::RoboCompLaser::TLaserData getLaserAndBStateData(::RoboCompGenericBase::TBaseState& iceP_bState, const ::Ice::Context& context = Ice::noExplicitContext)
     {
@@ -229,6 +206,29 @@ public:
 
     void _iceI_getLaserConfData(const ::std::shared_ptr<::IceInternal::OutgoingAsyncT<::RoboCompLaser::LaserConfData>>&, const ::Ice::Context&);
 
+    ::RoboCompLaser::TLaserData getLaserData(const ::Ice::Context& context = Ice::noExplicitContext)
+    {
+        return _makePromiseOutgoing<::RoboCompLaser::TLaserData>(true, this, &RoboCompLaser::LaserPrx::_iceI_getLaserData, context).get();
+    }
+
+    template<template<typename> class P = ::std::promise>
+    auto getLaserDataAsync(const ::Ice::Context& context = Ice::noExplicitContext)
+        -> decltype(::std::declval<P<::RoboCompLaser::TLaserData>>().get_future())
+    {
+        return _makePromiseOutgoing<::RoboCompLaser::TLaserData, P>(false, this, &RoboCompLaser::LaserPrx::_iceI_getLaserData, context);
+    }
+
+    ::std::function<void()>
+    getLaserDataAsync(::std::function<void(::RoboCompLaser::TLaserData)> response,
+                      ::std::function<void(::std::exception_ptr)> ex = nullptr,
+                      ::std::function<void(bool)> sent = nullptr,
+                      const ::Ice::Context& context = Ice::noExplicitContext)
+    {
+        return _makeLamdaOutgoing<::RoboCompLaser::TLaserData>(response, ex, sent, this, &RoboCompLaser::LaserPrx::_iceI_getLaserData, context);
+    }
+
+    void _iceI_getLaserData(const ::std::shared_ptr<::IceInternal::OutgoingAsyncT<::RoboCompLaser::TLaserData>>&, const ::Ice::Context&);
+
     static const ::std::string& ice_staticId();
 
 protected:
@@ -257,7 +257,7 @@ struct StreamReader<::RoboCompLaser::LaserConfData, S>
 {
     static void read(S* istr, ::RoboCompLaser::LaserConfData& v)
     {
-        istr->readAll(v.staticConf, v.maxMeasures, v.maxDegrees, v.maxRange, v.minRange, v.iniRange, v.endRange, v.cluster, v.sampleRate, v.angleRes, v.angleIni, v.driver, v.device);
+        istr->readAll(v.driver, v.device, v.staticConf, v.maxMeasures, v.maxDegrees, v.maxRange, v.minRange, v.iniRange, v.endRange, v.cluster, v.sampleRate, v.angleRes, v.angleIni);
     }
 };
 
@@ -323,6 +323,8 @@ typedef ::std::vector< ::Ice::Int> shortVector;
 
 struct LaserConfData
 {
+    ::std::string driver;
+    ::std::string device;
     ::Ice::Int staticConf;
     ::Ice::Int maxMeasures;
     ::Ice::Int maxDegrees;
@@ -334,264 +336,12 @@ struct LaserConfData
     ::Ice::Int sampleRate;
     ::Ice::Float angleRes;
     ::Ice::Float angleIni;
-    ::std::string driver;
-    ::std::string device;
-
-    bool operator==(const LaserConfData& rhs_) const
-    {
-        if(this == &rhs_)
-        {
-            return true;
-        }
-        if(staticConf != rhs_.staticConf)
-        {
-            return false;
-        }
-        if(maxMeasures != rhs_.maxMeasures)
-        {
-            return false;
-        }
-        if(maxDegrees != rhs_.maxDegrees)
-        {
-            return false;
-        }
-        if(maxRange != rhs_.maxRange)
-        {
-            return false;
-        }
-        if(minRange != rhs_.minRange)
-        {
-            return false;
-        }
-        if(iniRange != rhs_.iniRange)
-        {
-            return false;
-        }
-        if(endRange != rhs_.endRange)
-        {
-            return false;
-        }
-        if(cluster != rhs_.cluster)
-        {
-            return false;
-        }
-        if(sampleRate != rhs_.sampleRate)
-        {
-            return false;
-        }
-        if(angleRes != rhs_.angleRes)
-        {
-            return false;
-        }
-        if(angleIni != rhs_.angleIni)
-        {
-            return false;
-        }
-        if(driver != rhs_.driver)
-        {
-            return false;
-        }
-        if(device != rhs_.device)
-        {
-            return false;
-        }
-        return true;
-    }
-
-    bool operator<(const LaserConfData& rhs_) const
-    {
-        if(this == &rhs_)
-        {
-            return false;
-        }
-        if(staticConf < rhs_.staticConf)
-        {
-            return true;
-        }
-        else if(rhs_.staticConf < staticConf)
-        {
-            return false;
-        }
-        if(maxMeasures < rhs_.maxMeasures)
-        {
-            return true;
-        }
-        else if(rhs_.maxMeasures < maxMeasures)
-        {
-            return false;
-        }
-        if(maxDegrees < rhs_.maxDegrees)
-        {
-            return true;
-        }
-        else if(rhs_.maxDegrees < maxDegrees)
-        {
-            return false;
-        }
-        if(maxRange < rhs_.maxRange)
-        {
-            return true;
-        }
-        else if(rhs_.maxRange < maxRange)
-        {
-            return false;
-        }
-        if(minRange < rhs_.minRange)
-        {
-            return true;
-        }
-        else if(rhs_.minRange < minRange)
-        {
-            return false;
-        }
-        if(iniRange < rhs_.iniRange)
-        {
-            return true;
-        }
-        else if(rhs_.iniRange < iniRange)
-        {
-            return false;
-        }
-        if(endRange < rhs_.endRange)
-        {
-            return true;
-        }
-        else if(rhs_.endRange < endRange)
-        {
-            return false;
-        }
-        if(cluster < rhs_.cluster)
-        {
-            return true;
-        }
-        else if(rhs_.cluster < cluster)
-        {
-            return false;
-        }
-        if(sampleRate < rhs_.sampleRate)
-        {
-            return true;
-        }
-        else if(rhs_.sampleRate < sampleRate)
-        {
-            return false;
-        }
-        if(angleRes < rhs_.angleRes)
-        {
-            return true;
-        }
-        else if(rhs_.angleRes < angleRes)
-        {
-            return false;
-        }
-        if(angleIni < rhs_.angleIni)
-        {
-            return true;
-        }
-        else if(rhs_.angleIni < angleIni)
-        {
-            return false;
-        }
-        if(driver < rhs_.driver)
-        {
-            return true;
-        }
-        else if(rhs_.driver < driver)
-        {
-            return false;
-        }
-        if(device < rhs_.device)
-        {
-            return true;
-        }
-        else if(rhs_.device < device)
-        {
-            return false;
-        }
-        return false;
-    }
-
-    bool operator!=(const LaserConfData& rhs_) const
-    {
-        return !operator==(rhs_);
-    }
-    bool operator<=(const LaserConfData& rhs_) const
-    {
-        return operator<(rhs_) || operator==(rhs_);
-    }
-    bool operator>(const LaserConfData& rhs_) const
-    {
-        return !operator<(rhs_) && !operator==(rhs_);
-    }
-    bool operator>=(const LaserConfData& rhs_) const
-    {
-        return !operator<(rhs_);
-    }
 };
 
 struct TData
 {
     ::Ice::Float angle;
     ::Ice::Float dist;
-
-    bool operator==(const TData& rhs_) const
-    {
-        if(this == &rhs_)
-        {
-            return true;
-        }
-        if(angle != rhs_.angle)
-        {
-            return false;
-        }
-        if(dist != rhs_.dist)
-        {
-            return false;
-        }
-        return true;
-    }
-
-    bool operator<(const TData& rhs_) const
-    {
-        if(this == &rhs_)
-        {
-            return false;
-        }
-        if(angle < rhs_.angle)
-        {
-            return true;
-        }
-        else if(rhs_.angle < angle)
-        {
-            return false;
-        }
-        if(dist < rhs_.dist)
-        {
-            return true;
-        }
-        else if(rhs_.dist < dist)
-        {
-            return false;
-        }
-        return false;
-    }
-
-    bool operator!=(const TData& rhs_) const
-    {
-        return !operator==(rhs_);
-    }
-    bool operator<=(const TData& rhs_) const
-    {
-        return operator<(rhs_) || operator==(rhs_);
-    }
-    bool operator>(const TData& rhs_) const
-    {
-        return !operator<(rhs_) && !operator==(rhs_);
-    }
-    bool operator>=(const TData& rhs_) const
-    {
-        return !operator<(rhs_);
-    }
 };
 
 typedef ::std::vector< ::RoboCompLaser::TData> TLaserData;
@@ -601,14 +351,14 @@ typedef ::std::vector< ::RoboCompLaser::TData> TLaserData;
 namespace RoboCompLaser
 {
 
-class Callback_Laser_getLaserData_Base : public virtual ::IceInternal::CallbackBase { };
-typedef ::IceUtil::Handle< Callback_Laser_getLaserData_Base> Callback_Laser_getLaserDataPtr;
-
 class Callback_Laser_getLaserAndBStateData_Base : public virtual ::IceInternal::CallbackBase { };
 typedef ::IceUtil::Handle< Callback_Laser_getLaserAndBStateData_Base> Callback_Laser_getLaserAndBStateDataPtr;
 
 class Callback_Laser_getLaserConfData_Base : public virtual ::IceInternal::CallbackBase { };
 typedef ::IceUtil::Handle< Callback_Laser_getLaserConfData_Base> Callback_Laser_getLaserConfDataPtr;
+
+class Callback_Laser_getLaserData_Base : public virtual ::IceInternal::CallbackBase { };
+typedef ::IceUtil::Handle< Callback_Laser_getLaserData_Base> Callback_Laser_getLaserDataPtr;
 
 }
 
@@ -620,44 +370,6 @@ namespace RoboCompLaser
 
 class Laser : public virtual ::Ice::Proxy<Laser, ::IceProxy::Ice::Object>
 {
-public:
-
-    ::RoboCompLaser::TLaserData getLaserData(const ::Ice::Context& context = ::Ice::noExplicitContext)
-    {
-        return end_getLaserData(_iceI_begin_getLaserData(context, ::IceInternal::dummyCallback, 0, true));
-    }
-
-    ::Ice::AsyncResultPtr begin_getLaserData(const ::Ice::Context& context = ::Ice::noExplicitContext)
-    {
-        return _iceI_begin_getLaserData(context, ::IceInternal::dummyCallback, 0);
-    }
-
-    ::Ice::AsyncResultPtr begin_getLaserData(const ::Ice::CallbackPtr& del, const ::Ice::LocalObjectPtr& cookie = 0)
-    {
-        return _iceI_begin_getLaserData(::Ice::noExplicitContext, del, cookie);
-    }
-
-    ::Ice::AsyncResultPtr begin_getLaserData(const ::Ice::Context& context, const ::Ice::CallbackPtr& del, const ::Ice::LocalObjectPtr& cookie = 0)
-    {
-        return _iceI_begin_getLaserData(context, del, cookie);
-    }
-
-    ::Ice::AsyncResultPtr begin_getLaserData(const ::RoboCompLaser::Callback_Laser_getLaserDataPtr& del, const ::Ice::LocalObjectPtr& cookie = 0)
-    {
-        return _iceI_begin_getLaserData(::Ice::noExplicitContext, del, cookie);
-    }
-
-    ::Ice::AsyncResultPtr begin_getLaserData(const ::Ice::Context& context, const ::RoboCompLaser::Callback_Laser_getLaserDataPtr& del, const ::Ice::LocalObjectPtr& cookie = 0)
-    {
-        return _iceI_begin_getLaserData(context, del, cookie);
-    }
-
-    ::RoboCompLaser::TLaserData end_getLaserData(const ::Ice::AsyncResultPtr&);
-
-private:
-
-    ::Ice::AsyncResultPtr _iceI_begin_getLaserData(const ::Ice::Context&, const ::IceInternal::CallbackBasePtr&, const ::Ice::LocalObjectPtr& cookie = 0, bool sync = false);
-
 public:
 
     ::RoboCompLaser::TLaserData getLaserAndBStateData(::RoboCompGenericBase::TBaseState& iceP_bState, const ::Ice::Context& context = ::Ice::noExplicitContext)
@@ -736,6 +448,44 @@ private:
 
 public:
 
+    ::RoboCompLaser::TLaserData getLaserData(const ::Ice::Context& context = ::Ice::noExplicitContext)
+    {
+        return end_getLaserData(_iceI_begin_getLaserData(context, ::IceInternal::dummyCallback, 0, true));
+    }
+
+    ::Ice::AsyncResultPtr begin_getLaserData(const ::Ice::Context& context = ::Ice::noExplicitContext)
+    {
+        return _iceI_begin_getLaserData(context, ::IceInternal::dummyCallback, 0);
+    }
+
+    ::Ice::AsyncResultPtr begin_getLaserData(const ::Ice::CallbackPtr& del, const ::Ice::LocalObjectPtr& cookie = 0)
+    {
+        return _iceI_begin_getLaserData(::Ice::noExplicitContext, del, cookie);
+    }
+
+    ::Ice::AsyncResultPtr begin_getLaserData(const ::Ice::Context& context, const ::Ice::CallbackPtr& del, const ::Ice::LocalObjectPtr& cookie = 0)
+    {
+        return _iceI_begin_getLaserData(context, del, cookie);
+    }
+
+    ::Ice::AsyncResultPtr begin_getLaserData(const ::RoboCompLaser::Callback_Laser_getLaserDataPtr& del, const ::Ice::LocalObjectPtr& cookie = 0)
+    {
+        return _iceI_begin_getLaserData(::Ice::noExplicitContext, del, cookie);
+    }
+
+    ::Ice::AsyncResultPtr begin_getLaserData(const ::Ice::Context& context, const ::RoboCompLaser::Callback_Laser_getLaserDataPtr& del, const ::Ice::LocalObjectPtr& cookie = 0)
+    {
+        return _iceI_begin_getLaserData(context, del, cookie);
+    }
+
+    ::RoboCompLaser::TLaserData end_getLaserData(const ::Ice::AsyncResultPtr&);
+
+private:
+
+    ::Ice::AsyncResultPtr _iceI_begin_getLaserData(const ::Ice::Context&, const ::IceInternal::CallbackBasePtr&, const ::Ice::LocalObjectPtr& cookie = 0, bool sync = false);
+
+public:
+
     static const ::std::string& ice_staticId();
 
 protected:
@@ -765,14 +515,14 @@ public:
 
     static const ::std::string& ice_staticId();
 
-    virtual ::RoboCompLaser::TLaserData getLaserData(const ::Ice::Current& = ::Ice::emptyCurrent) = 0;
-    bool _iceD_getLaserData(::IceInternal::Incoming&, const ::Ice::Current&);
-
     virtual ::RoboCompLaser::TLaserData getLaserAndBStateData(::RoboCompGenericBase::TBaseState&, const ::Ice::Current& = ::Ice::emptyCurrent) = 0;
     bool _iceD_getLaserAndBStateData(::IceInternal::Incoming&, const ::Ice::Current&);
 
     virtual ::RoboCompLaser::LaserConfData getLaserConfData(const ::Ice::Current& = ::Ice::emptyCurrent) = 0;
     bool _iceD_getLaserConfData(::IceInternal::Incoming&, const ::Ice::Current&);
+
+    virtual ::RoboCompLaser::TLaserData getLaserData(const ::Ice::Current& = ::Ice::emptyCurrent) = 0;
+    bool _iceD_getLaserData(::IceInternal::Incoming&, const ::Ice::Current&);
 
     virtual bool _iceDispatch(::IceInternal::Incoming&, const ::Ice::Current&);
 
@@ -810,6 +560,8 @@ struct StreamWriter< ::RoboCompLaser::LaserConfData, S>
 {
     static void write(S* ostr, const ::RoboCompLaser::LaserConfData& v)
     {
+        ostr->write(v.driver);
+        ostr->write(v.device);
         ostr->write(v.staticConf);
         ostr->write(v.maxMeasures);
         ostr->write(v.maxDegrees);
@@ -821,8 +573,6 @@ struct StreamWriter< ::RoboCompLaser::LaserConfData, S>
         ostr->write(v.sampleRate);
         ostr->write(v.angleRes);
         ostr->write(v.angleIni);
-        ostr->write(v.driver);
-        ostr->write(v.device);
     }
 };
 
@@ -831,6 +581,8 @@ struct StreamReader< ::RoboCompLaser::LaserConfData, S>
 {
     static void read(S* istr, ::RoboCompLaser::LaserConfData& v)
     {
+        istr->read(v.driver);
+        istr->read(v.device);
         istr->read(v.staticConf);
         istr->read(v.maxMeasures);
         istr->read(v.maxDegrees);
@@ -842,8 +594,6 @@ struct StreamReader< ::RoboCompLaser::LaserConfData, S>
         istr->read(v.sampleRate);
         istr->read(v.angleRes);
         istr->read(v.angleIni);
-        istr->read(v.driver);
-        istr->read(v.device);
     }
 };
 
@@ -879,110 +629,6 @@ struct StreamReader< ::RoboCompLaser::TData, S>
 
 namespace RoboCompLaser
 {
-
-template<class T>
-class CallbackNC_Laser_getLaserData : public Callback_Laser_getLaserData_Base, public ::IceInternal::TwowayCallbackNC<T>
-{
-public:
-
-    typedef IceUtil::Handle<T> TPtr;
-
-    typedef void (T::*Exception)(const ::Ice::Exception&);
-    typedef void (T::*Sent)(bool);
-    typedef void (T::*Response)(const ::RoboCompLaser::TLaserData&);
-
-    CallbackNC_Laser_getLaserData(const TPtr& obj, Response cb, Exception excb, Sent sentcb)
-        : ::IceInternal::TwowayCallbackNC<T>(obj, cb != 0, excb, sentcb), _response(cb)
-    {
-    }
-
-    virtual void completed(const ::Ice::AsyncResultPtr& result) const
-    {
-        ::RoboCompLaser::LaserPrx proxy = ::RoboCompLaser::LaserPrx::uncheckedCast(result->getProxy());
-        ::RoboCompLaser::TLaserData ret;
-        try
-        {
-            ret = proxy->end_getLaserData(result);
-        }
-        catch(const ::Ice::Exception& ex)
-        {
-            ::IceInternal::CallbackNC<T>::exception(result, ex);
-            return;
-        }
-        if(_response)
-        {
-            (::IceInternal::CallbackNC<T>::_callback.get()->*_response)(ret);
-        }
-    }
-
-private:
-
-    Response _response;
-};
-
-template<class T> Callback_Laser_getLaserDataPtr
-newCallback_Laser_getLaserData(const IceUtil::Handle<T>& instance, void (T::*cb)(const ::RoboCompLaser::TLaserData&), void (T::*excb)(const ::Ice::Exception&), void (T::*sentcb)(bool) = 0)
-{
-    return new CallbackNC_Laser_getLaserData<T>(instance, cb, excb, sentcb);
-}
-
-template<class T> Callback_Laser_getLaserDataPtr
-newCallback_Laser_getLaserData(T* instance, void (T::*cb)(const ::RoboCompLaser::TLaserData&), void (T::*excb)(const ::Ice::Exception&), void (T::*sentcb)(bool) = 0)
-{
-    return new CallbackNC_Laser_getLaserData<T>(instance, cb, excb, sentcb);
-}
-
-template<class T, typename CT>
-class Callback_Laser_getLaserData : public Callback_Laser_getLaserData_Base, public ::IceInternal::TwowayCallback<T, CT>
-{
-public:
-
-    typedef IceUtil::Handle<T> TPtr;
-
-    typedef void (T::*Exception)(const ::Ice::Exception& , const CT&);
-    typedef void (T::*Sent)(bool , const CT&);
-    typedef void (T::*Response)(const ::RoboCompLaser::TLaserData&, const CT&);
-
-    Callback_Laser_getLaserData(const TPtr& obj, Response cb, Exception excb, Sent sentcb)
-        : ::IceInternal::TwowayCallback<T, CT>(obj, cb != 0, excb, sentcb), _response(cb)
-    {
-    }
-
-    virtual void completed(const ::Ice::AsyncResultPtr& result) const
-    {
-        ::RoboCompLaser::LaserPrx proxy = ::RoboCompLaser::LaserPrx::uncheckedCast(result->getProxy());
-        ::RoboCompLaser::TLaserData ret;
-        try
-        {
-            ret = proxy->end_getLaserData(result);
-        }
-        catch(const ::Ice::Exception& ex)
-        {
-            ::IceInternal::Callback<T, CT>::exception(result, ex);
-            return;
-        }
-        if(_response)
-        {
-            (::IceInternal::Callback<T, CT>::_callback.get()->*_response)(ret, CT::dynamicCast(result->getCookie()));
-        }
-    }
-
-private:
-
-    Response _response;
-};
-
-template<class T, typename CT> Callback_Laser_getLaserDataPtr
-newCallback_Laser_getLaserData(const IceUtil::Handle<T>& instance, void (T::*cb)(const ::RoboCompLaser::TLaserData&, const CT&), void (T::*excb)(const ::Ice::Exception&, const CT&), void (T::*sentcb)(bool, const CT&) = 0)
-{
-    return new Callback_Laser_getLaserData<T, CT>(instance, cb, excb, sentcb);
-}
-
-template<class T, typename CT> Callback_Laser_getLaserDataPtr
-newCallback_Laser_getLaserData(T* instance, void (T::*cb)(const ::RoboCompLaser::TLaserData&, const CT&), void (T::*excb)(const ::Ice::Exception&, const CT&), void (T::*sentcb)(bool, const CT&) = 0)
-{
-    return new Callback_Laser_getLaserData<T, CT>(instance, cb, excb, sentcb);
-}
 
 template<class T>
 class CallbackNC_Laser_getLaserAndBStateData : public Callback_Laser_getLaserAndBStateData_Base, public ::IceInternal::TwowayCallbackNC<T>
@@ -1192,6 +838,110 @@ template<class T, typename CT> Callback_Laser_getLaserConfDataPtr
 newCallback_Laser_getLaserConfData(T* instance, void (T::*cb)(const ::RoboCompLaser::LaserConfData&, const CT&), void (T::*excb)(const ::Ice::Exception&, const CT&), void (T::*sentcb)(bool, const CT&) = 0)
 {
     return new Callback_Laser_getLaserConfData<T, CT>(instance, cb, excb, sentcb);
+}
+
+template<class T>
+class CallbackNC_Laser_getLaserData : public Callback_Laser_getLaserData_Base, public ::IceInternal::TwowayCallbackNC<T>
+{
+public:
+
+    typedef IceUtil::Handle<T> TPtr;
+
+    typedef void (T::*Exception)(const ::Ice::Exception&);
+    typedef void (T::*Sent)(bool);
+    typedef void (T::*Response)(const ::RoboCompLaser::TLaserData&);
+
+    CallbackNC_Laser_getLaserData(const TPtr& obj, Response cb, Exception excb, Sent sentcb)
+        : ::IceInternal::TwowayCallbackNC<T>(obj, cb != 0, excb, sentcb), _response(cb)
+    {
+    }
+
+    virtual void completed(const ::Ice::AsyncResultPtr& result) const
+    {
+        ::RoboCompLaser::LaserPrx proxy = ::RoboCompLaser::LaserPrx::uncheckedCast(result->getProxy());
+        ::RoboCompLaser::TLaserData ret;
+        try
+        {
+            ret = proxy->end_getLaserData(result);
+        }
+        catch(const ::Ice::Exception& ex)
+        {
+            ::IceInternal::CallbackNC<T>::exception(result, ex);
+            return;
+        }
+        if(_response)
+        {
+            (::IceInternal::CallbackNC<T>::_callback.get()->*_response)(ret);
+        }
+    }
+
+private:
+
+    Response _response;
+};
+
+template<class T> Callback_Laser_getLaserDataPtr
+newCallback_Laser_getLaserData(const IceUtil::Handle<T>& instance, void (T::*cb)(const ::RoboCompLaser::TLaserData&), void (T::*excb)(const ::Ice::Exception&), void (T::*sentcb)(bool) = 0)
+{
+    return new CallbackNC_Laser_getLaserData<T>(instance, cb, excb, sentcb);
+}
+
+template<class T> Callback_Laser_getLaserDataPtr
+newCallback_Laser_getLaserData(T* instance, void (T::*cb)(const ::RoboCompLaser::TLaserData&), void (T::*excb)(const ::Ice::Exception&), void (T::*sentcb)(bool) = 0)
+{
+    return new CallbackNC_Laser_getLaserData<T>(instance, cb, excb, sentcb);
+}
+
+template<class T, typename CT>
+class Callback_Laser_getLaserData : public Callback_Laser_getLaserData_Base, public ::IceInternal::TwowayCallback<T, CT>
+{
+public:
+
+    typedef IceUtil::Handle<T> TPtr;
+
+    typedef void (T::*Exception)(const ::Ice::Exception& , const CT&);
+    typedef void (T::*Sent)(bool , const CT&);
+    typedef void (T::*Response)(const ::RoboCompLaser::TLaserData&, const CT&);
+
+    Callback_Laser_getLaserData(const TPtr& obj, Response cb, Exception excb, Sent sentcb)
+        : ::IceInternal::TwowayCallback<T, CT>(obj, cb != 0, excb, sentcb), _response(cb)
+    {
+    }
+
+    virtual void completed(const ::Ice::AsyncResultPtr& result) const
+    {
+        ::RoboCompLaser::LaserPrx proxy = ::RoboCompLaser::LaserPrx::uncheckedCast(result->getProxy());
+        ::RoboCompLaser::TLaserData ret;
+        try
+        {
+            ret = proxy->end_getLaserData(result);
+        }
+        catch(const ::Ice::Exception& ex)
+        {
+            ::IceInternal::Callback<T, CT>::exception(result, ex);
+            return;
+        }
+        if(_response)
+        {
+            (::IceInternal::Callback<T, CT>::_callback.get()->*_response)(ret, CT::dynamicCast(result->getCookie()));
+        }
+    }
+
+private:
+
+    Response _response;
+};
+
+template<class T, typename CT> Callback_Laser_getLaserDataPtr
+newCallback_Laser_getLaserData(const IceUtil::Handle<T>& instance, void (T::*cb)(const ::RoboCompLaser::TLaserData&, const CT&), void (T::*excb)(const ::Ice::Exception&, const CT&), void (T::*sentcb)(bool, const CT&) = 0)
+{
+    return new Callback_Laser_getLaserData<T, CT>(instance, cb, excb, sentcb);
+}
+
+template<class T, typename CT> Callback_Laser_getLaserDataPtr
+newCallback_Laser_getLaserData(T* instance, void (T::*cb)(const ::RoboCompLaser::TLaserData&, const CT&), void (T::*excb)(const ::Ice::Exception&, const CT&), void (T::*sentcb)(bool, const CT&) = 0)
+{
+    return new Callback_Laser_getLaserData<T, CT>(instance, cb, excb, sentcb);
 }
 
 }

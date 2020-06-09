@@ -69,8 +69,8 @@ const ::std::string iceC_RoboCompGenericBase_GenericBase_ops[] =
     "ice_isA",
     "ice_ping"
 };
-const ::std::string iceC_RoboCompGenericBase_GenericBase_getBaseState_name = "getBaseState";
 const ::std::string iceC_RoboCompGenericBase_GenericBase_getBasePose_name = "getBasePose";
+const ::std::string iceC_RoboCompGenericBase_GenericBase_getBaseState_name = "getBaseState";
 
 }
 
@@ -111,19 +111,6 @@ RoboCompGenericBase::GenericBase::ice_staticId()
 }
 
 bool
-RoboCompGenericBase::GenericBase::_iceD_getBaseState(::IceInternal::Incoming& inS, const ::Ice::Current& current)
-{
-    _iceCheckMode(::Ice::OperationMode::Normal, current.mode);
-    inS.readEmptyParams();
-    ::RoboCompGenericBase::TBaseState iceP_state;
-    this->getBaseState(iceP_state, current);
-    auto ostr = inS.startWriteParams();
-    ostr->writeAll(iceP_state);
-    inS.endWriteParams();
-    return true;
-}
-
-bool
 RoboCompGenericBase::GenericBase::_iceD_getBasePose(::IceInternal::Incoming& inS, const ::Ice::Current& current)
 {
     _iceCheckMode(::Ice::OperationMode::Normal, current.mode);
@@ -134,6 +121,19 @@ RoboCompGenericBase::GenericBase::_iceD_getBasePose(::IceInternal::Incoming& inS
     this->getBasePose(iceP_x, iceP_z, iceP_alpha, current);
     auto ostr = inS.startWriteParams();
     ostr->writeAll(iceP_x, iceP_z, iceP_alpha);
+    inS.endWriteParams();
+    return true;
+}
+
+bool
+RoboCompGenericBase::GenericBase::_iceD_getBaseState(::IceInternal::Incoming& inS, const ::Ice::Current& current)
+{
+    _iceCheckMode(::Ice::OperationMode::Normal, current.mode);
+    inS.readEmptyParams();
+    ::RoboCompGenericBase::TBaseState iceP_state;
+    this->getBaseState(iceP_state, current);
+    auto ostr = inS.startWriteParams();
+    ostr->writeAll(iceP_state);
     inS.endWriteParams();
     return true;
 }
@@ -182,28 +182,6 @@ RoboCompGenericBase::GenericBase::_iceDispatch(::IceInternal::Incoming& in, cons
 }
 
 void
-RoboCompGenericBase::GenericBasePrx::_iceI_getBaseState(const ::std::shared_ptr<::IceInternal::OutgoingAsyncT<::RoboCompGenericBase::TBaseState>>& outAsync, const ::Ice::Context& context)
-{
-    _checkTwowayOnly(iceC_RoboCompGenericBase_GenericBase_getBaseState_name);
-    outAsync->invoke(iceC_RoboCompGenericBase_GenericBase_getBaseState_name, ::Ice::OperationMode::Normal, ::Ice::FormatType::DefaultFormat, context,
-        nullptr,
-        [](const ::Ice::UserException& ex)
-        {
-            try
-            {
-                ex.ice_throw();
-            }
-            catch(const ::RoboCompGenericBase::HardwareFailedException&)
-            {
-                throw;
-            }
-            catch(const ::Ice::UserException&)
-            {
-            }
-        });
-}
-
-void
 RoboCompGenericBase::GenericBasePrx::_iceI_getBasePose(const ::std::shared_ptr<::IceInternal::OutgoingAsyncT<::RoboCompGenericBase::GenericBase::GetBasePoseResult>>& outAsync, const ::Ice::Context& context)
 {
     _checkTwowayOnly(iceC_RoboCompGenericBase_GenericBase_getBasePose_name);
@@ -231,6 +209,28 @@ RoboCompGenericBase::GenericBasePrx::_iceI_getBasePose(const ::std::shared_ptr<:
         });
 }
 
+void
+RoboCompGenericBase::GenericBasePrx::_iceI_getBaseState(const ::std::shared_ptr<::IceInternal::OutgoingAsyncT<::RoboCompGenericBase::TBaseState>>& outAsync, const ::Ice::Context& context)
+{
+    _checkTwowayOnly(iceC_RoboCompGenericBase_GenericBase_getBaseState_name);
+    outAsync->invoke(iceC_RoboCompGenericBase_GenericBase_getBaseState_name, ::Ice::OperationMode::Normal, ::Ice::FormatType::DefaultFormat, context,
+        nullptr,
+        [](const ::Ice::UserException& ex)
+        {
+            try
+            {
+                ex.ice_throw();
+            }
+            catch(const ::RoboCompGenericBase::HardwareFailedException&)
+            {
+                throw;
+            }
+            catch(const ::Ice::UserException&)
+            {
+            }
+        });
+}
+
 ::std::shared_ptr<::Ice::ObjectPrx>
 RoboCompGenericBase::GenericBasePrx::_newInstance() const
 {
@@ -252,9 +252,9 @@ namespace Ice
 namespace
 {
 
-const ::std::string iceC_RoboCompGenericBase_GenericBase_getBaseState_name = "getBaseState";
-
 const ::std::string iceC_RoboCompGenericBase_GenericBase_getBasePose_name = "getBasePose";
+
+const ::std::string iceC_RoboCompGenericBase_GenericBase_getBaseState_name = "getBaseState";
 
 }
 
@@ -327,48 +327,6 @@ void
 }
 
 ::Ice::AsyncResultPtr
-IceProxy::RoboCompGenericBase::GenericBase::_iceI_begin_getBaseState(const ::Ice::Context& context, const ::IceInternal::CallbackBasePtr& del, const ::Ice::LocalObjectPtr& cookie, bool sync)
-{
-    _checkTwowayOnly(iceC_RoboCompGenericBase_GenericBase_getBaseState_name, sync);
-    ::IceInternal::OutgoingAsyncPtr result = new ::IceInternal::CallbackOutgoing(this, iceC_RoboCompGenericBase_GenericBase_getBaseState_name, del, cookie, sync);
-    try
-    {
-        result->prepare(iceC_RoboCompGenericBase_GenericBase_getBaseState_name, ::Ice::Normal, context);
-        result->writeEmptyParams();
-        result->invoke(iceC_RoboCompGenericBase_GenericBase_getBaseState_name);
-    }
-    catch(const ::Ice::Exception& ex)
-    {
-        result->abort(ex);
-    }
-    return result;
-}
-
-void
-IceProxy::RoboCompGenericBase::GenericBase::end_getBaseState(::RoboCompGenericBase::TBaseState& iceP_state, const ::Ice::AsyncResultPtr& result)
-{
-    ::Ice::AsyncResult::_check(result, this, iceC_RoboCompGenericBase_GenericBase_getBaseState_name);
-    if(!result->_waitForResponse())
-    {
-        try
-        {
-            result->_throwUserException();
-        }
-        catch(const ::RoboCompGenericBase::HardwareFailedException&)
-        {
-            throw;
-        }
-        catch(const ::Ice::UserException& ex)
-        {
-            throw ::Ice::UnknownUserException(__FILE__, __LINE__, ex.ice_id());
-        }
-    }
-    ::Ice::InputStream* istr = result->_startReadParams();
-    istr->read(iceP_state);
-    result->_endReadParams();
-}
-
-::Ice::AsyncResultPtr
 IceProxy::RoboCompGenericBase::GenericBase::_iceI_begin_getBasePose(const ::Ice::Context& context, const ::IceInternal::CallbackBasePtr& del, const ::Ice::LocalObjectPtr& cookie, bool sync)
 {
     _checkTwowayOnly(iceC_RoboCompGenericBase_GenericBase_getBasePose_name, sync);
@@ -409,6 +367,48 @@ IceProxy::RoboCompGenericBase::GenericBase::end_getBasePose(::Ice::Int& iceP_x, 
     istr->read(iceP_x);
     istr->read(iceP_z);
     istr->read(iceP_alpha);
+    result->_endReadParams();
+}
+
+::Ice::AsyncResultPtr
+IceProxy::RoboCompGenericBase::GenericBase::_iceI_begin_getBaseState(const ::Ice::Context& context, const ::IceInternal::CallbackBasePtr& del, const ::Ice::LocalObjectPtr& cookie, bool sync)
+{
+    _checkTwowayOnly(iceC_RoboCompGenericBase_GenericBase_getBaseState_name, sync);
+    ::IceInternal::OutgoingAsyncPtr result = new ::IceInternal::CallbackOutgoing(this, iceC_RoboCompGenericBase_GenericBase_getBaseState_name, del, cookie, sync);
+    try
+    {
+        result->prepare(iceC_RoboCompGenericBase_GenericBase_getBaseState_name, ::Ice::Normal, context);
+        result->writeEmptyParams();
+        result->invoke(iceC_RoboCompGenericBase_GenericBase_getBaseState_name);
+    }
+    catch(const ::Ice::Exception& ex)
+    {
+        result->abort(ex);
+    }
+    return result;
+}
+
+void
+IceProxy::RoboCompGenericBase::GenericBase::end_getBaseState(::RoboCompGenericBase::TBaseState& iceP_state, const ::Ice::AsyncResultPtr& result)
+{
+    ::Ice::AsyncResult::_check(result, this, iceC_RoboCompGenericBase_GenericBase_getBaseState_name);
+    if(!result->_waitForResponse())
+    {
+        try
+        {
+            result->_throwUserException();
+        }
+        catch(const ::RoboCompGenericBase::HardwareFailedException&)
+        {
+            throw;
+        }
+        catch(const ::Ice::UserException& ex)
+        {
+            throw ::Ice::UnknownUserException(__FILE__, __LINE__, ex.ice_id());
+        }
+    }
+    ::Ice::InputStream* istr = result->_startReadParams();
+    istr->read(iceP_state);
     result->_endReadParams();
 }
 
@@ -471,19 +471,6 @@ RoboCompGenericBase::GenericBase::ice_staticId()
 }
 
 bool
-RoboCompGenericBase::GenericBase::_iceD_getBaseState(::IceInternal::Incoming& inS, const ::Ice::Current& current)
-{
-    _iceCheckMode(::Ice::Normal, current.mode);
-    inS.readEmptyParams();
-    ::RoboCompGenericBase::TBaseState iceP_state;
-    this->getBaseState(iceP_state, current);
-    ::Ice::OutputStream* ostr = inS.startWriteParams();
-    ostr->write(iceP_state);
-    inS.endWriteParams();
-    return true;
-}
-
-bool
 RoboCompGenericBase::GenericBase::_iceD_getBasePose(::IceInternal::Incoming& inS, const ::Ice::Current& current)
 {
     _iceCheckMode(::Ice::Normal, current.mode);
@@ -496,6 +483,19 @@ RoboCompGenericBase::GenericBase::_iceD_getBasePose(::IceInternal::Incoming& inS
     ostr->write(iceP_x);
     ostr->write(iceP_z);
     ostr->write(iceP_alpha);
+    inS.endWriteParams();
+    return true;
+}
+
+bool
+RoboCompGenericBase::GenericBase::_iceD_getBaseState(::IceInternal::Incoming& inS, const ::Ice::Current& current)
+{
+    _iceCheckMode(::Ice::Normal, current.mode);
+    inS.readEmptyParams();
+    ::RoboCompGenericBase::TBaseState iceP_state;
+    this->getBaseState(iceP_state, current);
+    ::Ice::OutputStream* ostr = inS.startWriteParams();
+    ostr->write(iceP_state);
     inS.endWriteParams();
     return true;
 }

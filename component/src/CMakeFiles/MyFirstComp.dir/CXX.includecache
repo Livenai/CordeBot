@@ -419,6 +419,8 @@ QHash
 -
 mutex
 -
+memory
+-
 qmat/qmat.h
 -
 qmat/qvec.h
@@ -611,6 +613,8 @@ qmat/qessential.h
 -
 qmat/qline2d.h
 -
+qmat/quaternion.h
+-
 
 /opt/robocomp/include/qmat/qcamera.h
 qmat/qmat.h
@@ -680,6 +684,18 @@ qmat/qmat.h
 
 /opt/robocomp/include/qmat/qrtmat.h
 qmat/QMatAll
+-
+
+/opt/robocomp/include/qmat/quaternion.h
+math.h
+-
+iostream
+-
+QString
+-
+qmat/qvec.h
+-
+qmat/qmat.h
 -
 
 /opt/robocomp/include/qmat/qvec.h

@@ -58,6 +58,7 @@ src/CMakeFiles/MyFirstComp.dir/MyFirstComp_autogen/mocs_compilation.cpp.o
  /opt/robocomp/include/qmat/qmatrot.h
  /opt/robocomp/include/qmat/qmovingrobot.h
  /opt/robocomp/include/qmat/qrtmat.h
+ /opt/robocomp/include/qmat/quaternion.h
  /opt/robocomp/include/qmat/qvec.h
  /usr/include/x86_64-linux-gnu/qt5/QtCore/QEvent
  /usr/include/x86_64-linux-gnu/qt5/QtCore/QHash
@@ -2405,6 +2406,7 @@ src/CMakeFiles/MyFirstComp.dir/main.cpp.o
  /opt/robocomp/include/qmat/qmatrot.h
  /opt/robocomp/include/qmat/qmovingrobot.h
  /opt/robocomp/include/qmat/qrtmat.h
+ /opt/robocomp/include/qmat/quaternion.h
  /opt/robocomp/include/qmat/qvec.h
  /usr/include/x86_64-linux-gnu/qt5/QtCore/QEvent
  /usr/include/x86_64-linux-gnu/qt5/QtCore/QHash
@@ -3371,6 +3373,7 @@ src/CMakeFiles/MyFirstComp.dir/specificworker.cpp.o
  /opt/robocomp/include/qmat/qmatrot.h
  /opt/robocomp/include/qmat/qmovingrobot.h
  /opt/robocomp/include/qmat/qrtmat.h
+ /opt/robocomp/include/qmat/quaternion.h
  /opt/robocomp/include/qmat/qvec.h
  /usr/include/x86_64-linux-gnu/qt5/QtCore/QEvent
  /usr/include/x86_64-linux-gnu/qt5/QtCore/QHash
