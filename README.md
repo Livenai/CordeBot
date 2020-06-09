@@ -14,7 +14,7 @@ Pasos para ejecutar el componente:
     
     (en CordeBot/component)
     cmake .
-    make {es posible que senecesite sudo}
+    make 
     
   2) Ejecutar el mapa:
     
@@ -25,4 +25,9 @@ Pasos para ejecutar el componente:
   
     (en CordeBot/oveja)
     ./RUN_5_LAMBS.sh 10  {el 10 es el numero de segundos que el shell espera entre ejecutar una oveja y otra}
+
+  opcional) Ejecutar el shell script 4_just4lamb.sh:
+  
+    (en CordeBot/oveja)
+    ./4_just4lamb.sh {esto ejecutara solo una oveja, la ultima, directamente}
   
