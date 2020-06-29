@@ -69,7 +69,7 @@ public:
 
     //robot data
     string RobotName;
-    string LaserName; 
+    string LaserName;
 
 void initialize(const std::shared_ptr<InnerModel> &innerModel_, std::shared_ptr< RoboCompCommonBehavior::ParameterList > configparams_, RoboCompOmniRobot::OmniRobotPrx omnirobot_proxy_)
 {
@@ -89,7 +89,7 @@ void initialize(const std::shared_ptr<InnerModel> &innerModel_, std::shared_ptr<
     }
 
 
-    qDebug() << "-=-=-=-=-=-=-=-=-=-=  > " << QString::fromStdString(RobotName) << "  " << QString::fromStdString(LaserName) << endl; 
+    qDebug() << "-=-=-=-=-=-=-=-=-=-=  > " << QString::fromStdString(RobotName) << "  " << QString::fromStdString(LaserName) << endl;
 
 
     omnirobot_proxy = omnirobot_proxy_;
@@ -123,7 +123,7 @@ void updateInnerModel(const std::shared_ptr<InnerModel> &innerModel_)
 
 };
 
-void update(const RoboCompLaser::TLaserData &laserData_, bool needsReplaning)
+bool update(const RoboCompLaser::TLaserData &laserData_, bool needsReplaning)
 {
     qDebug()<<"Navigation - "<< __FUNCTION__<<"(): Updating...";
 
@@ -138,9 +138,27 @@ void update(const RoboCompLaser::TLaserData &laserData_, bool needsReplaning)
 
     laserData = computeLaser(laserData_);  // esta linea necesita dentro el nombre del laser de cada oveja
 
-    currentRobotPose = innerModel->transformS6D("world", RobotName); // esta linea necesita el nombre del robot (esta en configparams)
 
-    updateLaserPolygon(laserData); // esta linea necesita dentro el nombre del laser de cada oveja    
+    currentRobotPose = innerModel->transformS6D("world", RobotName); // esta linea necesita el nombre del robot (esta en configparams)
+    qDebug()<< "NAVIGATION ---- Robot all: "<< currentRobotPose;
+
+    int xpos;
+    int ypos;
+    float angle;
+    omnirobot_proxy->getBasePose(xpos, ypos, angle);
+    qDebug()<< "NAVIGATION ---- omnirobot_proxy.getBasePose:   x:"<< xpos << "    y:" << ypos << "    a:" << angle;
+
+    //actualizando innerModel
+    innerModel->updateTransformValuesS(RobotName, xpos, currentRobotPose.z(), ypos, currentRobotPose.rx(), angle, currentRobotPose.rz());
+
+    currentRobotPose = innerModel->transformS6D("world", RobotName); // esta linea necesita el nombre del robot (esta en configparams)
+    qDebug()<< "NAVIGATION ---- Robot all: "<< currentRobotPose;
+
+
+
+
+
+    updateLaserPolygon(laserData); // esta linea necesita dentro el nombre del laser de cada oveja
     currentRobotPolygon = getRobotPolygon();
     currentRobotNose = getRobotNose();
 
@@ -166,7 +184,7 @@ void update(const RoboCompLaser::TLaserData &laserData_, bool needsReplaning)
     }
 
     if (checkPathState() == false)
-        return;
+        return false;
 
     qDebug()<<"Navigation - "<< __FUNCTION__<<"(): Computing forces...";
     computeForces(pathPoints, laserData);
@@ -177,7 +195,7 @@ void update(const RoboCompLaser::TLaserData &laserData_, bool needsReplaning)
 
 
     qDebug()<<"Navigation - "<< __FUNCTION__<<"(): Updating Controller...";
-    auto [blocked, active, xVel,zVel,rotVel] = controller.update(pathPoints, laserData, current_target.p, currentRobotPose);
+    auto [blocked, active, on_target, xVel,zVel,rotVel] = controller.update(pathPoints, laserData, current_target.p, currentRobotPose);
     qDebug()<< "xVel "<<xVel << "zVel "<<zVel << "rotVel" << rotVel << "Blocked:" << blocked << "  Active:" << active << "   moveRobot:" << moveRobot;
 
 
@@ -211,13 +229,14 @@ void update(const RoboCompLaser::TLaserData &laserData_, bool needsReplaning)
     if (!blocked and active)
     {
         if(moveRobot){
-		omnirobot_proxy->setSpeedBase(xVel,zVel,rotVel);
-	} else {
-		qDebug()<<"Navigation - "<< __FUNCTION__<<"(): [!] Motionless Robot (use enableRobotMovement() to active robot movement ability) [!]";
-	}
+		        omnirobot_proxy->setSpeedBase(xVel,zVel,rotVel);
+	      } else {
+		        qDebug()<<"Navigation - "<< __FUNCTION__<<"(): [!] Motionless Robot (use enableRobotMovement() to active robot movement ability) [!]";
+	      }
     }
 
-
+    // devolvemos si el robot ha llegado al destino
+    return on_target;
 
 };
 
@@ -861,7 +880,7 @@ QPointF getRobotNose()
     return (robot + QPointF( (robotZLong/2 + 200) * sin(currentRobotPose.ry()), (robotZLong/2 + 200) * cos(currentRobotPose.ry())));
 
 }
- 
+
 
 
 };

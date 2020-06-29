@@ -4,7 +4,7 @@
 
 		id="base4"  -> laser id="laser4"
 		id="base"   -> laser id="laser"
-		
+
 -->
 
 
@@ -13,18 +13,18 @@
 <innerModel>
 	<transform id="world">
 		<transform id="floor">
-		    <plane id="floor_plane" ny="1"  px="-0" py="0" pz="0" size="15000,5000,10" texture="/home/robocomp/robocomp/components/CordeBot/textures/straw_texture.jpg" /> 
-	
+		    <plane id="floor_plane" ny="1"  px="-0" py="0" pz="0" size="15000,5000,10" texture="/home/robocomp/robocomp/components/CordeBot/textures/straw_texture.jpg" />
+
 			<plane id="ddR" nx="1"  px="7500" py="400" pz="0" size="5000,1000,200" texture="/home/robocomp/robocomp/components/CordeBot/textures/ladrillos_cortos.jpg"/>
 			<plane id="ddL" nx="1" px="-7500" py="400" pz="0" size="5000,1000,200" texture="/home/robocomp/robocomp/components/CordeBot/textures/ladrillos_cortos.jpg" />
-			
+
 			<plane id="ddF" nz="1"  pz="2500" py="400" px="0" size="15000,1000,200" texture="/home/robocomp/robocomp/components/CordeBot/textures/ladrillos_largos.jpg" />
 			<plane id="ddB" nz="1" pz="-2500" py="400" px="0" size="15000,1000,200" texture="/home/robocomp/robocomp/components/CordeBot/textures/ladrillos_largos.jpg" />
-			<!--<plane id="puntoObjetivo" px="1000" pz="1000" py="100"  size="100,100,100" repeat="1" texture="#ff6666" />--> 
+			<!--<plane id="puntoObjetivo" px="0" pz="1000" py="1000"  size="50,50,50" repeat="1" texture="#ff6666" />-->
 			<!--
 			<plane id="ddR2" nx="1" px="7500" py="400" pz="0" size="5000,1000,230" texture="/home/robocomp/robocomp/files/osgModels/textures/wood.jpg" />
 			<plane id="ddL2" nx="1" px="-7500" py="400" pz="0" size="5000,1000,230" texture="/home/robocomp/robocomp/files/osgModels/textures/wood.jpg" />
-			
+
 			<plane id="ddF2" nz="1" pz="2500" py="400" px="0" size="15000,1000,230" texture="/home/robocomp/robocomp/files/osgModels/textures/wood.jpg" />
 			<plane id="ddB2" nz="1" pz="-2500" py="400" px="0" size="15000,2000,230" texture="/home/robocomp/robocomp/files/osgModels/textures/wood.jpg" />
 			-->
@@ -32,67 +32,66 @@
 
 
 			<!--
-		
+
 			<omnirobot id="base" port="10004">
 			<mesh id="base_robex" file="/home/robocomp/robocomp/components/CordeBot/models/sheep/sheep_textured.ive"  tx="0" ty="0" tz="0" scale="6" rx="3.14"  ry="3.14" collide="1"/>
 				<translation id="laserPose" tx="0" ty="140" tz="200">
 					<laser id="laser" port="10003" measures="100" min="100" max="30000" angle="3" ifconfig="10000" />
-						<plane id="sensorL" nz="1" pz="-250" py="248"  size="30,8,210" repeat="1" texture="#ff55ff" /> 
-				</translation>	
+						<plane id="sensorL" nz="1" pz="-250" py="248"  size="30,8,210" repeat="1" texture="#ff55ff" />
+				</translation>
 				<translation id="robotGeometricCenter" tx="0" ty="0" tz="50">
 				</translation>
 			</omnirobot>
-		
-			
-			
+
+
+
 			<omnirobot id="base1" port="11004">
 			<mesh id="base_robex1" file="/home/robocomp/robocomp/components/CordeBot/models/sheep/sheep_textured.ive"  tx="0" ty="0" tz="0" scale="7" rx="3.14"  ry="3.14" collide="1"/>
 				<translation id="laserPose1" tx="0" ty="140" tz="200">
 					<laser id="laser1" port="11003" measures="100" min="100" max="30000" angle="3" ifconfig="10000" />
-						<plane id="sensorL1" nz="1" pz="-250" py="315"  size="30,8,270" repeat="1" texture="#ffffff" /> 
-				</translation>	
+						<plane id="sensorL1" nz="1" pz="-250" py="315"  size="30,8,270" repeat="1" texture="#ffffff" />
+				</translation>
 				<translation id="robotGeometricCenter1" tx="0" ty="0" tz="50">
 				</translation>
 			</omnirobot>
-		
+
 			<omnirobot id="base2" port="12004">
 			<mesh id="base_robex2" file="/home/robocomp/robocomp/components/CordeBot/models/sheep/sheep_textured.ive"  tx="0" ty="0" tz="0" scale="8" rx="3.14"  ry="3.14" collide="1"/>
 				<translation id="laserPose2" tx="0" ty="140" tz="200">
 					<laser id="laser2" port="12003" measures="100" min="100" max="30000" angle="3" ifconfig="10000" />
-						<plane id="sensorL2" nz="1" pz="-250" py="380"  size="30,8,310" repeat="1" texture="#0088ff" /> 
-				</translation>	
+						<plane id="sensorL2" nz="1" pz="-250" py="380"  size="30,8,310" repeat="1" texture="#0088ff" />
+				</translation>
 				<translation id="robotGeometricCenter2" tx="0" ty="0" tz="50">
 				</translation>
 			</omnirobot>
-		
+
 			<omnirobot id="base3" port="13004">
 			<mesh id="base_robex3" file="/home/robocomp/robocomp/components/CordeBot/models/sheep/sheep_textured.ive"  tx="0" ty="0" tz="0" scale="9" rx="3.14"  ry="3.14" collide="1"/>
 				<translation id="laserPose3" tx="0" ty="140" tz="200">
 					<laser id="laser3" port="13003" measures="100" min="100" max="30000" angle="3" ifconfig="10000" />
-						<plane id="sensorL3" nz="1" pz="-250" py="443"  size="30,9,350" repeat="1" texture="#00ff00" /> 
-				</translation>	
+						<plane id="sensorL3" nz="1" pz="-250" py="443"  size="30,9,350" repeat="1" texture="#00ff00" />
+				</translation>
 				<translation id="robotGeometricCenter3" tx="0" ty="0" tz="50">
 				</translation>
 			</omnirobot>
 		-->
 
+
+		<omnirobot id="base4" port="14004">
+			<mesh id="base_robex4" file="/home/robocomp/robocomp/components/CordeBot/models/sheep/sheep_textured.ive" tx="0" ty="0" tz="0" scale="10" rx="3.14" ry="3.14" collide="1"/>
+			<translation id="laserPose4" tx="0" ty="140" tz="200">
+				<laser id="laser4" port="14003" measures="100" min="100" max="30000" angle="3" ifconfig="10000"/>
+				<plane id="sensorl4" nz="1" pz="-250" py="510" size="30,10,350" repeat="1" texture="#ff6666"/>
+			</translation>
+			<translation id="robotGeometricCenter4" tx="0" ty="0" tz="50"></translation>
+		</omnirobot>
 		
-			<omnirobot id="base4" port="14004">
-			<mesh id="base_robex4" file="/home/robocomp/robocomp/components/CordeBot/models/sheep/sheep_textured.ive"  tx="0" ty="0" tz="0" scale="10" rx="3.14"  ry="3.14" collide="1"/>
-				<translation id="laserPose4" tx="0" ty="140" tz="200">
-					<laser id="laser4" port="14003" measures="100" min="100" max="30000" angle="3" ifconfig="10000" />
-						<plane id="sensorl4" nz="1" pz="-250" py="510"  size="30,10,350" repeat="1" texture="#ff6666" /> 
-				</translation>	
-				<translation id="robotGeometricCenter4" tx="0" ty="0" tz="50">
-				</translation>
-			</omnirobot>
-		
 
-		-->			
-			
+		-->
 
 
-			
+
+
 
 
 			<!-- COMEDERO   -->
@@ -112,9 +111,7 @@
 			<!-- CAMARAS   -->
 			<mesh id="cam1" file="/home/robocomp/robocomp/components/CordeBot/models/tube_cam/camera_textured.osg"  tx="0" ty="400" tz="2000" scale="2000" rx="3.14"  rz="0" collide="0"/>
 			-->
-		
-		
+
+
 	</transform>
 </innerModel>
-
-

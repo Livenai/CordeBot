@@ -13,8 +13,10 @@
 
 class Controller {
 public:
-                            //   blocked, active, velx,velz,velrot
-    using retUpdate = std::tuple <bool,bool,float,float,float>;
+                            //   blocked, active, on_target, velx,velz,velrot
+    using retUpdate = std::tuple <bool,bool,bool,float,float,float>;
+
+
 
     void initialize(const std::shared_ptr<InnerModel> &innerModel_,
             std::shared_ptr<RoboCompCommonBehavior::ParameterList> params_)
@@ -56,13 +58,18 @@ public:
 
         QPointF robot = QPointF(robotPose.x(),robotPose.z());
         QPointF robotNose = robot + QPointF(50*sin(robotPose.ry()),50*cos(robotPose.ry()));
+        qDebug()<< "Robot coords: " << robot << "    Robot ry: "<< robotPose.ry() << "    Robot Nose: "<< robotNose;
+
 
         auto firstPointInPath = points[0];
 
 
         // Compute euclidean distance to target
         float euc_dist_to_target = QVector2D(robot - target).length();
-//        qDebug()<< "DISTANCE TO TARGET " << euc_dist_to_target << "NUM POINTS "<< points.size();
+        qDebug()<< "NEXT POINT: (" << firstPointInPath << ")" << "     DISTANCE: " << QVector2D(robot - firstPointInPath).length();
+        qDebug()<< "DISTANCE TO TARGET " << euc_dist_to_target << "NUM POINTS "<< points.size();
+
+
 
         if (points.size() < 3 and euc_dist_to_target < FINAL_DISTANCE_TO_TARGET)
         {
@@ -76,7 +83,7 @@ public:
 
             active = false;
 
-            return std::make_tuple(blocked, active, advVelx, advVelz,rotVel);
+            return std::make_tuple(blocked, active, true, advVelx, advVelz,rotVel);
         }
 
         // Proceed through path
@@ -87,18 +94,24 @@ public:
         auto lim = std::min(6, (int)points.size());
         QLineF nose(robot, robotNose);
 
-        for (auto &&i : iter::range(1, lim))
+        for (auto &&i : iter::range(1, lim)){
+            qDebug() << __FUNCTION__ << "--------->  angles = " << rewrapAngleRestricted(qDegreesToRadians(nose.angleTo(QLineF(firstPointInPath, points[i]))));
             angles.push_back(rewrapAngleRestricted(qDegreesToRadians(nose.angleTo(QLineF(firstPointInPath, points[i])))));
+        }
 
-//        auto min_angle = std::min(angles.begin(), angles.end()); //Solo devolvía el primer elemento del vector aunque no fuese el ultimo
-        auto min_angle = std::min_element(angles.begin(), angles.end());
+
+        // funcion lambda comparadora para obtener el menor angulo usando fabs()
+        auto f = [](float i, float j) -> bool { return fabs(i)<fabs(j); };
+        //obtenemos el menor angulo
+        auto min_angle = std::min_element(angles.begin(), angles.end(), f);
 
 
         if (min_angle != angles.end())
         {
+            qDebug() << __FUNCTION__ << "-------------------->  min_angle = " << *min_angle;
             rotVel = 1.2 * *min_angle;
             if (fabs(rotVel) > MAX_ROT_SPEED)
-                rotVel = rotVel / fabs(rotVel) * MAX_ROT_SPEED;
+                rotVel = rotVel>0?MAX_ROT_SPEED:-MAX_ROT_SPEED;
         }
         else
         {
@@ -127,7 +140,7 @@ public:
             advVelx = bumperVel.x();
 
 
-        return std::make_tuple (blocked, active, advVelx, advVelz,rotVel);
+        return std::make_tuple (blocked, active, false, advVelx, advVelz,rotVel);
 
     }
 
@@ -153,6 +166,8 @@ private:
 
     float advVelx = 0, advVelz = 0, rotVel = 0;
     QVector2D bumperVel;
+
+
 
     // compute max de gauss(value) where gauss(x)=y  y min
     float exponentialFunction(float value, float xValue, float yValue, float min)

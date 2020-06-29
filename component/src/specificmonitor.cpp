@@ -70,7 +70,7 @@ bool SpecificMonitor::sendParamsToWorker(RoboCompCommonBehavior::ParameterList p
 	if(checkParams(params))
 	{
 		//Set params to worker
-		if(worker->setParams(params)) 
+		if(worker->setParams(params))
 			return true;
 	}
 	else
@@ -129,7 +129,7 @@ void SpecificMonitor::readConfig(RoboCompCommonBehavior::ParameterList &params )
 	aux.editable = false;
 	configGetString( "NavigationAgent","RobotRadius", aux.value,"300");
 	params["RobotRadius"] = aux;
-
+	
 	aux.editable = false;
 	configGetString( "NavigationAgent","MinControllerPeriod", aux.value,"100");
 	params["MinControllerPeriod"] = aux;
@@ -175,7 +175,7 @@ void SpecificMonitor::readConfig(RoboCompCommonBehavior::ParameterList &params )
 	params["MinimumDetectableTranslation"] = aux;
 
 	aux.editable = false;
-	configGetString( "NavigationAgent","MinimumSafetyDistance", aux.value,"100");
+	configGetString( "NavigationAgent","MinimumSafetyDistance", aux.value,"50");
 	params["MinimumSafetyDistance"] = aux;
 
 
@@ -187,4 +187,3 @@ bool SpecificMonitor::checkParams(RoboCompCommonBehavior::ParameterList l)
 	bool correct = true;
 	return correct;
 }
-
