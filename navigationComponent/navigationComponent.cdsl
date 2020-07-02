@@ -1,0 +1,18 @@
+import "DifferentialRobot.idsl";
+import "OmniRobot.idsl";
+import "Laser.idsl";
+import "RCISMousePicker.idsl";
+
+Component navigationComponent
+{
+    Communications
+    {
+		requires OmniRobot, Laser;
+		subscribesTo RCISMousePicker;
+    };
+    language Cpp;
+    gui Qt(QWidget);
+statemachine "statemachine.smdsl";
+
+};
+

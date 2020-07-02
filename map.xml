@@ -77,11 +77,11 @@
 		-->
 
 
-		<omnirobot id="base4" port="14004">
-			<mesh id="base_robex4" file="/home/robocomp/robocomp/components/CordeBot/models/sheep/sheep_textured.ive" tx="0" ty="0" tz="0" scale="10" rx="3.14" ry="3.14" collide="1"/>
-			<translation id="laserPose4" tx="0" ty="140" tz="200">
-				<laser id="laser4" port="14003" measures="100" min="100" max="30000" angle="3" ifconfig="10000"/>
-				<plane id="sensorl4" nz="1" pz="-250" py="510" size="30,10,350" repeat="1" texture="#ff6666"/>
+		<omnirobot id="robot" port="12238">
+			<mesh id="base_mesh" file="/home/robocomp/robocomp/components/CordeBot/models/sheep/sheep_textured.ive" tx="0" ty="0" tz="0" scale="10" rx="3.14" ry="3.14" collide="1"/>
+			<translation id="laserPose" tx="0" ty="140" tz="200">
+				<laser id="laser" port="10003" measures="100" min="100" max="30000" angle="3" ifconfig="10000"/>
+				<plane id="sensorl" nz="1" pz="-250" py="510" size="30,10,350" repeat="1" texture="#ff6666"/>
 			</translation>
 			<translation id="robotGeometricCenter4" tx="0" ty="0" tz="50"></translation>
 		</omnirobot>

@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<rcmanager>
+
+ <generalInformation>
+  <editor path="kate" dock="false" />
+  <timeouts fixed="1000.0" blink="300.0" />
+  <clicks switch="2.0" interval="400.0" />
+  <graph alpha="80.0" active="true" scale="200.0" />
+  <graphTiming idletime="1000.0" focustime="500.0" fasttime="10.0" fastperiod="2000.0" />
+  <simulation hookes="0.07" springlength="0.5" friction="0.4" step="0.5" fieldforce="20000.0" />
+ </generalInformation>
+
+  <node alias="mission - no deps" endpoint="commonbehavior:tcp -h localhost -p 11247">
+  <dependence alias="executive" />
+  <workingDir path="/home/robocomp/" />
+  <upCommand command="rcremote localhost mission /home/robocomp/AGM/tools/agmmission agmmission /home/robocomp/robocomp/components/robocomp-shelly/etcSim/mission.conf" />
+  <downCommand command="killall -9 agmmission" />
+  <configFile path="/home/robocomp/robocomp/components/robocomp-shelly/etcSim/mission.conf" />
+  <xpos value="-11.0935151594" />
+  <ypos value="-224.933874221" />
+  <radius value="10.0" />
+  <color value="#AAAAAA" />
+ </node>
+
+
+ <node alias="laser" endpoint="laser:tcp -h localhost -p 10003">
+  <dependence alias="base" />
+  <workingDir path="/home/robocomp/" />
+  <upCommand command="rcremote localhost rgbd /home/robocomp/robocomp/components/CordeBot rcis map.xml -f 100" />
+  <downCommand command="killall -9 rcis" />
+  <configFile path="rcremote localhost configs /home/robocomp/robocomp/components/CordeBot kate map.xml" />
+  <xpos value="-158.4646681749" />
+  <ypos value="50.5106363282" />
+  <radius value="10.0" />
+  <color value="#3333FF" />
+ </node>
+
+
+
+ <node alias="base" endpoint="omnirobot:tcp -h localhost -p 12238">
+  <workingDir path="/home/robocomp/" />
+  <upCommand command="rcremote localhost rgbd /home/robocomp/robocomp/components/CordeBot rcis map.xml -f 45" />
+  <downCommand command="killall -9 rcis" />
+  <configFile path="rcremote localhost configs /home/robocomp/robocomp/components/CordeBot kate map.xml" />
+  <xpos value="-216.350970747" />
+  <ypos value="50.5106363282" />
+  <radius value="10.0" />
+  <color value="#FF3333" />
+ </node>
+
+ <node alias="storm" endpoint="IceStorm/TopicManager:default -h localhost -p 9999">
+  <workingDir path="/home/robocomp/robocomp/components/robocomp-shelly/etc/" />
+  <upCommand command="rcremote localhost IS /home/robocomp/robocomp/components/robocomp-shelly/etc/ rcnode" />
+  <downCommand command="killall -9 icebox" />
+  <configFile path="/home/robocomp/robocomp/components/robocomp-shelly/etc/ursus.conf" />
+  <xpos value="58.22150957623" />
+  <ypos value="-115.512538117" />
+  <radius value="10.0" />
+  <color value="#FF3333" />
+ </node>
+
+ <node alias="executive" endpoint="agmexecutive:tcp -h localhost -p 10198">
+  <dependence alias="storm" />
+  <workingDir path="/home/robocomp/" />
+  <upCommand command="rcremote localhost AGMExecutive /home/robocomp/AGM/tools/AGMExecutive_robocomp python AGMExecutive_robocomp.py /home/robocomp/robocomp/components/robocomp-viriato/etcSim/executiveAUTONOMY.conf" />
+  <downCommand command="pkill -9 -f AGMExecutive_robocomp.py" />
+  <configFile path="xxx" />
+  <xpos value="-8.22150957623" />
+  <ypos value="-115.512538117" />
+  <radius value="10.0" />
+  <color value="#33FF33" />
+ </node>
+
+ <node alias="LocalizationA" endpoint="commonbehavior:tcp -p 14351">
+  <dependence alias="executive" />
+  <dependence alias="base" />
+  <!--dependence alias="slam" /-->
+  <workingDir path="/home/robocomp/" />
+  <upCommand command="rcremote localhost localizationAgent /home/robocomp/robocomp/components/robocomp-viriato/components/localizationAgent_RCIS ./bin/localizationAgent /home/robocomp/robocomp/components/robocomp-viriato/components/localizationAgent_RCIS/etc/config" />
+  <downCommand command="killall -9 localizationAgent" />
+  <configFile path="/home/robocomp/robocomp/components/robocomp-viriato/components/localizationAgent_RCIS/etc/config" />
+  <xpos value="-116.350970747" />
+  <ypos value="-115.512538117" />
+  <radius value="13.0" />
+   <color value="#FF3333" /> -->
+ </node>
+
+
+
+
+ <node alias="navigationA" endpoint="agmcommonbehavior:tcp -h localhost -p 10330">
+ <!-- <dependence alias="LocalizationA" />
+
+  <dependence alias="base" />-->
+  <workingDir path="/home/robocomp/" />
+  <upCommand command="rcremote localhost navigationA /home/robocomp/robocomp/components/CordeBot/navigationAgent ./bin/navigationAgent ./etc/navigationAgent.conf" />
+  <downCommand command="killall -9 navigationA" />
+  <configFile path="/home/robocomp/robocomp/components/Cordebot/navigationAgent/etc/navigationAgent.conf" />
+  <xpos value="-60.097569307" />
+  <ypos value="-30.5106363282" />
+  <radius value="10.0" />
+  <color value="#33FF33" />
+ </node>
+
+
+
+</rcmanager>
