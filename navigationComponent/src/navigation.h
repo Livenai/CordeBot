@@ -70,7 +70,7 @@ public:
 
 
 void initialize(const std::shared_ptr<InnerModel> &innerModel_, const std::shared_ptr<InnerViewer> &viewer_,
-        std::shared_ptr< RoboCompCommonBehavior::ParameterList > configparams_, OmniRobotPrx omnirobot_proxy_)
+        std::shared_ptr< RoboCompCommonBehavior::ParameterList > configparams_, RoboCompOmniRobot::OmniRobotPrx omnirobot_proxy_)
 {
     qDebug()<<"Navigation - "<< __FUNCTION__;
 
@@ -295,7 +295,7 @@ private:
     std::shared_ptr<InnerViewer> viewer;
     std::shared_ptr<RoboCompCommonBehavior::ParameterList> configparams;
 
-    OmniRobotPrx omnirobot_proxy;
+    RoboCompOmniRobot::OmniRobotPrx omnirobot_proxy;
 
     typedef struct { float dist; float angle;} LocalPointPol;
 
@@ -507,7 +507,7 @@ void computeForces(const std::vector<QPointF> &path, const RoboCompLaser::TLaser
         qDebug() << "Total force "<< total.toPointF()<< " New Point "<< temp_p;
 
 //        if (isVisible(temp_p)
-        if (isPointVisitable(temp_p)) 
+        if (isPointVisitable(temp_p))
         {
 
             auto it = find_if(pathPoints.begin(), pathPoints.end(), [p] (auto & s) {
