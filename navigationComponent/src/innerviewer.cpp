@@ -20,7 +20,7 @@
 #include "innerviewer.h"
 
 InnerViewer::InnerViewer( const InnerPtr &innerModel_, const std::string &name_, uint period_) : period(period_)
-{	
+{
 	QGLFormat fmt;
 	fmt.setDoubleBuffer(true);
 	QGLFormat::setDefaultFormat(fmt);
@@ -36,7 +36,7 @@ InnerViewer::InnerViewer( const InnerPtr &innerModel_, const std::string &name_,
 	viewer.addEventHandler(new osgViewer::WindowSizeHandler);
 	createWindow(viewer, name_);
  	root = new osg::Group();
-	
+
 	viewer.getLight()->setPosition(osg::Vec4(1,-1, 1, 0)); // make 4th coord 1 for point
 	viewer.getLight()->setAmbient(osg::Vec4(0.2, 0.2, 0.2, 1.0));
 	//viewer.getLight()->setDiffuse(osg::Vec4(0.7, 0.4, 0.6, 1.0));
@@ -47,7 +47,7 @@ InnerViewer::InnerViewer( const InnerPtr &innerModel_, const std::string &name_,
 	innerModelViewer = new InnerModelViewer(innerModel_, "root", root, true);
 
  	viewer.setSceneData(root);
-		
+
 	//////////////////////////
 	//RESTORE FORMER VIEW					QUEDA CAPTURAR EL EVENTO DE CIERRE DE LA VENTANA PARA GUARDAR LA MATRIZ ACTUAL
 	/////////////////////////
@@ -64,7 +64,7 @@ InnerViewer::InnerViewer( const InnerPtr &innerModel_, const std::string &name_,
 	}
 		else
 			innerModelViewer->setMainCamera(tb, InnerModelViewer::TOP_POV);
-	 	
+
 	viewer.realize();
 }
 
@@ -85,7 +85,7 @@ void InnerViewer::run()
 }
 
 void InnerViewer::reloadInnerModel(InnerPtr other)
-{	
+{
 //	guard gl(mutex);
 	innerModel = other;
 
@@ -102,11 +102,11 @@ void InnerViewer::reloadInnerModel(InnerPtr other)
 //}
 
 //////////////////////////////////////////////////////
-//// Non thread saffe API 
+//// Non thread saffe API
 //////////////////////////////////////////////////////
 
 void InnerViewer::removeNode(const QString &item_)
-{	
+{
 //	guard gl(mutex);
     //preconditions
 	InnerModelNode *node = innerModel->getNode(item_);
@@ -158,7 +158,7 @@ void InnerViewer::addTransform_ignoreExisting(const QString &item_, const QStrin
     //preconditions
 	if(pos.size() != 6)
 		throw QString("InnerViewer::addPlane_ignoreExisting: Position vector has not dimension 6");
-	
+
 	InnerModelNode *parent = innerModelViewer->innerModel->getNode(parent_);
 	if (parent == NULL)
 		throw QString("InnerViewer::addTransform_ignoreExisting: parent element node doesn't exist");
@@ -175,7 +175,7 @@ void InnerViewer::addTransform(const QString &item_, const QString &parent_,cons
     //preconditions
 	if(pos.size() != 6)
 		throw QString("InnerViewer::addPlane_ignoreExisting: Position vector has not dimension 6");
-	
+
 	InnerModelNode *parent = innerModelViewer->innerModel->getNode(parent_);
 	if (parent == NULL)
 		throw QString("InnerViewer::addTransform: parent node doesn't exist");
@@ -233,7 +233,7 @@ void InnerViewer::addMesh_ignoreExisting(const QString &item, const QString &bas
     InnerModelTransform *parent = innerModel->getNode<InnerModelTransform>(base);
 	if( parent == nullptr)
 		return;
-	
+
 	if (innerModel->getNode<InnerModelNode>(item) != nullptr)
 	{
 		removeNode(item);
@@ -256,7 +256,7 @@ bool InnerViewer::setScale(const QString &item, float scaleX, float scaleY, floa
 {
 //	guard gl(mutex);
     InnerModelMesh *aux = innerModel->getNode<InnerModelMesh>(item);
-	if(aux == nullptr) 
+	if(aux == nullptr)
 		return false;
 	aux->setScale(scaleX, scaleY, scaleZ);
 	return true;
@@ -291,7 +291,7 @@ bool InnerViewer::setPlaneTexture(const QString &item, const QString &texture)
     InnerModelPlane *aux = innerModel->getNode<InnerModelPlane>(item);
 	if(item == nullptr)
 		return false;
-	
+
 	aux->texture = texture;
 	bool constantColor = false;
 	if (texture.size() == 7)
@@ -322,7 +322,7 @@ bool InnerViewer::setPlaneTexture(const QString &item, const QString &texture)
 void InnerViewer::drawLine2Points(const QString &name, const QString &parent, const QVec& p1, const QVec& p2, float width, const QString &texture)
 {
 //	guard gl(mutex);
-    QLine2D line( p1 , p2 );	
+    QLine2D line( p1 , p2 );
 	float dl = (p1-p2).norm2();
 	QVec center = p2 + ((p1 - p2)*(float)0.5);
 	this->drawLine(name, parent, line.getNormalForOSGLineDraw(), center, dl, width, "#0000ff");
@@ -371,8 +371,8 @@ void InnerViewer::createWindow(osgViewer::Viewer& viewer, const std::string &nam
 	unsigned int width, height;
 
     //If the display number is different to 1 that should be changed to
-//	wsi->getScreenResolution(osg::GraphicsContext::ScreenIdentifier("",0, 0), width, height);
-	wsi->getScreenResolution(osg::GraphicsContext::ScreenIdentifier("",1, 0), width, height);
+	wsi->getScreenResolution(osg::GraphicsContext::ScreenIdentifier("",0, 0), width, height);
+//	wsi->getScreenResolution(osg::GraphicsContext::ScreenIdentifier("",1, 0), width, height);
     //and traits->displayNum = 1; should be removed
 
 	osg::ref_ptr<osg::GraphicsContext::Traits> traits = new osg::GraphicsContext::Traits;
@@ -385,7 +385,7 @@ void InnerViewer::createWindow(osgViewer::Viewer& viewer, const std::string &nam
 	traits->doubleBuffer = true;
 	traits->sharedContext = 0;
 	traits->windowName = "InnerModelViewer " + name;
-	traits->displayNum = 1;
+	//traits->displayNum = 1;
 
 	osg::ref_ptr<osg::GraphicsContext> gc = osg::GraphicsContext::createGraphicsContext(traits.get());
 
@@ -420,4 +420,3 @@ void InnerViewer::createWindow(osgViewer::Viewer& viewer, const std::string &nam
 		viewer.addSlave(camera.get(), osg::Matrixd(), osg::Matrixd::scale(aspectRatioScale,1.0,1.0));
 	}
 }
-

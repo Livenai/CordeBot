@@ -42,11 +42,6 @@
 #define CHECK_PERIOD 5000
 #define BASIC_PERIOD 100
 
-using namespace std;
-using namespace RoboCompGenericBase;
-using namespace RoboCompLaser;
-using namespace RoboCompOmniRobot;
-using namespace RoboCompRCISMousePicker;
 
 typedef map <string,::IceProxy::Ice::Object*> MapPrx;
 
@@ -64,10 +59,10 @@ public:
 	QMutex *mutex;
 
 
-	LaserPrx laser_proxy;
-	OmniRobotPrx omnirobot_proxy;
+	RoboCompLaser::LaserPrx laser_proxy;
+	RoboCompOmniRobot::OmniRobotPrx omnirobot_proxy;
 
-	virtual void RCISMousePicker_setPick(const Pick &myPick) = 0;
+	virtual void RCISMousePicker_setPick (const RoboCompRCISMousePicker::Pick &myPick) = 0;
 
 protected:
 	//State Machine

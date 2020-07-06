@@ -54,6 +54,11 @@ bool SpecificWorker::setParams(RoboCompCommonBehavior::ParameterList params)
         catch(std::exception e) { qFatal("Error reading innerModel Path"); }
 
 
+        qDebug()<<"InnerModelPath: " << QString::fromStdString(innermodel_path);
+
+
+
+
         innerModel = std::make_shared<InnerModel> (innermodel_path);
 
 
@@ -234,7 +239,7 @@ void SpecificWorker::sm_finalize()
 
 ////////////////////////// SUBSCRIPTIONS /////////////////////////////////////////////
 
-void SpecificWorker::RCISMousePicker_setPick(const Pick &myPick)
+void SpecificWorker::RCISMousePicker_setPick(const RoboCompRCISMousePicker::Pick &myPick)
 {
     navigation.newTarget(QPointF(myPick.x,myPick.z));
 }

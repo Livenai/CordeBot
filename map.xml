@@ -85,7 +85,7 @@
 			</translation>
 			<translation id="robotGeometricCenter4" tx="0" ty="0" tz="50"></translation>
 		</omnirobot>
-		
+
 
 		-->
 
@@ -111,6 +111,7 @@
 			<!-- CAMARAS   -->
 			<mesh id="cam1" file="/home/robocomp/robocomp/components/CordeBot/models/tube_cam/camera_textured.osg"  tx="0" ty="400" tz="2000" scale="2000" rx="3.14"  rz="0" collide="0"/>
 			-->
+
 
 
 	</transform>
