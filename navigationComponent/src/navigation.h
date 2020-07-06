@@ -132,19 +132,7 @@ void update(const RoboCompLaser::TLaserData &laserData_, bool needsReplaning)
     // InnerModel
     RobotName = "robot";
     currentRobotPose = innerModel->transformS6D("world",RobotName);
-    qDebug()<< "NAVIGATION ---- Robot all: "<< currentRobotPose;
 
-    int xpos;
-    int ypos;
-    float angle;
-    omnirobot_proxy->getBasePose(xpos, ypos, angle);
-    qDebug()<< "NAVIGATION ---- omnirobot_proxy.getBasePose:   x:"<< xpos << "    y:" << ypos << "    a:" << angle;
-
-    //actualizando innerModel
-    innerModel->updateTransformValuesS(RobotName, xpos, currentRobotPose.z(), ypos, currentRobotPose.rx(), angle, currentRobotPose.rz());
-
-    currentRobotPose = innerModel->transformS6D("world", RobotName); // esta linea necesita el nombre del robot (esta en configparams)
-    qDebug()<< "NAVIGATION ---- Robot all: "<< currentRobotPose;
 
 
 
@@ -738,7 +726,7 @@ QPointF getRobotNose()
     auto robot = QPointF(currentRobotPose.x(),currentRobotPose.z());
 
 //    return (robot + QPointF( (robotZLong/2 + 200) * sin(currentRobotPose.ry()), (robotZLong/2 + 200) * cos(currentRobotPose.ry())));
-    return (robot + QPointF(250*sin(currentRobotPose.ry()),250*cos(currentRobotPose.ry())));
+    return (robot + QPointF(600*sin(currentRobotPose.ry()),600*cos(currentRobotPose.ry())));
 
 }
 

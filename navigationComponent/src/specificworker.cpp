@@ -116,6 +116,22 @@ void SpecificWorker::compute()
 {
     qDebug()<< __FUNCTION__;
 
+    //actualizamos innerModel
+    string RobotName = "robot";
+    auto currentRobotPose = innerModel->transformS6D("world",RobotName);
+    qDebug()<< __FUNCTION__<< " ---- Robot pre: "<< currentRobotPose;
+    int xpos;
+    int ypos;
+    float angle;
+    omnirobot_proxy->getBasePose(xpos, ypos, angle);
+    qDebug()<< __FUNCTION__<< " ---- omnirobot_proxy.getBasePose:   x:"<< xpos << "    y:" << ypos << "    a:" << angle;
+
+    //actualizando innerModel
+    innerModel->updateTransformValuesS(RobotName, xpos, currentRobotPose.z(), ypos, currentRobotPose.rx(), angle, currentRobotPose.rz());
+
+    currentRobotPose = innerModel->transformS6D("world", RobotName); // esta linea necesita el nombre del robot (esta en configparams)
+    qDebug()<< __FUNCTION__<< " ---- Robot new: "<< currentRobotPose;
+
 //    static QTime reloj = QTime::currentTime();
 
     bool needsReplaning = false;
