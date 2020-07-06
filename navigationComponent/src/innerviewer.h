@@ -37,16 +37,16 @@
  */
 class InnerViewer
 //        : public QThread
-{	
-	
+{
+
 	using InnerPtr = std::shared_ptr<InnerModel>;
 	typedef std::lock_guard<std::recursive_mutex> guard;
-	
+
 	public:
 		InnerViewer(const InnerPtr &innerModel_, const std::__cxx11::string& name_ = "unknown", unsigned int period_=100000);
 		void run();
 		void reloadInnerModel(InnerPtr other);
-		
+
 		/////////////////////////////
 		// NOT thread safe interface
 		/////////////////////////////
@@ -75,7 +75,7 @@ class InnerViewer
 //		void ts_addPlane_notExisting(const QString &item_, const QString &parent_, const QVec &center, const QVec &normal, const QString &texture, const QVec &size){guard gl(mutex);addPlane_notExisting(item_, parent_, center, normal, texture, size);};
 //		void ts_updateTransformValues(const QString item_, const QVec &pos, const QString &parent = "")
 //		{guard gl(mutex); updateTransformValues(item_, pos, parent);};
-		
+
 	private:
 		mutable std::recursive_mutex mutex;
 		std::atomic<bool> stop{false};

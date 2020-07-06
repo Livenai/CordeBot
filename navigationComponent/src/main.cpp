@@ -86,20 +86,16 @@
 #include <GenericBase.h>
 
 
-// User includes here
-
-// Namespaces
-using namespace std;
-using namespace RoboCompCommonBehavior;
 
 class navigationComponent : public RoboComp::Application
 {
 public:
-	navigationComponent (QString prfx) { prefix = prfx.toStdString(); }
+	navigationComponent (QString prfx, bool startup_check) { prefix = prfx.toStdString(); this->startup_check_flag=startup_check; }
 private:
 	void initialize();
 	std::string prefix;
 	MapPrx mprx;
+	bool startup_check_flag;
 
 public:
 	virtual int run(int, char*[]);
@@ -135,8 +131,8 @@ int ::navigationComponent::run(int argc, char* argv[])
 
 	int status=EXIT_SUCCESS;
 
-	LaserPrx laser_proxy;
-	OmniRobotPrx omnirobot_proxy;
+	RoboCompLaser::LaserPrx laser_proxy;
+	RoboCompOmniRobot::OmniRobotPrx omnirobot_proxy;
 
 	string proxy, tmp;
 	initialize();
@@ -147,7 +143,7 @@ int ::navigationComponent::run(int argc, char* argv[])
 		{
 			cout << "[" << PROGRAM_NAME << "]: Can't read configuration for proxy LaserProxy\n";
 		}
-		laser_proxy = LaserPrx::uncheckedCast( communicator()->stringToProxy( proxy ) );
+		laser_proxy = RoboCompLaser::LaserPrx::uncheckedCast( communicator()->stringToProxy( proxy ) );
 	}
 	catch(const Ice::Exception& ex)
 	{
@@ -164,7 +160,7 @@ int ::navigationComponent::run(int argc, char* argv[])
 		{
 			cout << "[" << PROGRAM_NAME << "]: Can't read configuration for proxy OmniRobotProxy\n";
 		}
-		omnirobot_proxy = OmniRobotPrx::uncheckedCast( communicator()->stringToProxy( proxy ) );
+		omnirobot_proxy = RoboCompOmniRobot::OmniRobotPrx::uncheckedCast( communicator()->stringToProxy( proxy ) );
 	}
 	catch(const Ice::Exception& ex)
 	{
@@ -234,7 +230,7 @@ int ::navigationComponent::run(int argc, char* argv[])
 				cout << "[" << PROGRAM_NAME << "]: Can't read configuration for proxy RCISMousePickerProxy";
 			}
 			Ice::ObjectAdapterPtr RCISMousePicker_adapter = communicator()->createObjectAdapterWithEndpoints("rcismousepicker", tmp);
-			RCISMousePickerPtr rcismousepickerI_ =  new RCISMousePickerI(worker);
+			RoboCompRCISMousePicker::RCISMousePickerPtr rcismousepickerI_ =  new RCISMousePickerI(worker);
 			Ice::ObjectPrx rcismousepicker = RCISMousePicker_adapter->addWithUUID(rcismousepickerI_)->ice_oneway();
 			if(!rcismousepicker_topic)
 			{
@@ -290,7 +286,7 @@ int ::navigationComponent::run(int argc, char* argv[])
 		}
 		catch(const Ice::Exception& ex)
 		{
-			std::cout << "ERROR Unsubscribing topic: rcismousepicker " <<std::endl;
+			std::cout << "ERROR Unsubscribing topic: rcismousepicker " << ex.what()<<std::endl;
 		}
 
 
@@ -321,36 +317,49 @@ int main(int argc, char* argv[])
 	string arg;
 
 	// Set config file
-	std::string configFile = "etc/config";
+	QString configFile("etc/config");
+	bool startup_check_flag = false;
+	QString prefix("");
 	if (argc > 1)
 	{
-		std::string initIC("--Ice.Config=");
-		size_t pos = std::string(argv[1]).find(initIC);
-		if (pos == 0)
+	    QString initIC = QString("--Ice.Config=");
+	    for (int i = 1; i < argc; ++i)
 		{
-			configFile = std::string(argv[1]+initIC.size());
-		}
-		else
-		{
-			configFile = std::string(argv[1]);
-		}
-	}
+		    arg = argv[i];
+            if (arg.find(initIC.toStdString(), 0) == 0)
+            {
+                configFile = QString::fromStdString(arg).remove(0, initIC.size());
+            }
+        }
 
-	// Search in argument list for --prefix= argument (if exist)
-	QString prefix("");
-	QString prfx = QString("--prefix=");
-	for (int i = 2; i < argc; ++i)
-	{
-		arg = argv[i];
-		if (arg.find(prfx.toStdString(), 0) == 0)
-		{
-			prefix = QString::fromStdString(arg).remove(0, prfx.size());
-			if (prefix.size()>0)
-				prefix += QString(".");
-			printf("Configuration prefix: <%s>\n", prefix.toStdString().c_str());
-		}
-	}
-	::navigationComponent app(prefix);
+        // Search in argument list for --prefix= argument (if exist)
+        QString prfx = QString("--prefix=");
+        for (int i = 2; i < argc; ++i)
+        {
+            arg = argv[i];
+            if (arg.find(prfx.toStdString(), 0) == 0)
+            {
+                prefix = QString::fromStdString(arg).remove(0, prfx.size());
+                if (prefix.size()>0)
+                    prefix += QString(".");
+                printf("Configuration prefix: <%s>\n", prefix.toStdString().c_str());
+            }
+        }
 
-	return app.main(argc, argv, configFile.c_str());
+        // Search in argument list for --test argument (if exist)
+        QString startup = QString("--startup-check");
+		for (int i = 0; i < argc; ++i)
+		{
+			arg = argv[i];
+			if (arg.find(startup.toStdString(), 0) == 0)
+			{
+				startup_check_flag = true;
+				cout << "Startup check = True"<< endl;
+			}
+		}
+
+	}
+	::navigationComponent app(prefix, startup_check_flag);
+
+	return app.main(argc, argv, configFile.toLocal8Bit().data());
 }

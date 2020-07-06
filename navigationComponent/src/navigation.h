@@ -68,6 +68,10 @@ public:
 
 	localPersonsVec totalPersons;
 
+  //robot data
+  string RobotName;
+  string LaserName;
+
 
 void initialize(const std::shared_ptr<InnerModel> &innerModel_, const std::shared_ptr<InnerViewer> &viewer_,
         std::shared_ptr< RoboCompCommonBehavior::ParameterList > configparams_, RoboCompOmniRobot::OmniRobotPrx omnirobot_proxy_)
@@ -124,8 +128,25 @@ void update(const RoboCompLaser::TLaserData &laserData_, bool needsReplaning)
     RoboCompLaser::TLaserData laserData;
 //    laserData = computeLaser(laserData_);
     laserData = laserData_;
-    currentRobotPose = innerModel->transformS6D("world","robot");
-//    qDebug()<< "Updated Robot pose " << reloj.restart();
+
+    // InnerModel
+    RobotName = "robot";
+    currentRobotPose = innerModel->transformS6D("world",RobotName);
+    qDebug()<< "NAVIGATION ---- Robot all: "<< currentRobotPose;
+
+    int xpos;
+    int ypos;
+    float angle;
+    omnirobot_proxy->getBasePose(xpos, ypos, angle);
+    qDebug()<< "NAVIGATION ---- omnirobot_proxy.getBasePose:   x:"<< xpos << "    y:" << ypos << "    a:" << angle;
+
+    //actualizando innerModel
+    innerModel->updateTransformValuesS(RobotName, xpos, currentRobotPose.z(), ypos, currentRobotPose.rx(), angle, currentRobotPose.rz());
+
+    currentRobotPose = innerModel->transformS6D("world", RobotName); // esta linea necesita el nombre del robot (esta en configparams)
+    qDebug()<< "NAVIGATION ---- Robot all: "<< currentRobotPose;
+
+
 
     updateLaserPolygon(laserData);
     currentRobotPolygon = getRobotPolygon();
@@ -182,7 +203,7 @@ void update(const RoboCompLaser::TLaserData &laserData_, bool needsReplaning)
 void stopRobot()
 {
     qDebug()<<"Navigation - "<< __FUNCTION__;
-    omnirobot_proxy->setSpeedBase(0,0,0);
+    //omnirobot_proxy->setSpeedBase(0,0,0);
     qDebug()<<"Navigation - "<< __FUNCTION__ << " END ";
 
 }
@@ -754,6 +775,7 @@ void drawRoad()
             viewer->addTransform_ignoreExisting(item, "points", QVec::vec6(w.x(), 10, w.y(), 0, 0, 0));
 
 
+
             if(i == 1)
             {
                 viewer->drawLine(item + "_point", item, QVec::zeros(3), normal, 500, 40, "#FF0000");  //Rojo
@@ -765,6 +787,7 @@ void drawRoad()
                 viewer->drawLine(item + "_point", item, QVec::zeros(3), normal, 500, 40, "#00FFF0");
             else
                 viewer->drawLine(item + "_point", item, QVec::zeros(3), normal, 500, 40, "#A200FF");  //Morado
+
 
 
         }

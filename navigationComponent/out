@@ -1,0 +1,63 @@
+/usr/bin/cmake -H/home/carlos/robocomp/components/CordeBot/navigationComponent -B/home/carlos/robocomp/components/CordeBot/navigationComponent --check-build-system CMakeFiles/Makefile.cmake 0
+/usr/bin/cmake -E cmake_progress_start /home/carlos/robocomp/components/CordeBot/navigationComponent/CMakeFiles /home/carlos/robocomp/components/CordeBot/navigationComponent/CMakeFiles/progress.marks
+make -f CMakeFiles/Makefile2 all
+make -f src/CMakeFiles/ICES__home_carlos_robocomp_components_CordeBot_navigationComponent_src.dir/build.make src/CMakeFiles/ICES__home_carlos_robocomp_components_CordeBot_navigationComponent_src.dir/depend
+cd /home/carlos/robocomp/components/CordeBot/navigationComponent && /usr/bin/cmake -E cmake_depends "Unix Makefiles" /home/carlos/robocomp/components/CordeBot/navigationComponent /home/carlos/robocomp/components/CordeBot/navigationComponent/src /home/carlos/robocomp/components/CordeBot/navigationComponent /home/carlos/robocomp/components/CordeBot/navigationComponent/src /home/carlos/robocomp/components/CordeBot/navigationComponent/src/CMakeFiles/ICES__home_carlos_robocomp_components_CordeBot_navigationComponent_src.dir/DependInfo.cmake --color=
+make -f src/CMakeFiles/ICES__home_carlos_robocomp_components_CordeBot_navigationComponent_src.dir/build.make src/CMakeFiles/ICES__home_carlos_robocomp_components_CordeBot_navigationComponent_src.dir/build
+/usr/bin/cmake -E cmake_echo_color --switch= --blue --bold "Generating CommonBehavior.ice from /home/carlos/robocomp/interfaces/IDSLs/CommonBehavior.idsl"
+cd /home/carlos/robocomp/components/CordeBot/navigationComponent/src && robocompdsl /home/carlos/robocomp/interfaces/IDSLs/CommonBehavior.idsl /home/carlos/robocomp/components/CordeBot/navigationComponent/src/CommonBehavior.ice
+cd /home/carlos/robocomp/components/CordeBot/navigationComponent/src && robocompdsl /home/carlos/robocomp/interfaces/IDSLs/CommonBehavior.idsl CommonBehavior.ice
+/usr/bin/cmake -E cmake_echo_color --switch= --blue --bold "Generating GenericBase.ice from /home/carlos/robocomp/interfaces/IDSLs/GenericBase.idsl"
+cd /home/carlos/robocomp/components/CordeBot/navigationComponent/src && robocompdsl /home/carlos/robocomp/interfaces/IDSLs/GenericBase.idsl /home/carlos/robocomp/components/CordeBot/navigationComponent/src/GenericBase.ice
+cd /home/carlos/robocomp/components/CordeBot/navigationComponent/src && robocompdsl /home/carlos/robocomp/interfaces/IDSLs/GenericBase.idsl GenericBase.ice
+/usr/bin/cmake -E cmake_echo_color --switch= --blue --bold "Generating Laser.ice from /home/carlos/robocomp/interfaces/IDSLs/Laser.idsl"
+cd /home/carlos/robocomp/components/CordeBot/navigationComponent/src && robocompdsl /home/carlos/robocomp/interfaces/IDSLs/Laser.idsl /home/carlos/robocomp/components/CordeBot/navigationComponent/src/Laser.ice
+cd /home/carlos/robocomp/components/CordeBot/navigationComponent/src && robocompdsl /home/carlos/robocomp/interfaces/IDSLs/Laser.idsl Laser.ice
+/usr/bin/cmake -E cmake_echo_color --switch= --blue --bold "Generating OmniRobot.ice from /home/carlos/robocomp/interfaces/IDSLs/OmniRobot.idsl"
+cd /home/carlos/robocomp/components/CordeBot/navigationComponent/src && robocompdsl /home/carlos/robocomp/interfaces/IDSLs/OmniRobot.idsl /home/carlos/robocomp/components/CordeBot/navigationComponent/src/OmniRobot.ice
+cd /home/carlos/robocomp/components/CordeBot/navigationComponent/src && robocompdsl /home/carlos/robocomp/interfaces/IDSLs/OmniRobot.idsl OmniRobot.ice
+/usr/bin/cmake -E cmake_echo_color --switch= --blue --bold "Generating RCISMousePicker.ice from /home/carlos/robocomp/interfaces/IDSLs/RCISMousePicker.idsl"
+cd /home/carlos/robocomp/components/CordeBot/navigationComponent/src && robocompdsl /home/carlos/robocomp/interfaces/IDSLs/RCISMousePicker.idsl /home/carlos/robocomp/components/CordeBot/navigationComponent/src/RCISMousePicker.ice
+cd /home/carlos/robocomp/components/CordeBot/navigationComponent/src && robocompdsl /home/carlos/robocomp/interfaces/IDSLs/RCISMousePicker.idsl RCISMousePicker.ice
+/usr/bin/cmake -E cmake_echo_color --switch= --progress-dir=/home/carlos/robocomp/components/CordeBot/navigationComponent/CMakeFiles --progress-num= "Built target ICES__home_carlos_robocomp_components_CordeBot_navigationComponent_src"
+make -f src/CMakeFiles/navigationComponent_autogen.dir/build.make src/CMakeFiles/navigationComponent_autogen.dir/depend
+cd /home/carlos/robocomp/components/CordeBot/navigationComponent && /usr/bin/cmake -E cmake_depends "Unix Makefiles" /home/carlos/robocomp/components/CordeBot/navigationComponent /home/carlos/robocomp/components/CordeBot/navigationComponent/src /home/carlos/robocomp/components/CordeBot/navigationComponent /home/carlos/robocomp/components/CordeBot/navigationComponent/src /home/carlos/robocomp/components/CordeBot/navigationComponent/src/CMakeFiles/navigationComponent_autogen.dir/DependInfo.cmake --color=
+make -f src/CMakeFiles/navigationComponent_autogen.dir/build.make src/CMakeFiles/navigationComponent_autogen.dir/build
+/usr/bin/cmake -E cmake_echo_color --switch= --blue --bold --progress-dir=/home/carlos/robocomp/components/CordeBot/navigationComponent/CMakeFiles --progress-num=23 "Automatic MOC and UIC for target navigationComponent"
+cd /home/carlos/robocomp/components/CordeBot/navigationComponent/src && /usr/bin/cmake -E cmake_autogen /home/carlos/robocomp/components/CordeBot/navigationComponent/src/CMakeFiles/navigationComponent_autogen.dir ""
+/usr/bin/cmake -E cmake_echo_color --switch= --progress-dir=/home/carlos/robocomp/components/CordeBot/navigationComponent/CMakeFiles --progress-num=23 "Built target navigationComponent_autogen"
+make -f src/CMakeFiles/navigationComponent.dir/build.make src/CMakeFiles/navigationComponent.dir/depend
+/usr/bin/cmake -E cmake_echo_color --switch= --blue --bold --progress-dir=/home/carlos/robocomp/components/CordeBot/navigationComponent/CMakeFiles --progress-num=5 "Generating RCISMousePicker.h and RCISMousePicker.cpp from RCISMousePicker.ice"
+cd /home/carlos/robocomp/components/CordeBot/navigationComponent/src && slice2cpp RCISMousePicker.ice -I. --output-dir .
+/usr/bin/cmake -E touch_nocreate src/RCISMousePicker.h
+/usr/bin/cmake -E cmake_echo_color --switch= --blue --bold --progress-dir=/home/carlos/robocomp/components/CordeBot/navigationComponent/CMakeFiles --progress-num=1 "Generating CommonBehavior.h and CommonBehavior.cpp from CommonBehavior.ice"
+cd /home/carlos/robocomp/components/CordeBot/navigationComponent/src && slice2cpp CommonBehavior.ice -I. --output-dir .
+/usr/bin/cmake -E touch_nocreate src/CommonBehavior.h
+/usr/bin/cmake -E cmake_echo_color --switch= --blue --bold --progress-dir=/home/carlos/robocomp/components/CordeBot/navigationComponent/CMakeFiles --progress-num=2 "Generating GenericBase.h and GenericBase.cpp from GenericBase.ice"
+cd /home/carlos/robocomp/components/CordeBot/navigationComponent/src && slice2cpp GenericBase.ice -I. --output-dir .
+/usr/bin/cmake -E touch_nocreate src/GenericBase.h
+/usr/bin/cmake -E cmake_echo_color --switch= --blue --bold --progress-dir=/home/carlos/robocomp/components/CordeBot/navigationComponent/CMakeFiles --progress-num=3 "Generating Laser.h and Laser.cpp from Laser.ice"
+cd /home/carlos/robocomp/components/CordeBot/navigationComponent/src && slice2cpp Laser.ice -I. --output-dir .
+/usr/bin/cmake -E touch_nocreate src/Laser.h
+/usr/bin/cmake -E cmake_echo_color --switch= --blue --bold --progress-dir=/home/carlos/robocomp/components/CordeBot/navigationComponent/CMakeFiles --progress-num=4 "Generating OmniRobot.h and OmniRobot.cpp from OmniRobot.ice"
+cd /home/carlos/robocomp/components/CordeBot/navigationComponent/src && slice2cpp OmniRobot.ice -I. --output-dir .
+/usr/bin/cmake -E touch_nocreate src/OmniRobot.h
+cd /home/carlos/robocomp/components/CordeBot/navigationComponent && /usr/bin/cmake -E cmake_depends "Unix Makefiles" /home/carlos/robocomp/components/CordeBot/navigationComponent /home/carlos/robocomp/components/CordeBot/navigationComponent/src /home/carlos/robocomp/components/CordeBot/navigationComponent /home/carlos/robocomp/components/CordeBot/navigationComponent/src /home/carlos/robocomp/components/CordeBot/navigationComponent/src/CMakeFiles/navigationComponent.dir/DependInfo.cmake --color=
+make -f src/CMakeFiles/navigationComponent.dir/build.make src/CMakeFiles/navigationComponent.dir/build
+/usr/bin/cmake -E cmake_echo_color --switch= --blue --bold --progress-dir=/home/carlos/robocomp/components/CordeBot/navigationComponent/CMakeFiles --progress-num=1 "Generating CommonBehavior.h and CommonBehavior.cpp from CommonBehavior.ice"
+cd /home/carlos/robocomp/components/CordeBot/navigationComponent/src && slice2cpp CommonBehavior.ice -I. --output-dir .
+/usr/bin/cmake -E touch_nocreate src/CommonBehavior.h
+/usr/bin/cmake -E cmake_echo_color --switch= --blue --bold --progress-dir=/home/carlos/robocomp/components/CordeBot/navigationComponent/CMakeFiles --progress-num=2 "Generating GenericBase.h and GenericBase.cpp from GenericBase.ice"
+cd /home/carlos/robocomp/components/CordeBot/navigationComponent/src && slice2cpp GenericBase.ice -I. --output-dir .
+/usr/bin/cmake -E touch_nocreate src/GenericBase.h
+/usr/bin/cmake -E cmake_echo_color --switch= --blue --bold --progress-dir=/home/carlos/robocomp/components/CordeBot/navigationComponent/CMakeFiles --progress-num=3 "Generating Laser.h and Laser.cpp from Laser.ice"
+cd /home/carlos/robocomp/components/CordeBot/navigationComponent/src && slice2cpp Laser.ice -I. --output-dir .
+/usr/bin/cmake -E touch_nocreate src/Laser.h
+/usr/bin/cmake -E cmake_echo_color --switch= --blue --bold --progress-dir=/home/carlos/robocomp/components/CordeBot/navigationComponent/CMakeFiles --progress-num=4 "Generating OmniRobot.h and OmniRobot.cpp from OmniRobot.ice"
+cd /home/carlos/robocomp/components/CordeBot/navigationComponent/src && slice2cpp OmniRobot.ice -I. --output-dir .
+/usr/bin/cmake -E touch_nocreate src/OmniRobot.h
+/usr/bin/cmake -E cmake_echo_color --switch= --blue --bold --progress-dir=/home/carlos/robocomp/components/CordeBot/navigationComponent/CMakeFiles --progress-num=5 "Generating RCISMousePicker.h and RCISMousePicker.cpp from RCISMousePicker.ice"
+cd /home/carlos/robocomp/components/CordeBot/navigationComponent/src && slice2cpp RCISMousePicker.ice -I. --output-dir .
+/usr/bin/cmake -E touch_nocreate src/RCISMousePicker.h
+CMakeFiles/Makefile2:89: recipe for target 'src/CMakeFiles/navigationComponent.dir/all' failed
+Makefile:129: recipe for target 'all' failed

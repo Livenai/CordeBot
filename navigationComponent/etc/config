@@ -80,6 +80,3 @@ NavigationAgent.MinimunDetectableTranslation = 7 			# to accept a new target
 Ice.Warn.Connections=0
 Ice.Trace.Network=0
 Ice.Trace.Protocol=0
-
-
-

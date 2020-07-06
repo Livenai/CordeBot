@@ -43,8 +43,8 @@ GenericWorker::GenericWorker(MapPrx& mprx) : Ui_guiDlg()
 	QObject::connect(&timer, SIGNAL(timeout()), this, SIGNAL(t_compute_to_compute()));
 
 	//------------------
-	laser_proxy = (*(LaserPrx*)mprx["LaserProxy"]);
-	omnirobot_proxy = (*(OmniRobotPrx*)mprx["OmniRobotProxy"]);
+	laser_proxy = (*(RoboCompLaser::LaserPrx*)mprx["LaserProxy"]);
+	omnirobot_proxy = (*(RoboCompOmniRobot::OmniRobotPrx*)mprx["OmniRobotProxy"]);
 
 	mutex = new QMutex(QMutex::Recursive);
 

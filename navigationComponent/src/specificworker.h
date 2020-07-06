@@ -54,7 +54,7 @@ public:
 	~SpecificWorker();
 	bool setParams(RoboCompCommonBehavior::ParameterList params);
 
-	void RCISMousePicker_setPick(const Pick &myPick);
+	void RCISMousePicker_setPick(const RoboCompRCISMousePicker::Pick &myPick);
 
 	using InnerPtr = std::shared_ptr<InnerModel>;
 	#ifdef USE_QTGUI

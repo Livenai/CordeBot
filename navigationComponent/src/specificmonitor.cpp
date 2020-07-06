@@ -70,7 +70,7 @@ bool SpecificMonitor::sendParamsToWorker(RoboCompCommonBehavior::ParameterList p
 	if(checkParams(params))
 	{
 		//Set params to worker
-		if(worker->setParams(params)) 
+		if(worker->setParams(params))
 			return true;
 	}
 	else
@@ -89,7 +89,7 @@ void SpecificMonitor::readConfig(RoboCompCommonBehavior::ParameterList &params )
 	RoboCompCommonBehavior::Parameter aux;
 
 	aux.editable = false;
-	configGetString("NavigationAgent", "InnerModelPath", aux.value,"no file");
+	configGetString("NavigationAgent", "InnerModelPath", aux.value,"/home/robocomp/robocomp/components/CordeBot/map.xml");
 	params["NavigationAgent.InnerModelPath"] = aux;
 
 
@@ -177,4 +177,3 @@ bool SpecificMonitor::checkParams(RoboCompCommonBehavior::ParameterList l)
 	bool correct = true;
 	return correct;
 }
-
