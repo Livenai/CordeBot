@@ -55,7 +55,7 @@ public:
         bool blocked = false;
 
         QPointF robot = QPointF(robotPose.x(),robotPose.z());
-        QPointF robotNose = robot + QPointF(250*sin(robotPose.ry()),250*cos(robotPose.ry()));
+        QPointF robotNose = robot + QPointF(600*sin(robotPose.ry()),600*cos(robotPose.ry()));
 
         auto firstPointInPath = points[0];
 
