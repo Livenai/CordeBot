@@ -121,13 +121,13 @@ void SpecificWorker::compute()
     auto currentRobotPose = innerModel->transformS6D("world",RobotName);
     qDebug()<< __FUNCTION__<< " ---- Robot pre: "<< currentRobotPose;
     int xpos;
-    int ypos;
+    int zpos;
     float angle;
-    omnirobot_proxy->getBasePose(xpos, ypos, angle);
-    qDebug()<< __FUNCTION__<< " ---- omnirobot_proxy.getBasePose:   x:"<< xpos << "    y:" << ypos << "    a:" << angle;
+    omnirobot_proxy->getBasePose(xpos, zpos, angle);
+    qDebug()<< __FUNCTION__<< " ---- omnirobot_proxy.getBasePose:   x:"<< xpos << "    y:" << zpos << "    a:" << angle;
 
     //actualizando innerModel
-    innerModel->updateTransformValuesS(RobotName, xpos, currentRobotPose.z(), ypos, currentRobotPose.rx(), angle, currentRobotPose.rz());
+    innerModel->updateTransformValuesS(RobotName, xpos, currentRobotPose.y(), zpos, currentRobotPose.rx(), angle, currentRobotPose.rz());
 
     currentRobotPose = innerModel->transformS6D("world", RobotName); // esta linea necesita el nombre del robot (esta en configparams)
     qDebug()<< __FUNCTION__<< " ---- Robot new: "<< currentRobotPose;
