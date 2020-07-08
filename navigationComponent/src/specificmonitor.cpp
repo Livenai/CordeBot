@@ -97,6 +97,26 @@ void SpecificMonitor::readConfig(RoboCompCommonBehavior::ParameterList &params )
 	configGetString("NavigationAgent", "RobotName", aux.value,"robot");
 	params["NavigationAgent.RobotName"] = aux;
 
+	aux.editable = true;
+	configGetString("NavigationAgent", "LaserName", aux.value,"laser");
+	params["NavigationAgent.LaserName"] = aux;
+
+	aux.editable = true;
+	configGetString("NavigationAgent", "BaseMesh", aux.value,"base_mesh");
+	params["NavigationAgent.BaseMesh"] = aux;
+
+	aux.editable = true;
+	configGetString("NavigationAgent", "Xshift", aux.value,"0");
+	params["NavigationAgent.Xshift"] = aux;
+
+	aux.editable = true;
+	configGetString("NavigationAgent", "Zshift", aux.value,"0");
+	params["NavigationAgent.Zshift"] = aux;
+
+	aux.editable = true;
+	configGetString("NavigationAgent", "AngleShift", aux.value,"0");
+	params["NavigationAgent.AngleShift"] = aux;
+
 	aux.editable = false;
 	configGetString( "NavigationAgent","MaxZSpeed", aux.value,"600");
 	params["MaxZSpeed"] = aux;

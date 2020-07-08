@@ -16,12 +16,15 @@ public:
     std::vector<QString> restNodes;
     std::set<QString> excludedNodes;
     QRectF outerRegion;
+    string RobotName;
 
     void initialize(const std::shared_ptr<InnerModel> &innerModel_,const std::shared_ptr< RoboCompCommonBehavior::ParameterList > &params_) {
 
 
         qDebug()<<"Collisions - " <<__FUNCTION__;
         innerModel = innerModel_;
+        RobotName = params_->at("NavigationAgent.RobotName").value;
+
 
         /// Processing configuration parameters
         try
@@ -51,7 +54,7 @@ public:
 
         // Compute the list of meshes that correspond to robot, world and possibly some additionally excluded ones
         robotNodes.clear(); restNodes.clear();
-        recursiveIncludeMeshes(innerModel->getRoot(), "robot", false, robotNodes, restNodes, excludedNodes);
+        recursiveIncludeMeshes(innerModel->getRoot(), QString::fromStdString(RobotName), false, robotNodes, restNodes, excludedNodes);
         qsrand( QTime::currentTime().msec() );
 
     }
@@ -59,7 +62,7 @@ public:
     bool checkRobotValidStateAtTargetFast(const QVec &targetPos, const QVec &targetRot) const   {
         //First we move the robot in our copy of innermodel to its current coordinates
 
-            innerModel->updateTransformValues("robot", targetPos.x(), targetPos.y(), targetPos.z(), targetRot.x(), targetRot.y(), targetRot.z());
+            innerModel->updateTransformValues(QString::fromStdString(RobotName), targetPos.x(), targetPos.y(), targetPos.z(), targetRot.x(), targetRot.y(), targetRot.z());
 
             ///////////////////////
             //// Check if the robot at the target collides with any know object

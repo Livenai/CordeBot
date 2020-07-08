@@ -46,3 +46,19 @@ navigationComponent/src/navigationComponent_autogen/
 navigationComponent/src/cmake_install.cmake
 
 navigationComponent/Makefile
+
+laser0_Poly.txt
+
+laser1_Poly.txt
+
+robot0_calculatedPoints.txt
+
+robot0_startPoints.txt
+
+robot0.txt
+
+robot1_calculatedPoints.txt
+
+robot1_startPoints.txt
+
+robot1.txt

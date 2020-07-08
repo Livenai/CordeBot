@@ -1,0 +1,68 @@
+
+CommonBehavior.Endpoints=tcp -p 11320
+
+# Endpoints for implemented interfaces
+AGMCommonBehavior.Endpoints=tcp -p 10330
+TrajectoryRobot2D.Endpoints=tcp -p 13204
+
+AGMExecutiveTopicTopic.Endpoints=tcp -p 10334
+RCISMousePickerTopic.Endpoints=tcp -p 13001
+SocialRulesTopic.Endpoints=tcp -p 14000
+
+
+#
+# R E M O T E    P R O X I E S
+#
+TopicManager.Proxy=IceStorm/TopicManager:default -h localhost -p 9999
+
+
+
+###########    Robot PORTS    ########################################
+OmniRobotProxy = omnirobot:tcp -h localhost -p 12239
+LaserProxy = laser:tcp -h localhost -p 10004
+AGMExecutiveProxy = agmexecutive:tcp -h localhost -p 10199
+
+
+###########    Robot NAMES    ########################################
+NavigationAgent.InnerModelPath = /home/robocomp/robocomp/components/CordeBot/map.xml
+NavigationAgent.RobotName = robot1
+NavigationAgent.LaserName = laser1
+NavigationAgent.BaseMesh  = base_mesh1
+
+
+###########    Robot VALUES   ########################################
+NavigationAgent.Xshift = -1000
+NavigationAgent.Zshift = 0
+NavigationAgent.AngleShift = 0  ##decimales con coma
+
+
+NavigationAgent.MaxZSpeed = 1000
+NavigationAgent.MaxXSpeed = 1000
+NavigationAgent.MaxRotationSpeed = 2
+
+NavigationAgent.RobotXWidth = 400
+NavigationAgent.RobotZLong = 1100
+NavigationAgent.RobotRadius = 600
+
+NavigationAgent.MinControllerPeriod = 100
+
+NavigationAgent.PlannerGraphPoints = 400
+NavigationAgent.PlannerGraphNeighbours = 20
+NavigationAgent.PlannerGraphMaxDistanceToSearch = 2500 #mm
+
+NavigationAgent.ExcludedObjectsInCollisionCheck = floor_plane
+
+
+############CORDERO##################
+NavigationAgent.OuterRegionLeft = -8000
+NavigationAgent.OuterRegionRight = 8000
+NavigationAgent.OuterRegionBottom = -3000
+NavigationAgent.OuterRegionTop = 3000
+
+
+NavigationAgent.MinimunDetectableRotation = 0.03			# to accept a new target
+NavigationAgent.MinimunDetectableTranslation = 7 			# to accept a new target
+
+Ice.Warn.Connections=0
+Ice.Trace.Network=0
+Ice.Trace.Protocol=0

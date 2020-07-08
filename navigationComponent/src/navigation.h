@@ -71,6 +71,7 @@ public:
   //robot data
   string RobotName;
   string LaserName;
+  string BaseMesh;
 
 
 void initialize(const std::shared_ptr<InnerModel> &innerModel_, const std::shared_ptr<InnerViewer> &viewer_,
@@ -84,7 +85,6 @@ void initialize(const std::shared_ptr<InnerModel> &innerModel_, const std::share
     viewer = viewer_;
 
     omnirobot_proxy = omnirobot_proxy_;
-    stopRobot();
 
     //grid can't be initialized if the robot is moving
 
@@ -130,7 +130,9 @@ void update(const RoboCompLaser::TLaserData &laserData_, bool needsReplaning)
     laserData = laserData_;
 
     // InnerModel
-    RobotName = "robot";
+    RobotName = configparams->at("NavigationAgent.RobotName").value;
+    LaserName = configparams->at("NavigationAgent.LaserName").value;
+    BaseMesh  = configparams->at("NavigationAgent.BaseMesh").value;
     currentRobotPose = innerModel->transformS6D("world",RobotName);
 
 
@@ -191,7 +193,7 @@ void update(const RoboCompLaser::TLaserData &laserData_, bool needsReplaning)
 void stopRobot()
 {
     qDebug()<<"Navigation - "<< __FUNCTION__;
-    //omnirobot_proxy->setSpeedBase(0,0,0);
+    omnirobot_proxy->setSpeedBase(0,0,0);
     qDebug()<<"Navigation - "<< __FUNCTION__ << " END ";
 
 }
@@ -354,7 +356,7 @@ bool findNewPath()
 
     if (path.size() > 0)
     {
-        FILE *fd = fopen("startPoints.txt", "w");
+        FILE *fd = fopen((RobotName + "_startPoints.txt").c_str(), "w");
 
 
         pathPoints.push_back(currentRobotNose);
@@ -386,7 +388,7 @@ bool findNewPath()
 
 bool isVisible(QPointF p)
 {
-    QVec pointInLaser = innerModel->transform("laser", QVec::vec3(p.x(),0,p.y()),"world");
+    QVec pointInLaser = innerModel->transform(QString::fromStdString(LaserName), QVec::vec3(p.x(),0,p.y()),"world");
     return laser_poly.containsPoint(QPointF(pointInLaser.x(),pointInLaser.z()), Qt::OddEvenFill);
 }
 
@@ -551,7 +553,7 @@ void computeForces(const std::vector<QPointF> &path, const RoboCompLaser::TLaser
         qDebug()<< "Robot Nose not visible -- NEEDS REPLANNING ";
     }
 
-    FILE *fd1 = fopen("calculatedPoints.txt", "w");
+    FILE *fd1 = fopen((RobotName + "_calculatedPoints.txt").c_str(), "w");
 
     for (const QPointF &p : pathPoints)
     {
@@ -662,10 +664,10 @@ QPolygonF getRobotPolygon()
 
     QPolygonF robotP;
 
-    auto bLWorld = innerModel->transform ("world", robotBottomLeft ,"base_mesh");
-    auto bRWorld = innerModel->transform ("world", robotBottomRight ,"base_mesh");
-    auto tRWorld = innerModel->transform ("world", robotTopRight ,"base_mesh");
-    auto tLWorld = innerModel->transform ("world", robotTopLeft ,"base_mesh");
+    auto bLWorld = innerModel->transform ("world", robotBottomLeft,  QString::fromStdString(BaseMesh));
+    auto bRWorld = innerModel->transform ("world", robotBottomRight, QString::fromStdString(BaseMesh));
+    auto tRWorld = innerModel->transform ("world", robotTopRight,    QString::fromStdString(BaseMesh));
+    auto tLWorld = innerModel->transform ("world", robotTopLeft,     QString::fromStdString(BaseMesh));
 
 
     robotP << QPointF(bLWorld.x(),bLWorld.z());
@@ -673,7 +675,7 @@ QPolygonF getRobotPolygon()
     robotP << QPointF(tRWorld.x(),tRWorld.z());
     robotP << QPointF(tLWorld.x(),tLWorld.z());
 
-    FILE *fd = fopen("robot.txt", "w");
+    FILE *fd = fopen((RobotName + ".txt").c_str(), "w");
     for (const auto &r: robotP)
     {
         fprintf(fd, "%d %d\n", (int)r.x(), (int)r.y());
@@ -693,14 +695,14 @@ void updateLaserPolygon(const RoboCompLaser::TLaserData &lData)
 
     laser_poly.clear(); //stores the points of the laser in lasers refrence system
     laser_cart.clear();
-    auto lasernode = innerModel->getNode<InnerModelLaser>(QString("laser"));
+    auto lasernode = innerModel->getNode<InnerModelLaser>(QString::fromStdString(LaserName));
 
     for (const auto &l : lData)
     {
         //convert laser polar coordinates to cartesian
-        QVec laserc = lasernode->laserTo(QString("laser"),l.dist, l.angle);
-        QVec laserWord = lasernode->laserTo(QString("world"),l.dist, l.angle);
-//        QVec laserWorld = innerModel->transform("world",QVec::vec3(laserc.x(),0,laserc.y()),"laser");
+        QVec laserc = lasernode->laserTo(QString::fromStdString(LaserName),l.dist, l.angle);
+        QVec laserWord = lasernode->laserTo(QString::fromStdString("world"),l.dist, l.angle);
+//        QVec laserWorld = innerModel->transform("world",QVec::vec3(laserc.x(),0,laserc.y()),LaserName);
 
         laser_poly << QPointF(laserc.x(),laserc.z());
 
@@ -709,10 +711,10 @@ void updateLaserPolygon(const RoboCompLaser::TLaserData &lData)
     }
 
 
-    FILE *fd = fopen("laserPoly.txt", "w");
+    FILE *fd = fopen((LaserName + "_Poly.txt").c_str(), "w");
     for (const auto &lp : laser_poly)
     {
-        QVec p = innerModel->transform("world",QVec::vec3(lp.x(),0,lp.y()),"laser");
+        QVec p = innerModel->transform("world",QVec::vec3(lp.x(),0,lp.y()),QString::fromStdString(LaserName));
         fprintf(fd, "%d %d\n", (int)p.x(), (int)p.z());
     }
     fclose(fd);

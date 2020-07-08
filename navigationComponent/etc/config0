@@ -22,12 +22,24 @@ OmniRobotProxy = omnirobot:tcp -h localhost -p 12238
 LaserProxy = laser:tcp -h localhost -p 10003
 AGMExecutiveProxy = agmexecutive:tcp -h localhost -p 10198
 
-NavigationAgent.InnerModelPath = /home/robocomp/robocomp/components/CordeBot/map.xml
-NavigationAgent.RobotName = robot
 
-NavigationAgent.MaxZSpeed = 450
-NavigationAgent.MaxXSpeed = 350
-NavigationAgent.MaxRotationSpeed = 1
+###########    Robot NAMES    ########################################
+NavigationAgent.InnerModelPath = /home/robocomp/robocomp/components/CordeBot/map.xml
+NavigationAgent.RobotName = robot0
+NavigationAgent.LaserName = laser0
+NavigationAgent.BaseMesh  = base_mesh0
+
+
+###########    Robot VALUES   ########################################
+NavigationAgent.Xshift = 1000
+NavigationAgent.Zshift = 0
+NavigationAgent.AngleShift = 0  ##decimales con coma
+
+
+
+NavigationAgent.MaxZSpeed = 1000
+NavigationAgent.MaxXSpeed = 1000
+NavigationAgent.MaxRotationSpeed = 2
 
 NavigationAgent.RobotXWidth = 400
 NavigationAgent.RobotZLong = 1100
@@ -42,36 +54,11 @@ NavigationAgent.PlannerGraphMaxDistanceToSearch = 2500 #mm
 NavigationAgent.ExcludedObjectsInCollisionCheck = floor_plane
 
 
-
-##############LABORATORIO############
-#NavigationAgent.OuterRegionLeft = -2000
-#NavigationAgent.OuterRegionRight = 7500
-#NavigationAgent.OuterRegionBottom = -4250
-#NavigationAgent.OuterRegionTop = 4250
-
-##############ejemplo############
-#NavigationAgent.OuterRegionLeft = -3000
-#NavigationAgent.OuterRegionRight = 7000
-#NavigationAgent.OuterRegionBottom = -3000
-#NavigationAgent.OuterRegionTop = 7000
-
-##############aztide############
-#NavigationAgent.OuterRegionLeft = -5000
-#NavigationAgent.OuterRegionRight = 7000
-#NavigationAgent.OuterRegionBottom = -7000
-#NavigationAgent.OuterRegionTop = 5000
-
 ############CORDERO##################
 NavigationAgent.OuterRegionLeft = -8000
 NavigationAgent.OuterRegionRight = 8000
 NavigationAgent.OuterRegionBottom = -3000
 NavigationAgent.OuterRegionTop = 3000
-
-#############PruebasLab_pasillo###########
-#NavigationAgent.OuterRegionLeft = -2000
-#NavigationAgent.OuterRegionRight = 2000
-#NavigationAgent.OuterRegionBottom = -500
-#NavigationAgent.OuterRegionTop = 9500
 
 
 NavigationAgent.MinimunDetectableRotation = 0.03			# to accept a new target

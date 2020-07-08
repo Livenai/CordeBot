@@ -117,19 +117,22 @@ void SpecificWorker::compute()
     qDebug()<< __FUNCTION__;
 
     //actualizamos innerModel
-    string RobotName = "robot";
-    auto currentRobotPose = innerModel->transformS6D("world",RobotName);
+    auto currentRobotPose = innerModel->transformS6D("world",robotName);
     qDebug()<< __FUNCTION__<< " ---- Robot pre: "<< currentRobotPose;
     int xpos;
     int zpos;
     float angle;
     omnirobot_proxy->getBasePose(xpos, zpos, angle);
-    qDebug()<< __FUNCTION__<< " ---- omnirobot_proxy.getBasePose:   x:"<< xpos << "    y:" << zpos << "    a:" << angle;
+    //correccion
+    xpos  += std::stoi(confParams->at("NavigationAgent.Xshift").value);
+    zpos  += std::stoi(confParams->at("NavigationAgent.Zshift").value);
+    angle += std::stof(confParams->at("NavigationAgent.AngleShift").value);
+    qDebug()<< __FUNCTION__<< " ---- omnirobot_proxy.getBasePose:   x:"<< xpos << "    z:" << zpos << "    a:" << angle;
 
     //actualizando innerModel
-    innerModel->updateTransformValuesS(RobotName, xpos, currentRobotPose.y(), zpos, currentRobotPose.rx(), angle, currentRobotPose.rz());
+    innerModel->updateTransformValuesS(robotName, xpos, currentRobotPose.y(), zpos, currentRobotPose.rx(), angle, currentRobotPose.rz());
 
-    currentRobotPose = innerModel->transformS6D("world", RobotName); // esta linea necesita el nombre del robot (esta en configparams)
+    currentRobotPose = innerModel->transformS6D("world", robotName); // esta linea necesita el nombre del robot (esta en configparams)
     qDebug()<< __FUNCTION__<< " ---- Robot new: "<< currentRobotPose;
 
 //    static QTime reloj = QTime::currentTime();
