@@ -1,3 +1,6 @@
+#
+# Todos los puertos marcados con # +1 son puertos diferentes para cada robot. A cada puerto se le suma 1 para que cambie
+#
 
 CommonBehavior.Endpoints=tcp -p 11320
 
@@ -6,7 +9,7 @@ AGMCommonBehavior.Endpoints=tcp -p 10330
 TrajectoryRobot2D.Endpoints=tcp -p 13204
 
 AGMExecutiveTopicTopic.Endpoints=tcp -p 10334
-RCISMousePickerTopic.Endpoints=tcp -p 13001
+RCISMousePickerTopic.Endpoints=tcp -p 13001 # +1
 SocialRulesTopic.Endpoints=tcp -p 14000
 
 
@@ -18,9 +21,9 @@ TopicManager.Proxy=IceStorm/TopicManager:default -h localhost -p 9999
 
 
 ###########    Robot PORTS    ########################################
-OmniRobotProxy = omnirobot:tcp -h localhost -p 12239
-LaserProxy = laser:tcp -h localhost -p 10004
-AGMExecutiveProxy = agmexecutive:tcp -h localhost -p 10199
+OmniRobotProxy = omnirobot:tcp -h localhost -p 12239 # +1
+LaserProxy = laser:tcp -h localhost -p 10004 # +1
+AGMExecutiveProxy = agmexecutive:tcp -h localhost -p 10199 # +1
 
 
 ###########    Robot NAMES    ########################################
@@ -50,7 +53,7 @@ NavigationAgent.PlannerGraphPoints = 400
 NavigationAgent.PlannerGraphNeighbours = 20
 NavigationAgent.PlannerGraphMaxDistanceToSearch = 2500 #mm
 
-NavigationAgent.ExcludedObjectsInCollisionCheck = floor_plane
+NavigationAgent.ExcludedObjectsInCollisionCheck = floor_plane,base_mesh0,base_mesh2,base_mesh3,base_mesh4
 
 
 ############CORDERO##################
