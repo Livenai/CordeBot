@@ -39,8 +39,11 @@ NavigationAgent.Zshift = 0
 NavigationAgent.AngleShift = 0  ##decimales con coma
 
 
-NavigationAgent.MaxZSpeed = 1000
-NavigationAgent.MaxXSpeed = 1000
+NavigationAgent.OutputMessages = 0   ##0=no, 1=si
+
+
+NavigationAgent.MaxZSpeed = 500
+NavigationAgent.MaxXSpeed = 500
 NavigationAgent.MaxRotationSpeed = 2
 
 NavigationAgent.RobotXWidth = 400
@@ -53,14 +56,14 @@ NavigationAgent.PlannerGraphPoints = 400
 NavigationAgent.PlannerGraphNeighbours = 20
 NavigationAgent.PlannerGraphMaxDistanceToSearch = 2500 #mm
 
-NavigationAgent.ExcludedObjectsInCollisionCheck = floor_plane,base_mesh0,base_mesh2,base_mesh3,base_mesh4
+NavigationAgent.ExcludedObjectsInCollisionCheck = floor_plane,base_mesh0,base_mesh2,base_mesh3,base_mesh4,sensorl0,sensorl4,sensorl2,sensorl3
 
 
 ############CORDERO##################
-NavigationAgent.OuterRegionLeft = -8000
-NavigationAgent.OuterRegionRight = 8000
-NavigationAgent.OuterRegionBottom = -3000
-NavigationAgent.OuterRegionTop = 3000
+NavigationAgent.OuterRegionLeft = -7500
+NavigationAgent.OuterRegionRight = 7500
+NavigationAgent.OuterRegionBottom = -2500
+NavigationAgent.OuterRegionTop = 2500
 
 
 NavigationAgent.MinimunDetectableRotation = 0.03			# to accept a new target

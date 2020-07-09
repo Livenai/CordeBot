@@ -31,6 +31,9 @@
 #include <genericworker.h>
 #include <innermodel/innermodel.h>
 
+// qDebug control
+#include <QLoggingCategory>
+
 #include <grid.h>
 #include <controller.h>
 #include <navigation.h>

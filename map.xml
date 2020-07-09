@@ -73,7 +73,7 @@
 			<translation id="robotGeometricCenter3" tx="0" ty="0" tz="50"></translation>
 		</omnirobot>
 
-
+<!--
 		<omnirobot id="robot4" port="12242" tx="2000" ry="0">
 			<mesh id="base_mesh4" file="/home/robocomp/robocomp/components/CordeBot/models/sheep/sheep_textured.ive" tx="0" ty="0" tz="0" scale="10" rx="3.14" ry="3.14" collide="1"/>
 			<translation id="laserPose4" tx="0" ty="140" tz="200">
@@ -102,7 +102,8 @@
 
 
 			<!-- COMEDERO VACIO DECORACION  -->
-			<mesh id="comederovacio0" file="/home/robocomp/robocomp/components/CordeBot/models/comedero_vacio/comedero_textured.osg"  tx="-1900" ty="50" tz="1300" scale="20" rx="3.14" ry="0.2" rz="0" collide="0"/>
+			<mesh id="comederovacio0" file="/home/robocomp/robocomp/components/CordeBot/models/comedero_vacio/comedero_textured.osg"  tx="-3500" ty="50" tz="1000" scale="20" rx="3.14" ry="0.1" rz="0" collide="0"/>
+			<mesh id="comederovacio1" file="/home/robocomp/robocomp/components/CordeBot/models/comedero_vacio/comedero_textured.osg"  tx="3500" ty="50" tz="0" scale="20" rx="3.14" ry="1.57" rz="0" collide="0"/>
 
 
 			<!-- CAMARAS   -->

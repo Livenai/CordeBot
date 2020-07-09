@@ -117,6 +117,10 @@ void SpecificMonitor::readConfig(RoboCompCommonBehavior::ParameterList &params )
 	configGetString("NavigationAgent", "AngleShift", aux.value,"0");
 	params["NavigationAgent.AngleShift"] = aux;
 
+	aux.editable = true;
+	configGetString("NavigationAgent", "OutputMessages", aux.value,"1");
+	params["NavigationAgent.OutputMessages"] = aux;
+
 	aux.editable = false;
 	configGetString( "NavigationAgent","MaxZSpeed", aux.value,"600");
 	params["MaxZSpeed"] = aux;

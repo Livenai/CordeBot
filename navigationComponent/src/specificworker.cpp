@@ -53,6 +53,12 @@ bool SpecificWorker::setParams(RoboCompCommonBehavior::ParameterList params)
         try{ innermodel_path = params.at("NavigationAgent.InnerModelPath").value;}
         catch(std::exception e) { qFatal("Error reading innerModel Path"); }
 
+        //debug message
+        if(std::stoi(params.at("NavigationAgent.OutputMessages").value) == 0){
+          QLoggingCategory::setFilterRules("*.debug=false\n"
+                                               "driver.usb.debug=true");
+        }
+
 
         qDebug()<<"InnerModelPath: " << QString::fromStdString(innermodel_path);
 
@@ -110,6 +116,10 @@ void SpecificWorker::initialize(int period)
     std::cout << "[END] Initialize worker" << std::endl;
 
 
+    // INICIA DIRECTAMENTE CON MOVIMIENTO ALEATORIO //
+    navigation.robotAutoMov = true;
+    navigation.newRandomTarget();
+    //////////////////////////////////////////////////
 }
 
 void SpecificWorker::compute()
@@ -131,25 +141,17 @@ void SpecificWorker::compute()
 
     //actualizando innerModel
     innerModel->updateTransformValuesS(robotName, xpos, currentRobotPose.y(), zpos, currentRobotPose.rx(), angle, currentRobotPose.rz());
-
     currentRobotPose = innerModel->transformS6D("world", robotName); // esta linea necesita el nombre del robot (esta en configparams)
     qDebug()<< __FUNCTION__<< " ---- Robot new: "<< currentRobotPose;
 
-//    static QTime reloj = QTime::currentTime();
 
     bool needsReplaning = false;
-
-
     QMutexLocker lockIM(mutex);
-
     RoboCompLaser::TLaserData laserData = updateLaser();
 
-	navigation.update( laserData, needsReplaning);
 
-//    static QTime reloj = QTime::currentTime();
-
+   	navigation.update( laserData, needsReplaning);
     viewer->run();
-//    qDebug()<< "viewer " << reloj.restart();
 
 }
 

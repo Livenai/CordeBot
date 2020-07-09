@@ -263,6 +263,8 @@ void newRandomTarget()
     auto vmin = std::min(collisions->outerRegion.top(), collisions->outerRegion.bottom());
     auto height = std::max(collisions->outerRegion.top(), collisions->outerRegion.bottom()) - vmin;
 
+    srand(time(NULL)); // cambiamos la semilla con el tiempo para que varios robots no cojan la misma serie de numeros pseudo aleatorios
+
     auto x = hmin + (double)rand() * width / (double)RAND_MAX;
     auto z = vmin + (double)rand() * height/ (double)RAND_MAX;
 
