@@ -90,8 +90,19 @@ public:
         for (auto &&i : iter::range(1, lim))
             angles.push_back(rewrapAngleRestricted(qDegreesToRadians(nose.angleTo(QLineF(firstPointInPath, points[i])))));
 
-        auto min_angle = std::min(angles.begin(), angles.end());
-//        auto min_angle = std::min_element(angles.begin(), angles.end());
+
+        bool use_abs = false;
+        std::vector<float>::iterator min_angle;
+        if(use_abs){
+          // funcion lambda comparadora para obtener el menor angulo usando fabs()
+          auto f = [](float i, float j) -> bool { return fabs(i)<fabs(j); };
+          //obtenemos el menor angulo
+          min_angle = std::min_element(angles.begin(), angles.end(), f);
+        } else {
+          min_angle = std::min(angles.begin(), angles.end());
+          //auto min_angle = std::min_element(angles.begin(), angles.end());
+        }
+
 
 
         if (min_angle != angles.end())
@@ -117,7 +128,7 @@ public:
         QVector2D total{0, 0};
         for (const auto &l : laserData)
         {
-            float limit = (fabs(ROBOT_LENGTH / 2.f * sin(l.angle)) + fabs(ROBOT_LENGTH / 2.f * cos(l.angle))) + 200;
+            float limit = (fabs(ROBOT_LENGTH / 2.f * sin(l.angle)) + fabs(ROBOT_LENGTH / 2.f * cos(l.angle))) + 220; // ¿laser threshold? default 200
             float diff = limit - l.dist;
             if (diff >= 0)
                 total = total + QVector2D(-diff * sin(l.angle), -diff * cos(l.angle));

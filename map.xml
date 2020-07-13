@@ -37,23 +37,24 @@
 		<omnirobot id="robot0" port="12238" tx="-2000" ry="0">
 			<mesh id="base_mesh0" file="/home/robocomp/robocomp/components/CordeBot/models/sheep/sheep_textured.ive" tx="0" ty="0" tz="0" scale="10" rx="3.14" ry="3.14" collide="1"/>
 			<translation id="laserPose0" tx="0" ty="140" tz="200">
-				<laser id="laser0" port="10003" measures="100" min="100" max="30000" angle="4.2" ifconfig="10000"/>
+				<laser id="laser0" port="10003" measures="100" min="80" max="4000" angle="4.2" ifconfig="10000"/>
 				<plane id="sensorl0" nz="1" pz="-250" py="510" size="30,10,350" repeat="1" texture="#ff6666"/>
 			</translation>
 			<translation id="robotGeometricCenter0" tx="0" ty="0" tz="50"></translation>
 		</omnirobot>
 
 
+
 		<omnirobot id="robot1" port="12239" tx="-1000" ry="0">
 			<mesh id="base_mesh1" file="/home/robocomp/robocomp/components/CordeBot/models/sheep/sheep_textured.ive" tx="0" ty="0" tz="0" scale="10" rx="3.14" ry="3.14" collide="1"/>
 			<translation id="laserPose1" tx="0" ty="140" tz="200">
-				<laser id="laser1" port="10004" measures="100" min="100" max="30000" angle="4.2" ifconfig="10000"/>
+				<laser id="laser1" port="10004" measures="100" min="800" max="4000" angle="4.2" ifconfig="10000"/>
 				<plane id="sensorl1" nz="1" pz="-250" py="510" size="30,10,350" repeat="1" texture="#66ff66"/>
 			</translation>
 			<translation id="robotGeometricCenter1" tx="0" ty="0" tz="50"></translation>
 		</omnirobot>
 
-
+<!--
 		<omnirobot id="robot2" port="12240" tx="0" ry="0">
 			<mesh id="base_mesh2" file="/home/robocomp/robocomp/components/CordeBot/models/sheep/sheep_textured.ive" tx="0" ty="0" tz="0" scale="10" rx="3.14" ry="3.14" collide="1"/>
 			<translation id="laserPose2" tx="0" ty="140" tz="200">
@@ -72,7 +73,7 @@
 			</translation>
 			<translation id="robotGeometricCenter3" tx="0" ty="0" tz="50"></translation>
 		</omnirobot>
-
+-->
 <!--
 		<omnirobot id="robot4" port="12242" tx="2000" ry="0">
 			<mesh id="base_mesh4" file="/home/robocomp/robocomp/components/CordeBot/models/sheep/sheep_textured.ive" tx="0" ty="0" tz="0" scale="10" rx="3.14" ry="3.14" collide="1"/>

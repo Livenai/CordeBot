@@ -258,10 +258,14 @@ void newRandomTarget()
 {
     qDebug()<<"Navigation - "<< __FUNCTION__;
 
-    auto hmin = std::min(collisions->outerRegion.left(), collisions->outerRegion.right());
-    auto width = std::max(collisions->outerRegion.left(), collisions->outerRegion.right()) - hmin;
-    auto vmin = std::min(collisions->outerRegion.top(), collisions->outerRegion.bottom());
-    auto height = std::max(collisions->outerRegion.top(), collisions->outerRegion.bottom()) - vmin;
+    //region donde pueden aparecer los puntos aleatorios reducida para evitar atascos en los extremos
+    //double offset = std::max(std::stod(configparams->at("NavigationAgent.RobotXWidth").value), std::stod(configparams->at("NavigationAgent.RobotZLong").value));
+    double offset = 1100;
+
+    auto hmin = std::min(collisions->outerRegion.left(), collisions->outerRegion.right()) + offset;
+    auto width = (std::max(collisions->outerRegion.left(), collisions->outerRegion.right()) - hmin) - offset;
+    auto vmin = std::min(collisions->outerRegion.top(), collisions->outerRegion.bottom()) + offset;
+    auto height = (std::max(collisions->outerRegion.top(), collisions->outerRegion.bottom()) - vmin) - offset;
 
     srand(time(NULL)); // cambiamos la semilla con el tiempo para que varios robots no cojan la misma serie de numeros pseudo aleatorios
 

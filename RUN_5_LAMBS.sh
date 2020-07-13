@@ -16,9 +16,9 @@ if [ $# -eq 1 ]
     sleep $1s
     taskset -c 1 /home/robocomp/robocomp/components/CordeBot/navigationComponent/bin/navigationComponent --Ice.Config=/home/robocomp/robocomp/components/CordeBot/navigationComponent/etc/config1 &
     sleep $1s
-    taskset -c 2 /home/robocomp/robocomp/components/CordeBot/navigationComponent/bin/navigationComponent --Ice.Config=/home/robocomp/robocomp/components/CordeBot/navigationComponent/etc/config2 &
+    #taskset -c 2 /home/robocomp/robocomp/components/CordeBot/navigationComponent/bin/navigationComponent --Ice.Config=/home/robocomp/robocomp/components/CordeBot/navigationComponent/etc/config2 &
     sleep $1s
-    taskset -c 3 /home/robocomp/robocomp/components/CordeBot/navigationComponent/bin/navigationComponent --Ice.Config=/home/robocomp/robocomp/components/CordeBot/navigationComponent/etc/config3 &
+    #taskset -c 3 /home/robocomp/robocomp/components/CordeBot/navigationComponent/bin/navigationComponent --Ice.Config=/home/robocomp/robocomp/components/CordeBot/navigationComponent/etc/config3 &
     sleep $1s
     #/home/robocomp/robocomp/components/CordeBot/navigationComponent/bin/navigationComponent --Ice.Config=/home/robocomp/robocomp/components/CordeBot/navigationComponent/etc/config4 &
 fi
